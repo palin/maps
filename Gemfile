@@ -27,7 +27,6 @@ end
 group :development do
   gem 'capistrano'
   gem "rails-dev-boost"
-  gem 'thin'
 end
 
 group :test do

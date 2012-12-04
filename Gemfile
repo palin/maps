@@ -17,7 +17,7 @@ gem 'koala'
 gem 'sanitize'
 gem 'whenever'
 gem 'less-rails-bootstrap'
-gem 'yui-compressor', '~> 0.9.6'\
+gem 'yui-compressor', '~> 0.9.6'
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'

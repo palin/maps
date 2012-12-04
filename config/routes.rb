@@ -40,11 +40,12 @@ Reporter::Application.routes.draw do
   #   end
 
   # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  namespace :api do
+    match "send_report" => "reports#send_report", :via => [:post]
+    # Directs /admin/products/* to Admin::ProductsController
+    # (app/controllers/admin/products_controller.rb)
+    # resources :products
+  end
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.

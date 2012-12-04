@@ -1,0 +1,6 @@
+.modal-container
+  .overlay
+  .modal
+    .content
+      %button.close &times;
+      %h2 Base modal

@@ -1,0 +1,11 @@
+.modal-container#university-info
+  .overlay
+  .modal
+    .modal-header
+      %button.close{type: "button"} ×
+      %h3 Politechnika Poznańska
+    .modal-body
+      .left
+        %p Praca Dyplomowa Inżynierska
+      .right
+        %image{src: "assets/logo_put.png"}

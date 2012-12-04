@@ -6,13 +6,13 @@ describe Api::ReportsController do
     it "should be success if params present" do
       post :send_report, :report => {:placki => "asdsad"}, :format => :json
 
-      response.body.should == {:success => true}.to_json
+      response.body.should == {:success => true, :message => "Poprawnie utworzono zgłoszenie!"}.to_json
     end
 
     it "should fail if no params" do
       post :send_report, :report => {}, :format => :json
 
-      response.body.should == {:success => true}.to_json
+      response.body.should == {:success => false, :message => "Nie udało się przesłać zgłoszenia!"}.to_json
     end
   end
 end

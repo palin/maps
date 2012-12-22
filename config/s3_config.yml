@@ -1,0 +1,8 @@
+development:
+  access_key_id: AKIAJZ6VLEWVTUNQOUUA
+  secret_access_key: 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
+  bucket: fixer-photos
+production:
+  access_key_id: AKIAJZ6VLEWVTUNQOUUA
+  secret_access_key: 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
+  bucket: fixer-photos-prod

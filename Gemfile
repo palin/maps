@@ -5,16 +5,20 @@ gem 'rails', '3.2.8'
 gem 'pg'
 
 gem 'authlogic'
+gem 'carrierwave'
 gem 'draper'
 gem 'formtastic'
+gem 'fog'
 gem 'haml'
 gem 'httparty'
 gem 'json'
 gem 'json_pure'
 gem 'jquery-rails'
-gem 'rails-backbone'
 gem 'koala'
+gem 'mini_magick'
+gem 'rails-backbone'
 gem 'sanitize'
+gem 'squeel'
 gem 'whenever'
 gem 'less-rails-bootstrap'
 gem 'yui-compressor', '~> 0.9.6'
@@ -29,7 +33,7 @@ end
 
 group :development do
   gem 'capistrano'
-  gem 'sqlite3'
+  gem 'mysql2'
   gem "rails-dev-boost"
 end
 

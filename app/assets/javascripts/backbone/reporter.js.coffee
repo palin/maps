@@ -1,8 +1,17 @@
 #= require_self
+#= require hamlcoffee
+#= require jquery
+#= require jquery_ujs
+#= require jquery.transit
+#= require underscore
+#= require backbone
+#= require backbone_rails_sync
+#= require backbone_datalink
 #= require_tree ./templates
 #= require_tree ./models
 #= require_tree ./views
 #= require_tree ./routers
+#= require_tree .
 
 window.Reporter =
   Models: {}
@@ -16,6 +25,8 @@ window.Reporter =
       Base: {},
       UniversityInfo: {}
     }
+    Map: {}
+    Categories: {}
   }
   currentView: null
 

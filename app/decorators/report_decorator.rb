@@ -8,11 +8,11 @@ class ReportDecorator < Draper::Base
 
   def as_json(options={})
     properties = {}
-
     properties[:id] = @report.id
     properties[:title] = @report.title
     properties[:description] = @report.description
-    properties[:category] = Category.find_by_id(@report.category_id).title
+    properties[:category_title] = @report.category.title
+    properties[:category_image] = @report.category.image
     properties[:latitude] = @report.latitude
     properties[:longitude] = @report.longitude
     properties[:rating] = @report.rating
@@ -20,6 +20,8 @@ class ReportDecorator < Draper::Base
     properties[:photo_medium] = @report.photo.medium.url
     properties[:photo_small] = @report.photo.small.url
     properties[:photo_thumb] = @report.photo.thumb.url
+    properties[:rate_up_path] = "/api/reports/rate_up"
+    properties[:rate_down_path] = "/api/reports/rate_down"
 
     Hash[properties]
   end

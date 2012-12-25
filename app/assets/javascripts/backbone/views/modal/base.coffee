@@ -4,10 +4,11 @@ class Reporter.Views.Modal.Base extends Backbone.View
   template: JST['modals/base']
   events: 'click button.close': 'closeModal'
   modal: 'div.modal-container'
+  context: @context
 
   closeModal: ->
     $(@modal).fadeOut 300, =>
       $(@modal).remove()
 
-  render: ->
-     $(@el).append @template()
+  render: (context) ->
+    $(@el).append @template({context})

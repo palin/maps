@@ -1,0 +1,19 @@
+.modal-container#report-info
+  .overlay
+  .modal
+    .modal-header
+      %button.close{type: "button"} ×
+      %h3= @context.title
+    .modal-body
+      .left-column
+        %img{:src => @context.photo_small, :alt => @context.title}
+        .rating-box
+          %span Oceń to zgłoszenie
+          %a{:href => '#', :'data-vote' => 'up', :id => @context.id}
+            %img{:src => "assets/rate_up.png", :alt => "Potrzebne!"}
+          #current_rating
+            = @context.rating
+          %a{:href => '#', :'data-vote' => 'down', :id => @context.id}
+            %img{:src => "assets/rate_down.png", :alt => "Niepotrzebne!"}
+        %p= @context.description
+      .right

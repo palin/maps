@@ -65,6 +65,9 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 1.0.0)
+    carrierwave (0.7.1)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
     chronic (0.8.0)
@@ -93,6 +96,7 @@ GEM
       activesupport (~> 3.2)
     ejs (1.1.1)
     erubis (2.7.0)
+    excon (0.16.7)
     execjs (1.3.2)
       multi_json (~> 1.0)
     factory_girl (4.1.0)
@@ -104,6 +108,17 @@ GEM
       multipart-post (~> 1.1)
     fastercsv (1.5.5)
     ffi (1.2.0)
+    fog (1.8.0)
+      builder
+      excon (~> 0.14)
+      formatador (~> 0.2.0)
+      mime-types
+      multi_json (~> 1.0)
+      net-scp (~> 1.0.4)
+      net-ssh (>= 2.1.3)
+      nokogiri (~> 1.5.0)
+      ruby-hmac
+    formatador (0.2.4)
     formtastic (2.2.1)
       actionpack (>= 3.0)
     haml (3.1.7)
@@ -148,11 +163,14 @@ GEM
     metaclass (0.0.1)
     method_source (0.8.1)
     mime-types (1.19)
+    mini_magick (3.2.1)
+      subexec (~> 0.0.4)
     mocha (0.10.5)
       metaclass (~> 0.0.1)
     multi_json (1.4.0)
     multi_xml (0.5.1)
     multipart-post (1.1.5)
+    mysql2 (0.3.11)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -163,6 +181,8 @@ GEM
     nokogiri (1.5.5)
     open4 (1.3.0)
     pg (0.14.1)
+    polyamorous (0.5.0)
+      activerecord (~> 3.0)
     polyglot (0.3.3)
     pry (0.9.10)
       coderay (~> 1.0.5)
@@ -218,6 +238,7 @@ GEM
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
       rspec-mocks (~> 2.12.0)
+    ruby-hmac (0.4.0)
     ruby2ruby (1.3.1)
       ruby_parser (~> 2.0)
       sexp_processor (~> 3.0)
@@ -246,10 +267,14 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sqlite3 (1.3.6)
+    squeel (1.0.14)
+      activerecord (~> 3.0)
+      activesupport (~> 3.0)
+      polyamorous (~> 0.5.0)
     steak (2.0.0)
       capybara (>= 1.0.0)
       rspec-rails (>= 2.5.0)
+    subexec (0.0.4)
     terminal-table (1.4.5)
     therubyracer (0.10.2)
       libv8 (~> 3.3.10)
@@ -282,11 +307,13 @@ DEPENDENCIES
   brakeman
   capistrano
   capybara
+  carrierwave
   coffee-rails (~> 3.2.1)
   database_cleaner
   draper
   execjs
   factory_girl_rails
+  fog
   formtastic
   haml
   haml_coffee_assets
@@ -298,6 +325,8 @@ DEPENDENCIES
   launchy
   less-rails-bootstrap
   mail_safe
+  mini_magick
+  mysql2
   pg
   pry
   pry-debugger
@@ -308,7 +337,7 @@ DEPENDENCIES
   sanitize
   shoulda
   spork
-  sqlite3
+  squeel
   steak
   therubyracer
   uglifier (>= 1.0.3)

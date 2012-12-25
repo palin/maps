@@ -1,10 +1,54 @@
 @import "variables";
 
+.white-gradient {
+  background: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+  background: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
+}
+
 body {
   section.right_sidebar {
     float: left;
     height: 600px;
     width: 15%;
-    background: @green;
+    background: #ccc;
+
+    ul#categories {
+      list-style: none;
+      margin: 0 0 0 20px;
+      padding: 0;
+
+      li.category {
+        width: 165px;
+        height: 20px;
+        padding: 5px 0px 5px 5px;
+        border-radius: 15px 0px 0px 15px;
+        -moz-border-radius: 15px 0px 0px 15px;
+        -webkit-border-radius: 15px 0px 0px 15px;
+        border: 1px solid #999;
+
+        margin-bottom: 5px;
+        .white-gradient;
+
+        img {
+          width: 20px;
+          height: 20px;
+          float: left;
+        }
+        a {
+          display: inline-block;
+          width: 130px;
+          height: 20px;
+          text-align: right;
+        }
+        span.description {
+
+        }
+      }
+    }
   }
 }

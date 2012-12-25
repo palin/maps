@@ -1,0 +1,11 @@
+%h2
+  Logowanie
+
+= render "admin/layouts/flash"
+
+= semantic_form_for @user_session, :url => admin_user_sessions_path, :method => :post do |f|
+  = f.input :login
+  = f.input :password
+  = f.actions do
+    = f.action :submit
+    = f.action :cancel

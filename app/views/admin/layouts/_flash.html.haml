@@ -1,0 +1,10 @@
+Dupa
+- if flash.present?
+  alert
+  #flash
+    - if flash[:alert].present?
+      #alert
+        = flash[:alert]
+    - elsif flash[:notice].present?
+      #notice
+        = flash[:notice]

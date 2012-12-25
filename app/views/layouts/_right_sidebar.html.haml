@@ -1,2 +1,5 @@
 %section.right_sidebar
-  %h2 Right sidebar
+  %h2 Kategorie zdarzeń
+  %ul#categories
+    - @categories.each do |category|
+      = render :partial => 'categories/category', :object => category

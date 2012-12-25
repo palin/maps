@@ -6,4 +6,19 @@ FactoryGirl.define do
     password_confirmation "password"
     sequence(:email) { |n| "#{login}-#{n}@example.com"}
   end
+
+  factory :report do
+    sequence(:title) { |n| "Tytul zgloszenia nr#{n}"}
+    sequence(:description ) { |n| "To jest opis zgloszenia nr#{n}"}
+    photo File.open("#{Rails.root}/spec/rails.png", "r")
+    association(:category)
+    latitude 52.123456
+    longitude 16.123456
+  end
+
+  factory :category do
+    sequence(:title) { |n| "Kategoria#{n}"}
+    sequence(:description ) { |n| "Opis kategorii#{n}"}
+    image File.open("#{Rails.root}/spec/rails.png", "r")
+  end
 end

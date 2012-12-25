@@ -11,6 +11,50 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20121224192431) do
+
+  create_table "categories", :force => true do |t|
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "title"
+    t.string   "description"
+    t.string   "image"
+  end
+
+  create_table "opinions", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "positives"
+    t.integer  "negatives"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "reports", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "photo"
+    t.integer  "positives",                                 :default => 0
+    t.integer  "negatives",                                 :default => 0
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
+    t.integer  "category_id"
+    t.decimal  "latitude",    :precision => 8, :scale => 5
+    t.decimal  "longitude",   :precision => 8, :scale => 5
+  end
+
+  create_table "users", :force => true do |t|
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "name"
+    t.string   "login"
+    t.string   "password"
+    t.string   "password_confirmation"
+    t.string   "crypted_password"
+    t.string   "email"
+    t.date     "date_of_birth"
+    t.string   "salt"
+    t.string   "persistence_token"
+  end
 
 end

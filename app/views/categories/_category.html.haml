@@ -1,0 +1,5 @@
+%li.category
+  = image_tag "fixer_icons/symbol_check.png", :alt => category.title
+  = link_to category.title, "#", :onclick => "$(this).transition();"
+  %span.description
+    = category.description

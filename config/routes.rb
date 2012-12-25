@@ -45,6 +45,15 @@ Reporter::Application.routes.draw do
       collection do
         get :all
         post :send_report
+        post :rate_up
+        post :rate_down
+        post :can_vote
+      end
+    end
+
+    resources :maps do
+      collection do
+        get :border
       end
     end
     # Directs /admin/products/* to Admin::ProductsController

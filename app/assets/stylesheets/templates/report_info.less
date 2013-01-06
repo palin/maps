@@ -1,54 +1,191 @@
+.element-opacity (@x: 1.0, @y: 100) {
+  opacity: @x;
+  -ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=@y);
+  filter: alpha(opacity=@y);
+  -moz-opacity: @x;
+  -webkit-opacity: @x;
+}
+.border {
+  border: 1px solid black;
+}
+
 div.modal-container#report-info {
-  .modal {
-    width: 870px;
-    margin: -250px 0 0 -435px;
-    height: 520px;
+  div.overlay {
+    .element-opacity (0.9, 90);
   }
 
-  div.overlay {
-    opacity: 0.9;
-    -ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
-    filter: alpha(opacity=90);
-    -moz-opacity:0.9;
-    -webkit-opacity:0.9
-  }
-  div.left-column {
-    div.rating-box {
-      span {
-        display: block;
-      }
-      a {
-        display: block;
+  .modal {
+    width: 600px;
+    margin: -250px 0 0 -435px;
+    height: 400px;
+    padding: 25px;
+
+    .left-column {
+      float: left;
+      width: 150px;
+      height: 400px;
+
+      .image-box {
         float: left;
-        width: 32px;
+        width: 125px;
+        height: 125px;
+        margin-bottom: 6px;
+        .border;
+      }
+
+      .rating-box {
+        float: left;
+        width: 125px;
         height: 32px;
-        &.disabled {
-          opacity: 0.5;
-          -ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
-          filter: alpha(opacity=50);
-          -moz-opacity:0.5;
-          -webkit-opacity:0.5
+        margin-bottom: 20px;
+
+        span {
+          display: block;
+        }
+        a {
+          display: block;
+          float: left;
+          width: 32px;
+          height: 32px;
+          &.disabled {
+            .element-opacity (0.5, 50);
+          }
+          &.down {
+            float: left;
+          }
+          &.up {
+            float: right;
+          }
+        }
+        div#current_rating {
+          float: left;
+          padding-top: 5px;
+          width: 61px;
+          height: 27px;
+          margin: 0;
         }
       }
-      div#current_rating {
+
+      .moderate-box {
         float: left;
-        margin-left: 10px;
-        margin-right: 10px;
+        width: 125px;
+        height: 100px;
+        font-size: 11px;
+        color: #666;
+
+        img {
+          width: 16px;
+          height: 16px;
+          display: inline-block;
+          float: left;
+        }
+        span {
+          margin-left: -7px;
+        }
+        ul {
+          list-style-type: circle;
+          margin-left: 19px;
+
+          li {
+            text-align: left;
+            margin-bottom: -3px;
+
+            a {
+              text-decoration: underline;
+              color: #666;
+            }
+            a:hover {
+              color: #999;
+            }
+          }
+        }
+      }
+
+      .social-box {
+        float: left;
+        width: 125px;
+        height: 30px;
       }
     }
-  }
-  .modal-body {
-    max-height: 520px;
-    width: 835px;
-    div.left {
+
+    .right-column {
       float: left;
-      width: 380px;
-      height: 430px;
+      width: 450px;
+      height: 400px;
+      text-align: left;
+
+      .head-box {
+        margin-bottom: 30px;
+
+        h3 {
+          margin-top: 0px;
+          margin-bottom: 0px;
+          font-size: 20px;
+        }
+        h4 {
+          margin-top: 0px;
+          font-size: 14px;
+          .category {
+            color: red;
+          }
+        }
+        p {
+          font-size: 12px;
+        }
+      }
+
+      .opinion-box {
+        overflow: hidden;
+        img {
+          float: left;
+        }
+
+        h4 {
+          margin-top: 5px;
+        }
+
+        .opinion {
+          .title {
+            float: left;
+            width: 350px;
+            font-size: 12px;
+          }
+          .rating-opinion {
+            float: left;
+            height: 20px;
+            width: 100px;
+
+            img.disabled {
+              .element-opacity (0.5, 50);
+            }
+
+            a {
+              display: inline-block;
+              float: left;
+            }
+
+            #current_opinion_rating {
+              float: left;
+              width: 40px;
+              height: 20px;
+              text-align: center;
+              .rating {
+                color: red;
+              }
+            }
+          }
+          .description {
+            clear: both;
+          }
+        }
+      }
     }
-    div.right {
-      float: right;
-      width: 435px;
-      height: 436px;
+
+    button.close {
+      position: absolute;
+      right: -23px;
+      top: -23px;
+      .element-opacity (1.0, 100);
     }
   }
 }

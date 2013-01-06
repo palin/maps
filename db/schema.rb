@@ -11,23 +11,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121224192431) do
+ActiveRecord::Schema.define(:version => 20130105193841) do
 
   create_table "categories", :force => true do |t|
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
     t.string   "title"
     t.string   "description"
     t.string   "image"
+    t.string   "unique_id",   :limit => 3
+  end
+
+  create_table "events", :force => true do |t|
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.string   "title"
+    t.string   "description"
+    t.string   "photo"
+    t.integer  "positives",   :default => 0
+    t.integer  "negatives",   :default => 0
   end
 
   create_table "opinions", :force => true do |t|
     t.string   "title"
     t.string   "description"
-    t.integer  "positives"
-    t.integer  "negatives"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "positives",   :default => 0
+    t.integer  "negatives",   :default => 0
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "report_id"
   end
 
   create_table "reports", :force => true do |t|
@@ -39,8 +51,8 @@ ActiveRecord::Schema.define(:version => 20121224192431) do
     t.datetime "created_at",                                               :null => false
     t.datetime "updated_at",                                               :null => false
     t.integer  "category_id"
-    t.decimal  "latitude",    :precision => 8, :scale => 5
-    t.decimal  "longitude",   :precision => 8, :scale => 5
+    t.decimal  "latitude",    :precision => 8, :scale => 6
+    t.decimal  "longitude",   :precision => 8, :scale => 6
   end
 
   create_table "users", :force => true do |t|

@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Category < ActiveRecord::Base
-  attr_accessible :title, :description
+  attr_accessible :title, :description, :unique_id
 
   validates_presence_of :title, :description
 

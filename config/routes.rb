@@ -41,17 +41,30 @@ Reporter::Application.routes.draw do
 
   # Sample resource route within a namespace:
   namespace :api do
-    resources :reports do
+    resources :reports, :only => [] do
       collection do
         get :all
         post :send_report
+      end
+      member do
         post :rate_up
         post :rate_down
         post :can_vote
       end
+      resources :opinions, :only => [] do
+        collection do
+          get :all
+          post :add
+        end
+        member do
+          post :rate_up
+          post :rate_down
+          post :can_vote
+        end
+      end
     end
 
-    resources :maps do
+    resources :maps, :only => [] do
       collection do
         get :border
       end
@@ -67,6 +80,7 @@ Reporter::Application.routes.draw do
     resources :panel, :only => [:index]
     match 'logout', :to => 'user_sessions#destroy', :as => :logout
     match 'login', :to => 'user_sessions#new', :as => :login
+    resources :user_sessions, :only => [:create]
   end
 
   # You can have the root of your site routed with "root"

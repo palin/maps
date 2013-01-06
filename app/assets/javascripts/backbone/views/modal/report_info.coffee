@@ -4,9 +4,11 @@ class Reporter.Views.Modal.ReportInfo extends Reporter.Views.Modal.Base
   events:
     'click .rating-box a': 'onRate'
     'click button.close': 'closeModal'
+    'click .overlay': 'closeModal'
 
-  constructor: ->
-    super
+  initialize: ->
+    #@report = @reports.get('')
+    #@opinions = new Reporter.Collection.Opinions()
 
   url: (vote) ->
     "api/reports/rate_#{vote}"
@@ -36,9 +38,17 @@ class Reporter.Views.Modal.ReportInfo extends Reporter.Views.Modal.Base
     alert(JSON.parse(response.responseText).reason.reason)
 
   canVote: (id)->
-    url = "api/reports/can_vote"
+    url = "api/reports/#{id}/can_vote"
     response = $.post(url, {'report': id}, null, 'json')
     response.error(@onVoteError)
 
   onVoteError: (response) =>
     @disableRating()
+
+  render: (context) ->
+    @opinions = new Reporter.Collections.Opinions(context.id)
+    @opinions.fetch
+      success: =>
+        $(@el).append @template({report: context, opinions: @opinions.models})
+      error: =>
+        console.log "Couldn't load opinions"

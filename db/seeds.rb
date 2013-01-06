@@ -1,9 +1,9 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
-categories = Category.create([{title: 'Category First'}, {title: 'Category second'}, {title: 'Allthethings'}, {title: 'Fourth cat'}])
+# -*- encoding : utf-8 -*-
+Category.create([
+  {title: 'Fauna i flora',              :unique_id => "fif", :description => "Zwierzęta, przewrócone drzewa"},
+  {title: 'Wandalizm',                  :unique_id => "wan", :description => "Graffiti, zdewastowane przystanki"},
+  {title: 'Problemy drogowe',           :unique_id => "pro", :description => "Zniszczone oświetlenie, dziury w drodze"},
+  {title: 'Budynki',                    :unique_id => "bud", :description => "Niebezpieczne budynki, odpadający tynk"},
+  {title: 'Nieprzemyślane rozwiązania', :unique_id => "nie", :description => "Źle zaprojektowane przejścia dla pieszych, drogi dla rowerzystów, brak dostępu dla inwalidów"},
+  {title: 'Inne',                       :unique_id => "inn", :description => "Problemy niepasujące do powyższych kategorii"}
+])

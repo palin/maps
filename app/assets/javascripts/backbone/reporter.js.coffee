@@ -15,15 +15,20 @@
 
 window.Reporter =
   Models: {}
-  Collections: {}
+  Collections: {
+    Base: {}
+    Reports: {}
+    Opinions: {}
+  }
   Routers: {
     Base: {}
   }
   Views: {
     Home: {}
     Modal: {
-      Base: {},
+      Base: {}
       UniversityInfo: {}
+      ReportInfo: {}
     }
     Map: {}
     Categories: {}

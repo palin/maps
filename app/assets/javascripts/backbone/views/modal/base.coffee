@@ -9,7 +9,8 @@ class Reporter.Views.Modal.Base extends Backbone.View
   closeModal: ->
     $(@modal).fadeOut 300, =>
       $(@modal).remove()
+    #window.location = ""
 
   render: (context) ->
-    window.location = window.location + "#/reports/#{context.id}"
+    #window.location = window.location + "#/reports/#{context.id}"
     $(@el).append @template({context})

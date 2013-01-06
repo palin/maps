@@ -1,19 +1,54 @@
 .modal-container#report-info
   .overlay
   .modal
-    .modal-header
-      %button.close{type: "button"} ×
-      %h3= @context.title
-    .modal-body
-      .left-column
-        %img{:src => @context.photo_small, :alt => @context.title}
-        .rating-box
-          %span Oceń to zgłoszenie
-          %a{:href => '#', :'data-vote' => 'up', :id => @context.id}
-            %img{:src => "assets/rate_up.png", :alt => "Potrzebne!"}
-          #current_rating
-            = @context.rating
-          %a{:href => '#', :'data-vote' => 'down', :id => @context.id}
-            %img{:src => "assets/rate_down.png", :alt => "Niepotrzebne!"}
-        %p= @context.description
-      .right
+    .left-column
+      .image-box
+        %img{:src => @report.get('photo_small'), :alt => @report.get('title')}
+      .rating-box
+        %a{:href => '#', :'data-vote' => 'down', :id => @report.get('id'), :class => "down"}
+          %img{:src => "assets/minus_medium.png", :alt => "-1"}
+        #current_rating
+          = @report.get('rating')
+        %a{:href => '#', :'data-vote' => 'up', :id => @report.get('id'), :class => "up"}
+          %img{:src => "assets/plus_medium.png", :alt => "+1"}
+      .moderate-box
+        %img{:src => "assets/moderate_small.png", :alt => "Zgłoś do moderacji"}
+        %span Zgłoś do moderacji:
+        %ul
+          %li
+            %a{:href => "#", :id => "spam"} spam
+          %li
+            %a{:href => "#", :id => "duplicate"} duplikat
+          %li
+            %a{:href => "#", :id => "unsuitable"} nieodpowiednia treść
+          %li
+            %a{:href => "#", :id => "solved"} problem rozwiązany
+      .social-box
+        Lubię to!
+    .right-column
+      .head-box
+        %h3= @report.get('title')
+        %h4
+          Kategoria:
+          %span.category= @report.get('category_title')
+        %p= @report.get('description')
+      .opinion-box
+        %img{:src => "assets/people.png", :alt => "Opinie użytkowników"}
+        %h4 Opinie:
+        .opinions
+          - for opinion in @opinions
+            .opinion
+              .title
+                = opinion.get('title')
+              .rating-opinion
+                %a{:href => '#', :'data-vote' => 'up', :id => opinion.get('id')}
+                  %img{:src => "assets/plus_small.png", :alt => "-1"}
+                #current_opinion_rating
+                  %span.rating= opinion.get('rating')
+                %a{:href => '#', :'data-vote' => 'down', :id => opinion.get('id')}
+                  %img{:src => "assets/minus_small.png", :alt => "+1"}
+              .description
+                %p
+                  = opinion.get('description')
+    %button.close{type: "button"}
+      %img{:src => "assets/close_modal_medium.png"}

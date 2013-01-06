@@ -14,23 +14,23 @@ class Reporter.Views.Map extends Backbone.View
     @drawBorder()
 
   renderReports: ->
-    url = "api/reports/all"
-    response = $.get(url, null, @prepareReports, 'json')
-
-  prepareReports: (response) =>
-    @reports = response.reports
-    @addMarkers()
+    @reports = new Reporter.Collections.Reports()
+    @reports.fetch
+      success: =>
+        @addMarkers()
+      error: =>
+        console.log "error while fetching reports"
 
   addMarkers: ->
     mappy = @map
     @marker = null
     modal = new Reporter.Views.Modal.ReportInfo()
-    _.each @reports, (report) ->
+    _.each @reports.models, (report) ->
       @marker = new google.maps.Marker({
         map: mappy,
         draggable: false,
         animation: google.maps.Animation.DROP,
-        position: new google.maps.LatLng(parseFloat(report.latitude), parseFloat(report.longitude))
+        position: new google.maps.LatLng(parseFloat(report.get('latitude')), parseFloat(report.get('longitude')))
         #icon: report.category_image
       })
       google.maps.event.addListener(@marker, 'click', -> modal.canVote(report.id); modal.render(report))

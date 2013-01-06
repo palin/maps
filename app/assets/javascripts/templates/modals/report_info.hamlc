@@ -54,11 +54,11 @@
               .title
                 = opinion.get('title')
               .rating-opinion
-                %a{:href => '#', :'data-vote' => 'up', :id => opinion.get('id')}
+                %a{:href => '#', :'data-vote' => 'up', :'data-report-id' => opinion.get('report_id'), :id => opinion.get('id')}
                   %img{:src => "assets/plus_small.png", :alt => "-1"}
                 #current_opinion_rating
-                  %span.rating= opinion.get('rating')
-                %a{:href => '#', :'data-vote' => 'down', :id => opinion.get('id')}
+                  %span.rating{:'data-opinion-id' => opinion.get('id')}= opinion.get('rating')
+                %a{:href => '#', :'data-vote' => 'down', :'data-report-id' => opinion.get('report_id'), :id => opinion.get('id')}
                   %img{:src => "assets/minus_small.png", :alt => "+1"}
               .description
                 %p

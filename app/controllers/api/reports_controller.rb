@@ -32,14 +32,14 @@ class Api::ReportsController < Api::ApiController
   end
 
   def rate_up
-    @report.increment!(:positives) unless has_cookie?
-    set_cookie
+    @report.increment!(:positives) unless has_cookie?('report', @report.id)
+    set_cookie('report', @report.id)
     render_json :rating => @report.rating
   end
 
   def rate_down
-    @report.increment!(:negatives) unless has_cookie?
-    set_cookie
+    @report.increment!(:negatives) unless has_cookie?('report', @report.id)
+    set_cookie('report', @report.id)
     render_json :rating => @report.rating
   end
 
@@ -48,7 +48,7 @@ class Api::ReportsController < Api::ApiController
   end
 
   def can_vote
-    if has_cookie?
+    if has_cookie?('report', @report.id)
       render_error 409, :reason => "Już głosowałeś na to zgłoszenie!"
     else
       render_json 200
@@ -56,18 +56,6 @@ class Api::ReportsController < Api::ApiController
   end
 
   private
-
-  def has_cookie?
-    cookies["report_id_#{@report.id}"].present?
-  end
-
-  def cookie_enabled?
-    render_error 409, :reason => "Żeby głosować należy włączyć obsługę ciasteczek (cookies)!" if request.cookies["_reporter_session"].to_s.blank?
-  end
-
-  def set_cookie
-    cookies.permanent["report_id_#{@report.id}"] = @report.id
-  end
 
   def find_report
     render_error 409, :reason => "Nie znaleziono takiego zgłoszenia!" unless @report = Report.find_by_id(params[:report]) || Report.find_by_id(params[:id])

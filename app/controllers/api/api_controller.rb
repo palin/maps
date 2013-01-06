@@ -31,4 +31,16 @@ class Api::ApiController < ActionController::Base
       render :json => response, :status => code
     end
   end
+
+  def has_cookie?(type, id)
+    cookies["#{type}_id_#{id}"].present?
+  end
+
+  def cookie_enabled?
+    render_error 409, :reason => "Żeby głosować należy włączyć obsługę ciasteczek (cookies)!" if request.cookies["_reporter_session"].to_s.blank?
+  end
+
+  def set_cookie(type, id)
+    cookies.permanent["#{type}_id_#{id}"] = id
+  end
 end

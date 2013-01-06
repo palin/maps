@@ -56,11 +56,12 @@ Reporter::Application.routes.draw do
         collection do
           get :all
           post :add
+          get :can_vote
         end
         member do
           post :rate_up
           post :rate_down
-          post :can_vote
+          get :rating
         end
       end
     end

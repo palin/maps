@@ -3,7 +3,8 @@
   .modal
     .left-column
       .image-box
-        %img{:src => @report.get('photo_small'), :alt => @report.get('title')}
+        %a{:href => @report.get('photo_full'), :alt => @report.get('title')}
+          %img{:src => @report.get('photo_small'), :alt => @report.get('title')}
       .rating-box
         %a{:href => '#', :'data-vote' => 'down', :id => @report.get('id'), :class => "down"}
           %img{:src => "assets/minus_medium.png", :alt => "-1"}
@@ -35,6 +36,18 @@
       .opinion-box
         %img{:src => "assets/people.png", :alt => "Opinie użytkowników"}
         %h4 Opinie:
+        .new_opinion
+          %form{:action => "/api/reports/#{@report.get('id')}/opinions/add"}
+            %li
+              %label{:for => "op_content"}
+                Tytuł:
+              %input{:type => "text", :name => "content", :id => "op_content"}
+            %li
+              %label{:for => "op_description"}
+                Treść:
+              %input{:type => "text", :name => "description", :id => "op_description"}
+            %li
+              %input{:type => "submit", :value => "Dodaj nową"}
         .opinions
           - for opinion in @opinions
             .opinion

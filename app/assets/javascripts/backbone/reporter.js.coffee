@@ -29,6 +29,7 @@ window.Reporter =
       Base: {}
       UniversityInfo: {}
       ReportInfo: {}
+      LargePhoto: {}
     }
     Map: {}
     Categories: {}

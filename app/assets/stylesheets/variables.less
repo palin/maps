@@ -4,3 +4,18 @@
 @blue:    #7AC5CD;
 @black:   #000;
 @white:   #fff;
+@rounded_values: 50px 0px 50px 0px;
+
+.rounded_corners (@rounded_values) {
+  -webkit-border-radius: @rounded_values;
+  -moz-border-radius: @rounded_values;
+  border-radius: @rounded_values;
+}
+
+.element-opacity (@x: 1.0, @y: 100) {
+  opacity: @x;
+  -ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=@y);
+  filter: alpha(opacity=@y);
+  -moz-opacity: @x;
+  -webkit-opacity: @x;
+}

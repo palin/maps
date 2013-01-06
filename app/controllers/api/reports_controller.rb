@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Api::ReportsController < Api::ApiController
   include Draper
-  before_filter :find_report, :only => [:rate_up, :rate_down, :can_vote]
+  before_filter :find_report, :only => [:rate_up, :rate_down, :can_vote, :rating]
   before_filter :cookie_enabled?, :only => [:rate_up, :rate_down]
 
   def send_report
@@ -43,6 +43,10 @@ class Api::ReportsController < Api::ApiController
     render_json :rating => @report.rating
   end
 
+  def rating
+    render_json :rating => @report.rating
+  end
+
   def can_vote
     if has_cookie?
       render_error 409, :reason => "Już głosowałeś na to zgłoszenie!"
@@ -66,6 +70,6 @@ class Api::ReportsController < Api::ApiController
   end
 
   def find_report
-    render_error 409, :reason => "Nie znaleziono takiego zgłoszenia!" unless @report = Report.find(params[:report])
+    render_error 409, :reason => "Nie znaleziono takiego zgłoszenia!" unless @report = Report.find_by_id(params[:report]) || Report.find_by_id(params[:id])
   end
 end

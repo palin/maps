@@ -3,52 +3,68 @@ class Reporter.Views.Modal.ReportInfo extends Reporter.Views.Modal.Base
 
   events:
     'click .rating-box a': 'onRate'
-    'click button.close': 'closeModal'
+    'click #report-info button.close': 'closeModal'
     'click .overlay': 'closeModal'
+    'submit .new_opinion form': 'onOpinionSubmit'
+    'click .image-box a': 'onEnlargeImage'
 
   initialize: ->
-    #@report = @reports.get('')
-    #@opinions = new Reporter.Collection.Opinions()
 
-  url: (vote) ->
-    "api/reports/rate_#{vote}"
+  url: (vote, id) ->
+    "api/reports/#{id}/rate_#{vote}"
 
   onRate: (e) ->
     return if $(e.currentTarget).attr("disabled") == 'disabled'
     e.preventDefault()
     response = @sendRequest(e)
     response.success(@onRateSuccess)
-    response.error(@onRateFail)
     @disableRating()
     return false
 
   sendRequest: (e) ->
-    $.post(@url($(e.currentTarget).data('vote')), {'report': e.currentTarget.id}, null, 'json')
+    $.post(@url($(e.currentTarget).data('vote'), e.currentTarget.id), null, null, 'json')
 
   onRateSuccess: (response) =>
     @$('div#current_rating').text(response.rating)
 
   disableRating: ->
-    _.each @$('div.rating-box a'), (link) ->
+    _.each $('div.rating-box a'), (link) ->
       $(link).attr("disabled", 'true')
       $(link).addClass('disabled')
 
-  onRateFail: (response) =>
-    #showTooltip
-    alert(JSON.parse(response.responseText).reason.reason)
-
   canVote: (id)->
     url = "api/reports/#{id}/can_vote"
-    response = $.post(url, {'report': id}, null, 'json')
-    response.error(@onVoteError)
-
-  onVoteError: (response) =>
-    @disableRating()
+    response = $.post(url, null, null, 'json')
+    response.error(@disableRating)
 
   render: (context) ->
+    url = "api/reports/#{context.id}/rating"
+    response = $.ajax(url, null, null, 'json')
+    response.success ->
+      context.set('rating', JSON.parse(response.responseText).rating)
     @opinions = new Reporter.Collections.Opinions(context.id)
     @opinions.fetch
       success: =>
         $(@el).append @template({report: context, opinions: @opinions.models})
+        @canVote(context.id)
       error: =>
-        console.log "Couldn't load opinions"
+        $(@el).append @template({report: context, opinions: null})
+        @canVote(context.id)
+
+  onOpinionSubmit: (e) ->
+    e.preventDefault()
+    url = e.currentTarget.action
+    response = $.post(url, title: e.currentTarget[0].value, description: e.currentTarget[1].value, null, 'json')
+    response.success(@updateOpinions)
+
+  updateOpinions: (response) =>
+    @$(".opinions").hide().prepend(JST['new_opinion']({opinion: response.new_opinion})).fadeIn('slow')
+    @$('.new_opinion form input[type=submit]').attr('disabled', 'true')
+    _.each @$('.new_opinion form input[type=text]'), (input) ->
+      $(input).val("")
+      $(input).attr("disabled", 'true')
+
+  onEnlargeImage: (e) ->
+    e.preventDefault()
+    photo = new Reporter.Views.Modal.LargePhoto()
+    photo.render(e.currentTarget.href, e.currentTarget.alt)

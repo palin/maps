@@ -19,7 +19,7 @@ class Reporter.Views.Map extends Backbone.View
       success: =>
         @addMarkers()
       error: =>
-        console.log "error while fetching reports"
+        console.log "Wystąpił problem z pobraniem listy zgłoszeń."
 
   addMarkers: ->
     mappy = @map
@@ -33,7 +33,7 @@ class Reporter.Views.Map extends Backbone.View
         position: new google.maps.LatLng(parseFloat(report.get('latitude')), parseFloat(report.get('longitude')))
         #icon: report.category_image
       })
-      google.maps.event.addListener(@marker, 'click', -> modal.canVote(report.id); modal.render(report))
+      google.maps.event.addListener(@marker, 'click', -> modal.render(report))
 
   drawBorder: ->
     url = "api/maps/border"

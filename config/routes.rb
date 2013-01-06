@@ -50,6 +50,7 @@ Reporter::Application.routes.draw do
         post :rate_up
         post :rate_down
         post :can_vote
+        get :rating
       end
       resources :opinions, :only => [] do
         collection do

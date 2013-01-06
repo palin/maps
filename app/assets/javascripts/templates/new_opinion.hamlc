@@ -1,0 +1,13 @@
+.opinion
+  .title
+    = @opinion.title
+  .rating-opinion
+    %a{:href => '#', :'data-vote' => 'up', :id => @opinion.id}
+      %img{:src => "assets/plus_small.png", :alt => "-1"}
+    #current_opinion_rating
+      %span.rating= @opinion.rating
+    %a{:href => '#', :'data-vote' => 'down', :id => @opinion.id}
+      %img{:src => "assets/minus_small.png", :alt => "+1"}
+  .description
+    %p
+      = @opinion.description

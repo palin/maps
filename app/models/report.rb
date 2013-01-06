@@ -26,7 +26,7 @@ class Report < ActiveRecord::Base
       end
     end
 
-    report = Report.new(data)
+    Report.new(data)
   end
 
   def rating

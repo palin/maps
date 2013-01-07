@@ -10,11 +10,24 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
 }
 
+.transition (@property: margin-left, @duration: 1s) {
+  transition: @property @duration;
+  -moz-transition: @property @duration; /* Firefox 4 */
+  -webkit-transition: @property @duration; /* Safari and Chrome */
+  -o-transition: @property @duration; /* Opera */
+}
+
 body {
   section.right_sidebar {
     float: left;
     height: 600px;
     width: 250px;
+
+    .grey {
+      .element-opacity (0.4, 40);
+      .transition (margin-left, 0.5s);
+      margin-left: 20px;
+    }
 
     ul#categories {
       list-style: none;
@@ -22,14 +35,14 @@ body {
       padding: 0;
 
       li.category {
-        width: 265px;
+        width: 240px;
         height: 20px;
         padding: 5px 0px 5px 5px;
         border-radius: 15px 0px 0px 15px;
         -moz-border-radius: 15px 0px 0px 15px;
         -webkit-border-radius: 15px 0px 0px 15px;
         border: 1px solid #999;
-
+        cursor: pointer;
         margin-bottom: 5px;
         .white-gradient;
 
@@ -37,15 +50,53 @@ body {
           width: 20px;
           height: 20px;
           float: left;
+          .transition ();
         }
         a {
           display: inline-block;
-          width: 230px;
+          margin-right: 8px;
+          float: right;
           height: 20px;
           text-align: right;
         }
         span.description {
           display: none;
+        }
+      }
+
+      li.category:hover {
+        border: 1px solid #000;
+      }
+    }
+  }
+
+  #example_form {
+    margin-left: 32px;
+    width: 245px;
+    padding-top: 15px;
+    form {
+      list-style: none;
+
+      li {
+        clear: both;
+
+        label {
+          display: inline-block;
+          width: 77px;
+          margin-top: 6px;
+          margin-right: 5px;
+          float: left;
+        }
+
+        input {
+          float: left;
+          width: 120px;
+        }
+
+        select {
+          width: 120px;
+          margin-left: -20px;
+          width: 134px;
         }
       }
     }

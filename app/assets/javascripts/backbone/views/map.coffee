@@ -2,7 +2,7 @@ class Reporter.Views.Map extends Backbone.View
 
   el: 'body section.content'
   events:
-    'click section.right_sidebar #categories li.category a': 'toggleMarker'
+    'click section.right_sidebar #categories li.category': 'toggleMarker'
 
   initialize: ->
     mapOptions = {
@@ -83,7 +83,7 @@ class Reporter.Views.Map extends Backbone.View
         marker.setMap(mappy)
 
   toggleMarker: (e) ->
-    link = $(e.currentTarget)
+    link = $(e.currentTarget).find('a')
     category = link.data('category-id')
     if !link.hasClass('hidden')
       @removeMarkers(category)

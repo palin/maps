@@ -21,7 +21,7 @@ class Api::ReportsController < Api::ApiController
 
     respond_to do |format|
       format.json { render :json => response }
-      format.html { redirect_to root_path }
+      format.html { redirect_to root_path, :alert => response }
     end
   end
 

@@ -1,10 +1,11 @@
 class Reporter.Views.Modal.ReportInfo extends Reporter.Views.Modal.Base
   template: JST['modals/report_info']
+  modal: 'div.modal-container#report-info'
 
   events:
     'click .rating-box a': 'onRate'
     'click #report-info button.close': 'closeModal'
-    'click .overlay': 'closeModal'
+    'click #report-info .overlay': 'closeModal'
     'submit .new_opinion form': 'onOpinionSubmit'
     'click .image-box a': 'onEnlargeImage'
     'click .rating-opinion a': 'onRateOpinion'

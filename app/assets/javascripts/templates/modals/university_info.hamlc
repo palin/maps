@@ -4,10 +4,10 @@
     .modal-header
       %button.close{type: "button"} ×
       %h3 Politechnika Poznańska
-      %h2 Autor: Maciej Paliński
-      %h2 Promotor: Dr inż. Beata Jankowska
+      %h4 Praca Dyplomowa Inżynierska
     .modal-body
       .left
-        %p Praca Dyplomowa Inżynierska
+        %h5 Autor: Maciej Paliński
+        %h5 Promotor: Dr inż. Beata Jankowska
       .right
         %image{src: "assets/logo_put.png"}

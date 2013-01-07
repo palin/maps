@@ -38,6 +38,9 @@ class Reporter.Views.Modal.ReportInfo extends Reporter.Views.Modal.Base
     response.error(@disableRating)
 
   render: (context) ->
+    $("html meta[property='og:title']")[0].content = "Zgłoszenie- #{context.get('title')}"
+    $("html meta[property='og:url']")[0].content = "http://reporter-maps.herokuapp.com/#/report/#{context.get('id')}"
+    $("html meta[property='og:image']")[0].content = context.get('photo_small')
     url = "api/reports/#{context.id}/rating"
     response = $.ajax(url, null, null, 'json')
     response.success ->

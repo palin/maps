@@ -5,10 +5,8 @@ class Reporter.Views.Categories extends Backbone.View
     'mouseenter li': 'onMouseEnterCategory'
     'mouseleave li': 'onMouseLeaveCategory'
 
-  initialize: ->
-
   onMouseEnterCategory: (e) ->
-    $(e.currentTarget).transition({ x: '-30px' })
+    #$(e.currentTarget).transition({ x: '-30px' })
 
   onMouseLeaveCategory: (e) ->
-    $(e.currentTarget).transition({ x: '0px' })
+    #$(e.currentTarget).transition({ x: '0px' })

@@ -1,6 +1,8 @@
 class Reporter.Views.Map extends Backbone.View
 
-  el: 'body section.content #map_canvas'
+  el: 'body section.content'
+  events:
+    'click section.right_sidebar #categories li.category a': 'toggleMarker'
 
   initialize: ->
     mapOptions = {
@@ -22,18 +24,22 @@ class Reporter.Views.Map extends Backbone.View
         console.log "Wystąpił problem z pobraniem listy zgłoszeń."
 
   addMarkers: ->
+    allMarkers = []
     mappy = @map
-    @marker = null
+    marker = null
     modal = new Reporter.Views.Modal.ReportInfo()
     _.each @reports.models, (report) ->
-      @marker = new google.maps.Marker({
+      marker = new google.maps.Marker({
         map: mappy,
         draggable: false,
         animation: google.maps.Animation.DROP,
-        position: new google.maps.LatLng(parseFloat(report.get('latitude')), parseFloat(report.get('longitude')))
-        #icon: report.category_image
+        position: new google.maps.LatLng(parseFloat(report.get('latitude')), parseFloat(report.get('longitude'))),
+        icon: "assets/categories/#{report.get('category_unique_id')}_icon.png",
+        category: report.get('category_unique_id')
       })
-      google.maps.event.addListener(@marker, 'click', -> modal.render(report))
+      allMarkers.push marker
+      google.maps.event.addListener(marker, 'click', -> modal.render(report))
+    @markers = allMarkers
 
   drawBorder: ->
     url = "api/maps/border"
@@ -64,3 +70,24 @@ class Reporter.Views.Map extends Backbone.View
       fillOpacity: 0.0
     })
     border.setMap(@map)
+
+  removeMarkers: (category) ->
+    _.each @markers, (marker) ->
+      if marker.category == category
+        marker.setMap(null)
+
+  showMarkers: (category) ->
+    mappy = @map
+    _.each @markers, (marker) ->
+      if marker.category == category
+        marker.setMap(mappy)
+
+  toggleMarker: (e) ->
+    link = $(e.currentTarget)
+    category = link.data('category-id')
+    if !link.hasClass('hidden')
+      @removeMarkers(category)
+      link.addClass('hidden')
+    else
+      @showMarkers(category)
+      link.removeClass()

@@ -12,7 +12,7 @@ class ReportDecorator < Draper::Base
     properties[:title] = @report.title
     properties[:description] = @report.description
     properties[:category_title] = @report.category.title
-    properties[:category_image] = @report.category.image
+    properties[:category_unique_id] = @report.category.unique_id
     properties[:latitude] = @report.latitude
     properties[:longitude] = @report.longitude
     properties[:rating] = @report.rating

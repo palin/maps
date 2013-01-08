@@ -5,4 +5,4 @@ class Reporter.Views.Home extends Backbone.View
   initialize: ->
     new Reporter.Views.Map()
     new Reporter.Views.Categories()
-    #new Reporter.Views.Modal.UniversityInfo().render()
+    new Reporter.Views.Modal.UniversityInfo().render()

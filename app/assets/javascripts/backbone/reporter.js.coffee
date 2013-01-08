@@ -14,15 +14,16 @@
 #= require_tree .
 
 window.Reporter =
-  Models: {}
+  Models: {
+    Opinion: {}
+    Report: {}
+  }
   Collections: {
-    Base: {}
     Reports: {}
     Opinions: {}
   }
-  Routers: {
-    Base: {}
-  }
+  Routers: {}
+  Templates: {}
   Views: {
     Admin: {}
     Home: {}

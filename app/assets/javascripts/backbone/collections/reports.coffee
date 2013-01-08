@@ -1,4 +1,4 @@
-class Reporter.Collections.Reports extends Reporter.Collections.Base
+class Reporter.Collections.Reports extends Backbone.Collection
   model: Reporter.Models.Report
   url: "api/reports/all"
 

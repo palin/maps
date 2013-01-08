@@ -1,4 +1,4 @@
-class Reporter.Collections.Opinions extends Reporter.Collections.Base
+class Reporter.Collections.Opinions extends Backbone.Collection
   model: Reporter.Models.Opinion
   url: ->
     "/api/reports/#{@id}/opinions/all"

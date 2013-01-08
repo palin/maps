@@ -21,4 +21,15 @@ FactoryGirl.define do
     sequence(:description ) { |n| "Opis kategorii#{n}"}
     image File.open("#{Rails.root}/spec/rails.png", "r")
   end
+
+  factory :opinion do
+    sequence(:title) { |n| "Tytul opinii nr#{n}"}
+    sequence(:description) { |n| "Opis opinii nr#{n} opis opinii"}
+    association(:report)
+  end
+
+  factory :abuse do
+    name "spam"
+    association(:report)
+  end
 end

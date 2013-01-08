@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Api::ReportsController < Api::ApiController
-  include Draper
+
   before_filter :find_report, :only => [:rate_up, :rate_down, :can_vote, :rating]
   before_filter :cookie_enabled?, :only => [:rate_up, :rate_down]
 

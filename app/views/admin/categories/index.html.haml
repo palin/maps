@@ -21,7 +21,7 @@
         %td= c.unique_id
         %td= c.reports.count
         %td
-          = image_tag "categories/#{c.unique_id}.png", :alt => c.title, :width => 24
+          = image_tag "categories/#{c.unique_id}.png", :alt => c.title, :width => 75
         %td
           = link_to "Edytuj", edit_admin_category_path(c.id)
 

@@ -1,0 +1,12 @@
+%h2 Edytuj zgłoszenie
+
+= semantic_form_for @report, :url => admin_report_path(@report.id), :html => {:multipart => true }, :format => :html, :class => 'form-signin', :method => :put do |f|
+  = f.input :title, :label => "Tytuł", :placeholder => "Tytuł"
+  = f.input :description, :as => :text, :label => "Opis", :placeholder => "Opis"
+  %li.old_photo
+    = image_tag @report.photo.small.url, :alt => "Aktualne zdjęcie", :width => 100
+  = f.input :photo, :label => "Zdjęcie", :as => :file
+  = f.input :category_id, :selected => @report.category.unique_id ,:label => "Kategoria", :as => :select, :include_blank => false, :collection => Category.all.map(&:unique_id)
+  = f.input :latitude, :label => "Szerokość g.", :as => :string
+  = f.input :longitude, :label => "Długość g.", :as => :string
+  = f.submit :value => "Zapisz zmiany", :class => "btn btn-large btn-primary"

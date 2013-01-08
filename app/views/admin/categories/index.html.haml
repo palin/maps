@@ -1,0 +1,28 @@
+%h2 Kategorie
+%table.table.table-striped
+  %caption Kategorie zgłoszeń
+  %thead
+    %tr
+      %th= sortable("Category", "id", "Nr")
+      %th= sortable("Category", "title", "Tytuł")
+      %th= sortable("Category", "description", "Opis")
+      %th= sortable("Category", "created_at", "Utworzono")
+      %th= sortable("Category", "unique_id", "Unikalna nazwa")
+      %th Ilość zgłoszeń
+      %th Ikona
+      %th Akcje
+  %tbody
+    - @categories.each do |c|
+      %tr
+        %td= c.id
+        %td= c.title
+        %td= c.description
+        %td= l c.created_at, :format => "%d-%m-%Y %H:%M:%S"
+        %td= c.unique_id
+        %td= c.reports.count
+        %td
+          = image_tag "categories/#{c.unique_id}.png", :alt => c.title, :width => 24
+        %td
+          = link_to "Edytuj", edit_admin_category_path(c.id)
+
+= paginate @categories

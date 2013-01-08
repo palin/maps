@@ -1,0 +1,26 @@
+@import "variables";
+
+body.admin_namespace {
+  section.content {
+    margin-top: 41px;
+
+    div#flash {
+      height: 30px;
+      padding: 10px;
+      margin-right: 6px;
+      text-align: left;
+      .rounded_corners (0px 0px 10px 10px);
+      .element-shadow ();
+
+      &.notice {
+        background: #33FF33;
+        font-weight: bold;
+      }
+      &.alert {
+        background: #FF0000;
+        color: #fff;
+        font-weight: bold;
+      }
+    }
+  }
+}

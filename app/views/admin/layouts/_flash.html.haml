@@ -1,8 +1,9 @@
-- if flash.present?
-  #flash
-    - if flash[:alert].present?
-      #alert
-        = flash[:alert]
-    - elsif flash[:notice].present?
-      #notice
-        = flash[:notice]
+- if session[:flash].present?
+  - if session[:flash][:alert].present?
+    #flash.alert
+      = image_tag "flash_alert.png", :alert => "Wystąpił błąd!"
+      = session[:flash][:alert]
+  - elsif session[:flash][:notice].present?
+    #flash.notice
+      = image_tag "flash_notice.png", :alert => "Wszystko OK!"
+      = session[:flash][:notice]

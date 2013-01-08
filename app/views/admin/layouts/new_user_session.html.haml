@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    %title System Zgłaszania Szkód - Poznań
+    = stylesheet_link_tag :application, :media => "all"
+    = javascript_include_tag :application, :media => "all"
+  %body{class: "#{controller_name}_controller #{action_name}_action", data: {view_name: "#{controller_name.classify}"}}
+    %h2
+      Logowanie
+
+    = render "admin/layouts/flash"
+
+    = semantic_form_for @user_session, :url => admin_user_sessions_path, :class => 'form-signin', :method => :post do |f|
+      = f.input :login, :label => false, :placeholder => "Login"
+      = f.input :password, :label => false, :placeholder => "Hasło"
+      = f.submit :value => "Zaloguj", :class => "btn btn-large btn-primary"

@@ -4,6 +4,8 @@
     %title System Zgłaszania Szkód - Poznań - Panel administracyjny
     = stylesheet_link_tag :application, :media => "all"
     = javascript_include_tag :application, :media => "all"
-  %body{class: "#{controller_name}_controller #{action_name}_action", data: {view_name: "#{controller_name.classify}"}}
+  %body{class: "admin_namespace #{controller_path.gsub('/','_')}_controller #{action_name}_action", data: {view_name: "Admin"}}
     = render 'admin/layouts/top_bar'
-    = yield
+    %section.content
+      = render 'admin/layouts/flash'
+      = yield

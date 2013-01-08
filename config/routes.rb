@@ -87,10 +87,14 @@ Reporter::Application.routes.draw do
   resources :events
 
   namespace :admin do
-    resources :panel, :only => [:index]
+    root :to => 'reports#index'
     match 'logout', :to => 'user_sessions#destroy', :as => :logout
     match 'login', :to => 'user_sessions#new', :as => :login
     resources :user_sessions, :only => [:create]
+    resources :reports
+    resources :opinions
+    resources :abuses
+    resources :categories
   end
 
   # You can have the root of your site routed with "root"

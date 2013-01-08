@@ -24,6 +24,7 @@ window.Reporter =
     Base: {}
   }
   Views: {
+    Admin: {}
     Home: {}
     Modal: {
       Base: {}

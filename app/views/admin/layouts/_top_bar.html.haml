@@ -1,0 +1,23 @@
+.navbar.navbar-inverse.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{:'data-toggle' => 'collapse', :'data-target' => '.nav-collapse'}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{:href => admin_root_path}
+        SZS-Poznań
+      .nav-collapse.collapse
+        %ul.nav
+          %li{:class => controller_name == "reports" ? 'active' : ''}
+            = link_to "Zgłoszenia", admin_reports_path
+          %li{:class => controller_name == "categories" ? 'active' : ''}
+            = link_to "Kategorie", admin_categories_path
+          %li{:class => controller_name == "opinions" ? 'active' : ''}
+            = link_to "Opinie", admin_opinions_path
+          %li{:class => controller_name == "abuses" ? 'active' : ''}
+            = link_to "Nadużycia", admin_abuses_path
+
+        %ul.nav.pull-right
+          %li
+            = link_to "Wyloguj", admin_logout_path

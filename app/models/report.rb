@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class Report < ActiveRecord::Base
   attr_accessible :title, :description, :photo, :category_id, :latitude, :longitude
 
@@ -10,8 +9,8 @@ class Report < ActiveRecord::Base
 
   validates_presence_of :title, :description, :category_id, :latitude, :longitude, :photo
   validates_numericality_of :latitude, :longitude
-  validates_format_of :title, :with => /^[a-zA-Z0-9\s-]{8,30}+$/
-  validates_format_of :description, :with => /^[a-zA-Z0-9\s[-,._\(\)]*]{15,120}$/
+  validates_format_of :title, :with => /^.{8,30}$/
+  validates_format_of :description, :with => /^.{15,120}$/
 
   REPORT_ATTRS = [:title, :description, :photo, :category_id, :latitude, :longitude]
 

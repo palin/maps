@@ -1,0 +1,29 @@
+%h2 Opinie
+%table.table.table-striped
+  %caption Opinie do zgłoszeń
+  %thead
+    %tr
+      %th= sortable("Opinion", "id", "Nr")
+      %th= sortable("Opinion", "title", "Tytuł")
+      %th= sortable("Opinion", "description", "Treść")
+      %th= sortable("Opinion", "created_at", "Utworzono")
+      %th= sortable("Opinion", "positives", "Plusy")
+      %th= sortable("Opinion", "negatives", "Minusy")
+      %th= sortable("Opinion", "report_id", "Zgłoszenie")
+      %th Akcje
+  %tbody
+    - @opinions.each do |o|
+      %tr
+        %td= o.id
+        %td= o.title
+        %td= o.description
+        %td= l o.created_at, :format => "%d-%m-%Y %H:%M:%S"
+        %td= o.positives
+        %td= o.negatives
+        %td= o.report_id
+        %td
+          = link_to "Usuń", admin_opinion_path(o.id), :method => :delete, :confirm => "Jesteś pewny? Usunięcie jest nieodwracalne!"
+          %br
+          = link_to "Edytuj zgłoszenie", edit_admin_report_path(o.report_id) if o.report_id.present?
+
+= paginate @opinions

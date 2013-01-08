@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Admin::UserSessionsController < Admin::AdminController
+  layout 'admin/layouts/new_user_session'
 
   def new
     @user_session = UserSession.new
@@ -8,7 +9,7 @@ class Admin::UserSessionsController < Admin::AdminController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      redirect_to admin_panel_index_path, :notice => "Poprawnie zalogowano!"
+      redirect_to admin_reports_path, :notice => "Poprawnie zalogowano!"
     else
       flash[:alert] = "Niepoprawne dane logowania!"
       render :new

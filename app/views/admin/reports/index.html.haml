@@ -1,0 +1,29 @@
+%h2 Zgłoszenia
+%table.table.table-striped
+  %caption Zgłoszenia problemów na terenie Poznania
+  %thead
+    %tr
+      %th= sortable("Report", "id", "Nr")
+      %th= sortable("Report", "title", "Tytuł")
+      %th= sortable("Report", "description", "Opis")
+      %th= sortable("Report", "created_at", "Utworzono")
+      %th Zdjęcie
+      %th Kategoria
+      %th Akcje
+  %tbody
+    - @reports.each do |r|
+      %tr
+        %td= r.id
+        %td= r.title
+        %td= r.description
+        %td= l r.created_at, :format => "%d-%m-%Y %H:%M:%S"
+        %td
+          = link_to (image_tag r.photo.small.url, :alt => r.title, :width => 75), r.photo.full.url
+        %td= r.category.title
+        %td
+          = link_to "Usuń", admin_report_path(r.id), :method => :delete, :confirm => "Jesteś pewny? Usunięcie jest nieodwracalne!"
+          %br
+          = link_to "Edytuj", edit_admin_report_path(r.id)
+
+= paginate @reports
+

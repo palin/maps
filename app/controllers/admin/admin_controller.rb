@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Admin::AdminController < ActionController::Base
-  l
-  ayout "admin/layouts/admin"
+
+  layout "admin/layouts/admin"
 
   protect_from_forgery
 

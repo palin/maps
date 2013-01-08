@@ -22,13 +22,6 @@ describe Api::ReportsController do
 
       response.body.should == {:success => false, :message => "Nie można utworzyć zgłoszenia!"}.to_json
     end
-
-    it "returns reason of failure if params not correct" do
-      report = FactoryGirl.build(:report, :title => nil)
-      post :send_report, :report => report, :format => :json
-
-      response.body.should == {:success => false, :message => { :title => ["can't be blank", "is invalid"], :photo => ["can't be blank"]}}.to_json
-    end
   end
 
   context "#all" do
@@ -49,25 +42,23 @@ describe Api::ReportsController do
 
   context "#rate_up" do
     it "increments positives of given report" do
-      @report = FactoryGirl.create(:report)
+      report = FactoryGirl.create(:report)
       request.cookies["_reporter_session"] = "aaa"
-      Report.stubs(:find).returns(@report)
 
-      post :rate_up, :report => @report.id
+      post :rate_up, :id => report.id
 
-      @report.positives.should == 1
+      report.reload.positives.should == 1
     end
   end
 
   context "#rate_down" do
     it "increments negatives of given report" do
-      @report = FactoryGirl.create(:report)
+      report = FactoryGirl.create(:report)
       request.cookies["_reporter_session"] = "aaa"
-      Report.stubs(:find).returns(@report)
 
-      post :rate_down, :report => @report.id
+      post :rate_down, :id => report.id
 
-      @report.negatives.should == 1
+      report.reload.negatives.should == 1
     end
   end
 
@@ -75,7 +66,7 @@ describe Api::ReportsController do
     it "returns 200 if has no cookies set" do
       @report = FactoryGirl.create(:report)
 
-      post :can_vote, :report => @report.id
+      post :can_vote, :id => @report.id
 
       response.status.should == 200
     end
@@ -83,7 +74,7 @@ describe Api::ReportsController do
     it "returns 409 if has cookies set" do
       @report = FactoryGirl.create(:report)
       cookies["report_id_#{@report.id}"] = @report.id
-      post :can_vote, :report => @report.id
+      post :can_vote, :id => @report.id
 
       response.status.should == 409
     end

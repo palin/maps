@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Admin::UserSessionsController < Admin::AdminController
+
   layout 'admin/layouts/new_user_session'
 
   def new

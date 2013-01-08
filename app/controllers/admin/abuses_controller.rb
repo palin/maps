@@ -24,7 +24,7 @@ class Admin::AbusesController < Admin::AdminController
     @abuse = Abuse.find_by_id(params[:id])
     unless @abuse
       flash[:alert] = "Nie znaleziono takiego zgłoszenia nadużycia"
-      redirect_to admin_reports_path and return
+      redirect_to admin_abuses_path and return
     end
   end
 end

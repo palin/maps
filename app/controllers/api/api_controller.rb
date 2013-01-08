@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Api::ApiController < ActionController::Base
+
   def render_json(status = 200, data = {})
     if status.is_a?(Hash)
       data = status

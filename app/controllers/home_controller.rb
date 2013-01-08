@@ -5,5 +5,4 @@ class HomeController < ApplicationController
     @report = Report.new
     @categories = Category.all
   end
-
 end

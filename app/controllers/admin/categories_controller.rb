@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Admin::CategoriesController < Admin::AdminController
+
   before_filter :require_admin
   before_filter :find_category, :except => [:index]
 
@@ -27,7 +28,7 @@ class Admin::CategoriesController < Admin::AdminController
     if @category.destroy
       flash[:notice] = "Kategoria została usunięta!"
     else
-      flash.now[:alert] = "Nie można usunąć zgłoszenia!"
+      flash[:alert] = "Nie można usunąć zgłoszenia!"
     end
 
     redirect_to admin_categories_path and return

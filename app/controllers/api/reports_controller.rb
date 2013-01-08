@@ -5,6 +5,7 @@ class Api::ReportsController < Api::ApiController
   before_filter :cookie_enabled?, :only => [:rate_up, :rate_down]
 
   def send_report
+    binding.pry
     if params[:report].present?
       @report = Report.build_from_params(params[:report])
     end

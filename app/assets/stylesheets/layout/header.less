@@ -2,18 +2,47 @@
 
 body {
   header {
+    display: block;
     width: 100%;
     height: 100px;
-    background: #eee;
+    background: #ddd;
     color: #999;
 
-    h1 {
-      text-align: center;
-    }
+    #wrapper {
+      width: 988px;
+      margin: 0 auto;
+      #logo {
+        margin-top: 5px;
+        height: 100px;
+        width: 100px;
+        float: left;
+      }
 
-    a {
-      float: right;
-      margin-right: 50px;
+      #info {
+        width: 700px;
+        float: left;
+
+        h1 {
+          color: #666;
+          display: block;
+          padding-top: 10px;
+          text-align: center;
+        }
+        h3 {
+          margin-top: -10px;
+          text-align: center;
+        }
+      }
+      #admin_panel {
+        width: 150px;
+        float: left;
+
+        a {
+          margin-top: 80px;
+          margin-right: 5px;
+          float: right;
+        }
+      }
     }
   }
 }

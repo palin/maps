@@ -1,3 +1,9 @@
 %header
-  %h1 System zgłaszania szkód - Poznań
-  = link_to "Panel administracyjny", admin_login_path
+  #wrapper
+    #logo
+      = image_tag "logo_put.png", :alt => "Politechnika Poznańska", :width => 90
+    #info
+      %h1 System Zgłaszania Szkód - Poznań
+      %h3 Praca dyplomowa inżynierska
+    #admin_panel
+      = link_to "Panel administracyjny", admin_login_path

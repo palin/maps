@@ -4,6 +4,7 @@ class Report < ActiveRecord::Base
 
   belongs_to :category
   has_many :opinions
+  has_many :abuses, :class_name => "Abuse"
 
   mount_uploader :photo, PhotoUploader
 

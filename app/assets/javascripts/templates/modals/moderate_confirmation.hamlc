@@ -1,0 +1,8 @@
+.modal-container#moderate-confirmation
+  .overlay
+  .modal
+    .content
+      %button.close
+        %img{:src => "assets/close_modal.png"}
+      %h3 Dziękujemy za zgłoszenie!
+      %h4= @context

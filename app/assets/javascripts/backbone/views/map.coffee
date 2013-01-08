@@ -8,7 +8,7 @@ class Reporter.Views.Map extends Backbone.View
     mapOptions = {
       zoom: 11,
       center: new google.maps.LatLng(52.4063, 16.9251),
-      mapTypeId: google.maps.MapTypeId.HYBRID
+      mapTypeId: google.maps.MapTypeId.ROADMAP
     }
 
     @map = new google.maps.Map($("#map_canvas")[0], mapOptions)

@@ -64,6 +64,14 @@ Reporter::Application.routes.draw do
           get :rating
         end
       end
+      resources :abuses, :only => [] do
+        collection do
+          post :spam
+          post :duplicate
+          post :content
+          post :solved
+        end
+      end
     end
 
     resources :maps, :only => [] do

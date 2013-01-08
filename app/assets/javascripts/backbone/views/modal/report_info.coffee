@@ -9,6 +9,7 @@ class Reporter.Views.Modal.ReportInfo extends Reporter.Views.Modal.Base
     'submit .new_opinion form': 'onOpinionSubmit'
     'click .image-box a': 'onEnlargeImage'
     'click .rating-opinion a': 'onRateOpinion'
+    'click .moderate-box ul li a': 'onModerate'
 
   url: (vote, id) ->
     "api/reports/#{id}/rate_#{vote}"
@@ -111,3 +112,14 @@ class Reporter.Views.Modal.ReportInfo extends Reporter.Views.Modal.Base
     _.each $('#current_opinion_rating span.rating'), (link) ->
       if parseInt($(link).data('opinion-id')) == id
         $(link).text(rating)
+
+  onModerate: (e) ->
+    e.preventDefault()
+    url = e.currentTarget.href
+    response = $.post(url, null, @onModerateSuccess, 'json')
+
+  onModerateSuccess: (response) =>
+    modal = new Reporter.Views.Modal.ModerateConfirmation()
+    modal.render(response.thanks)
+    $('.moderate-box').fadeOut('slow')
+    $('.moderate-box').css('height', '0px')

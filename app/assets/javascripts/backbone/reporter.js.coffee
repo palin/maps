@@ -30,6 +30,7 @@ window.Reporter =
       UniversityInfo: {}
       ReportInfo: {}
       LargePhoto: {}
+      ModerateConfirmation: {}
     }
     Map: {}
     Categories: {}

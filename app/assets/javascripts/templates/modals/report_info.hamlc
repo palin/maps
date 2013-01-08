@@ -17,13 +17,13 @@
         %span Zgłoś do moderacji:
         %ul
           %li
-            %a{:href => "#", :id => "spam"} spam
+            %a{:href => "/api/reports/#{@report.get('id')}/abuses/spam", :id => "spam"} spam
           %li
-            %a{:href => "#", :id => "duplicate"} duplikat
+            %a{:href => "/api/reports/#{@report.get('id')}/abuses/duplicate", :id => "duplicate"} duplikat
           %li
-            %a{:href => "#", :id => "unsuitable"} nieodpowiednia treść
+            %a{:href => "/api/reports/#{@report.get('id')}/abuses/content", :id => "content"} nieodpowiednia treść
           %li
-            %a{:href => "#", :id => "solved"} problem rozwiązany
+            %a{:href => "/api/reports/#{@report.get('id')}/abuses/solved", :id => "solved"} problem rozwiązany
       .social-box
         <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Freporter-maps.herokuapp.com%2F%23%2Freport%2F#{@report.get('id')}&amp;send=false&amp;layout=button_count&amp;width=120&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:120px; height:21px;" allowTransparency="true"></iframe>
     .right-column

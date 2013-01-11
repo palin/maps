@@ -6,4 +6,3 @@ class Reporter.Views.Categories extends Backbone.View
 
   onMouseClick: (e) ->
     $(e.currentTarget).find('img').toggleClass("grey")
-    $(e.currentTarget).find('a').transition({x: '0px'})

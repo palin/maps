@@ -18,7 +18,8 @@ class Admin::UserSessionsController < Admin::AdminController
   end
 
   def destroy
-    current_user_session.destroy
+    reset_session
+    current_user_session.destroy if current_user_session
     redirect_to root_path, :notice => "Pomyślnie wylogowano!"
   end
 end

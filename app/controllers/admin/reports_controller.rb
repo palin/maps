@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Admin::ReportsController < Admin::AdminController
 
-  before_filter :require_admin
+  before_filter :require_admin, :set_cache_buster
   before_filter :find_report, :except => [:index]
 
   def index

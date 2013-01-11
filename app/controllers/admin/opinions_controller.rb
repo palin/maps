@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Admin::OpinionsController < Admin::AdminController
 
-  before_filter :require_admin
+  before_filter :require_admin, :set_cache_buster
   before_filter :find_opinion, :except => [:index]
 
   def index

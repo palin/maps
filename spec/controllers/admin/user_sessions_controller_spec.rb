@@ -29,6 +29,12 @@ describe Admin::UserSessionsController do
   end
 
   describe "#destroy" do
+    it "doesn't return error if session wasn't created" do
+      delete :destroy
+
+      response.should redirect_to(root_path)
+    end
+
     it "redirects to root path after unlogging" do
       FactoryGirl.create(:user)
 

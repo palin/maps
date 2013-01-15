@@ -32,6 +32,21 @@ body {
       .transition (margin-left, 0.5s);
       margin-left: 20px;
     }
+    .tooltip {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      display: none;
+      .element-opacity (1.0, 100);
+      background-color: #08C;
+      color: #fff;
+      margin-top: 25px;
+      margin-left: -130px;
+      padding: 5px;
+      .rounded_corners (15px 15px 15px 15px);
+    }
 
     ul#categories {
       list-style: none;
@@ -42,12 +57,10 @@ body {
         width: 240px;
         height: 20px;
         padding: 5px 0px 5px 5px;
-        border-radius: 15px 0px 0px 15px;
-        -moz-border-radius: 15px 0px 0px 15px;
-        -webkit-border-radius: 15px 0px 0px 15px;
+        .rounded_corners (15px 0px 0px 15px);
         border: 1px solid #999;
         cursor: pointer;
-        margin-bottom: 5px;
+        margin-bottom: 12px;
         .white-gradient;
 
         img {

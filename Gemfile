@@ -29,6 +29,8 @@ group :assets do
 end
 
 group :development do
+  gem 'psych'
+  gem 'railroady'
   gem 'capistrano'
   gem 'mysql2'
   gem "rails-dev-boost"

@@ -3,13 +3,3 @@
   %ul#categories
     - @categories.each do |category|
       = render :partial => 'categories/category', :object => category
-  #example_form
-    %h5 Formularz testowy
-    = semantic_form_for @report, :html => {:multipart => true }, :format => :html, :url => send_report_api_reports_path do |f|
-      = f.input :title, :label => "Tytuł", :input_html => {:value => ""}, :placeholder => "Tytuł"
-      = f.input :description, :label => "Opis", :input_html => {:value => ""}, :placeholder => "Opis"
-      = f.input :photo, :label => "Zdjęcie", :as => :file
-      = f.input :latitude, :label => "Szerokość", :as => :string, :input_html => {:value => 52.3992}
-      = f.input :longitude, :label => "Długość", :as => :string, :input_html => {:value => 16.9355}
-      = f.input :category_id, :label => "Kategoria", :required => true, :as => :select, :include_blank => false, :collection => Category.all.map(&:unique_id)
-      = f.submit :value => "Utwórz raport"

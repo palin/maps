@@ -2,7 +2,6 @@
 class HomeController < ApplicationController
 
   def index
-    @report = Report.new
     @categories = Category.all
   end
 end

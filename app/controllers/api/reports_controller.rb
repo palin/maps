@@ -7,11 +7,13 @@ class Api::ReportsController < Api::ApiController
   def send_report
     puts "------PARAMS---------\n\n"
     puts params.to_yaml
-    puts "------RESPBODY-------\n\n"
+    puts "------REQUEST-------\n\n"
     begin
-    puts response.body
+    puts request
     rescue
     end
+    puts "-----ENDREQ-----\n\n"
+
     if params[:report].present?
       @report = Report.build_from_params(params[:report])
     end

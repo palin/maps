@@ -20,9 +20,9 @@ class Report < ActiveRecord::Base
     REPORT_ATTRS.each do |att|
       if att == :category_id
         category = Category.find_by_unique_id(params[att])
-        data[att] = category.id
+        data[att] = category.id if category.present?
       else
-        data[att] = params[att]
+        data[att] = nil
       end
     end
 

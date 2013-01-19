@@ -10,6 +10,7 @@ div.modal-container#report-info {
   }
 
   .modal {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     width: 600px;
     margin: -250px 0 0 -435px;
     height: 400px;
@@ -36,7 +37,7 @@ div.modal-container#report-info {
 
       .rating-box {
         float: left;
-        width: 125px;
+        width: 127px;
         height: 32px;
         margin-bottom: 20px;
 
@@ -49,7 +50,7 @@ div.modal-container#report-info {
           width: 32px;
           height: 32px;
           &.disabled {
-            .element-opacity (0.5, 50);
+            .element-opacity (0.3, 30);
           }
           &.down {
             float: left;
@@ -70,7 +71,7 @@ div.modal-container#report-info {
       .moderate-box {
         float: left;
         width: 125px;
-        height: 100px;
+        height: 130px;
         font-size: 11px;
         color: #666;
 
@@ -79,14 +80,14 @@ div.modal-container#report-info {
           height: 16px;
           display: inline-block;
           float: left;
+          margin-top: 2px;
         }
         span {
-          margin-left: -7px;
+          margin-left: -18px;
         }
         ul {
-          list-style-type: circle;
+          list-style-image: url("/assets/moderate_mini.png");
           margin-left: 19px;
-
           li {
             text-align: left;
             margin-bottom: -3px;
@@ -116,38 +117,45 @@ div.modal-container#report-info {
       text-align: left;
 
       .head-box {
-        margin-bottom: 15px;
+        margin-top: 5px;
+        margin-bottom: 10px;
 
+        p {
+          margin-top: 5px;
+          margin-bottom: 15px;
+          font-size: 12px;
+          font-weight: 600;
+        }
         h3 {
           margin-top: -12px;
           margin-bottom: 0px;
           font-size: 20px;
         }
-        h4 {
+        h5 {
           margin-top: -5px;
-          font-size: 14px;
-          .category {
-            color: red;
-          }
-        }
-        p {
-          margin-top: -1px;
+          margin-bottom: 3px;
           font-size: 12px;
+          font-weight: 400;
+          .category, .created_at {
+            color: #2f96b4;
+          }
         }
       }
 
       .opinion-box {
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
         overflow: hidden;
-        height: 255px;
+        height: 265px;
         img {
           float: left;
         }
 
         h4 {
-          margin-top: 5px;
+          font-family: inherit;
+          margin: 4px 0px -10px 30px;
         }
         .new_opinion {
-          height: 40px;
+          height: 32px;
           border-bottom: 1px solid #999;
           margin-bottom: 10px;
 
@@ -157,19 +165,16 @@ div.modal-container#report-info {
             li {
               float: left;
               margin-right: 5px;
-
-              label {
-                float: left;
-                margin-right: 5px;
-                font-size: 12px;
-              }
-
               input[type=text] {
+                font-family: inherit;
                 float: left;
-                width: 130px;
+                width: 110px;
                 font-size: 12px;
                 padding: 0px 4px;
                 margin: 0px;
+              }
+              input#op_description {
+                width: 230px;
               }
 
               input[type=submit] {
@@ -182,7 +187,7 @@ div.modal-container#report-info {
           }
         }
         .opinions {
-          height: 169px;
+          height: 188px;
           overflow: auto;
 
           .opinion {
@@ -195,16 +200,16 @@ div.modal-container#report-info {
 
             .title {
               float: left;
-              width: 325px;
+              width: 345px;
               font-weight: bold;
             }
             .rating-opinion {
               float: left;
               height: 20px;
-              width: 100px;
+              width: 80px;
 
               a.disabled {
-                .element-opacity (0.5, 50);
+                .element-opacity (0.3, 30);
               }
 
               a {
@@ -218,7 +223,7 @@ div.modal-container#report-info {
                 height: 20px;
                 text-align: center;
                 .rating {
-                  color: red;
+                  color: #666;
                 }
               }
             }

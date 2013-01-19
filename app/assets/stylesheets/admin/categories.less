@@ -1,7 +1,7 @@
 
 body.admin_categories_controller {
 
-  &.edit_action {
+  &.edit_action, &.update_action {
     form {
       list-style: none;
       li {
@@ -20,6 +20,11 @@ body.admin_categories_controller {
         }
         &.icon {
           margin-left: -192px;
+        }
+        p.inline-errors {
+          margin-left: 100px;
+          color: red;
+          font-weight: bold;
         }
       }
     }

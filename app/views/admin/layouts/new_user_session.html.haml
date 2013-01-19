@@ -11,6 +11,6 @@
     = render "admin/layouts/flash"
 
     = semantic_form_for @user_session, :url => admin_user_sessions_path, :class => 'form-signin', :method => :post do |f|
-      = f.input :login, :label => false, :placeholder => "Login"
-      = f.input :password, :label => false, :placeholder => "Hasło"
+      = f.input :login, :label => false, :required => true, :placeholder => "Login"
+      = f.input :password, :label => false, :required => true, :placeholder => "Hasło"
       = f.submit :value => "Zaloguj", :class => "btn btn-large btn-primary"

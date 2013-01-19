@@ -7,13 +7,12 @@ class OpinionDecorator < Draper::Base
   end
 
   def as_json(options={})
-    properties = {}
-    properties[:id] = @opinion.id
-    properties[:report_id] = @opinion.report.id
-    properties[:title] = @opinion.title
-    properties[:description] = @opinion.description
-    properties[:rating] = @opinion.rating
-
-    Hash[properties]
+    {
+      :id => @opinion.id,
+      :report_id => @opinion.report.id,
+      :title => @opinion.title,
+      :description => @opinion.description,
+      :rating => @opinion.rating
+    }
   end
 end

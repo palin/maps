@@ -1,7 +1,7 @@
 
 body.admin_reports_controller {
 
-  &.edit_action {
+  &.edit_action, &.update_action {
     form {
       list-style: none;
       li {
@@ -26,6 +26,11 @@ body.admin_reports_controller {
         }
         textarea {
           height: 50px;
+        }
+        p.inline-errors {
+          margin-left: 100px;
+          color: red;
+          font-weight: bold;
         }
       }
     }

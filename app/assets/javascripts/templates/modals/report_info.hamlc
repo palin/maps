@@ -13,7 +13,6 @@
         %a{:href => '#', :'data-vote' => 'up', :id => @report.get('id'), :class => "up"}
           %img{:src => "assets/plus_medium.png", :alt => "+1"}
       .moderate-box
-        %img{:src => "assets/moderate_small.png", :alt => "Zgłoś do moderacji"}
         %span Zgłoś do moderacji:
         %ul
           %li
@@ -29,25 +28,25 @@
     .right-column
       .head-box
         %h3= @report.get('title')
-        %h4
+        %p= @report.get('description')
+        %h5
           Kategoria:
           %span.category= @report.get('category_title')
-        %p= @report.get('description')
+        %h5
+          Utworzono:
+          %span.created_at= @report.get('created_at')
+
       .opinion-box
         %img{:src => "assets/people.png", :alt => "Opinie użytkowników"}
         %h4 Opinie:
         .new_opinion
           %form{:action => "/api/reports/#{@report.get('id')}/opinions/add"}
             %li
-              %label{:for => "op_content"}
-                Tytuł:
-              %input{:type => "text", :name => "content", :id => "op_content"}
+              %input{:type => "text", :name => "content", :id => "op_content", :required => true, :placeholder => "Imię lub tytuł opinii"}
             %li
-              %label{:for => "op_description"}
-                Treść:
-              %input{:type => "text", :name => "description", :id => "op_description"}
+              %input{:type => "text", :name => "description", :id => "op_description", :required => true, :placeholder => "Treść opinii"}
             %li
-              %input{:type => "submit", :value => "Dodaj nową"}
+              %input{:type => "submit", :value => "Dodaj nową", :class => "btn btn-info"}
         .opinions
           - for opinion in @opinions
             .opinion

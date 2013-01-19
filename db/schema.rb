@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108133713) do
+ActiveRecord::Schema.define(:version => 20130119154441) do
 
   create_table "abuses", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -25,18 +25,7 @@ ActiveRecord::Schema.define(:version => 20130108133713) do
     t.datetime "updated_at",               :null => false
     t.string   "title"
     t.string   "description"
-    t.string   "image"
     t.string   "unique_id",   :limit => 3
-  end
-
-  create_table "events", :force => true do |t|
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-    t.string   "title"
-    t.string   "description"
-    t.string   "photo"
-    t.integer  "positives",   :default => 0
-    t.integer  "negatives",   :default => 0
   end
 
   create_table "opinions", :force => true do |t|

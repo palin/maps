@@ -8,4 +8,8 @@ class Category < ActiveRecord::Base
 
   scope :without_reports, joins(:reports).where{ id.eq nil }
   scope :with_reports,    joins(:reports).where{ id.not_eq nil }
+
+  def image
+    "categories/#{unique_id}.png"
+  end
 end

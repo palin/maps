@@ -7,7 +7,7 @@
       %h4 Praca Dyplomowa Inżynierska
     .modal-body
       .left
-        %h5 Tytuł: System zgłaszania szkód na terenie miasta Poznania- \"SZS-Poznań\"
+        %h5 Tytuł: System zgłaszania szkód na terenie miasta Poznania \"SZS-Poznań\"
         %br /
         %h5 Autorzy: Wojciech Ostrowski, Maciej Paliński
         %h5 Promotor: Dr inż. Beata Jankowska

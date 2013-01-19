@@ -5,6 +5,13 @@ class Api::ReportsController < Api::ApiController
   before_filter :cookie_enabled?, :only => [:rate_up, :rate_down]
 
   def send_report
+    puts "------PARAMS---------\n\n"
+    puts params.to_yaml
+    puts "------RESPBODY-------\n\n"
+    begin
+    puts response.body
+    rescue
+    end
     if params[:report].present?
       @report = Report.build_from_params(params[:report])
     end

@@ -13,14 +13,16 @@ describe Api::ReportsController do
       post :send_report, :report => report, :format => :json
 
       Report.count.should == r_count + 1
-      response.body.should == {:success => true, :message => "Poprawnie utworzono zgłoszenie!"}.to_json
+      response.body.should == {:success => true}.to_json
+      response.code.should == "200"
     end
 
     it "returns fail if no params" do
       Report.stubs(:build_from_params).returns(nil)
       post :send_report, :report => {}, :format => :json
 
-      response.body.should == {:success => false, :message => "Nie można utworzyć zgłoszenia!"}.to_json
+      response.body.should == {:success => true}.to_json
+      response.code.should == "403"
     end
   end
 

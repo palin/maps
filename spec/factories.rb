@@ -23,7 +23,7 @@ FactoryGirl.define do
   end
 
   factory :opinion do
-    sequence(:title) { |n| "Tytul opinii nr#{n}"}
+    sequence(:title) { |n| "Tytul nr#{n}"}
     sequence(:description) { |n| "Opis opinii nr#{n} opis opinii"}
     association(:report)
   end

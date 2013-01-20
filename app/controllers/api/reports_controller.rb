@@ -20,7 +20,7 @@ class Api::ReportsController < Api::ApiController
     end
 
     respond_to do |format|
-      format.json { render_json reponse }
+      format.json { render_json response }
       format.html { redirect_to root_path }
     end
   end

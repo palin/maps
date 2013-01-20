@@ -12,4 +12,9 @@ class Category < ActiveRecord::Base
   def image
     "categories/#{unique_id}.png"
   end
+
+  def self.find_category_id(uid)
+    category = Category.find_by_unique_id(params[att])
+    category.present? ? category.id : nil
+  end
 end

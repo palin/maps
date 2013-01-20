@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130119154441) do
+ActiveRecord::Schema.define(:version => 20130119211354) do
 
   create_table "abuses", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20130119154441) do
     t.integer  "category_id"
     t.decimal  "latitude",    :precision => 8, :scale => 6
     t.decimal  "longitude",   :precision => 8, :scale => 6
+    t.text     "photo_data"
   end
 
   create_table "users", :force => true do |t|

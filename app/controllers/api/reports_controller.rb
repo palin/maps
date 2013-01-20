@@ -5,31 +5,22 @@ class Api::ReportsController < Api::ApiController
   before_filter :cookie_enabled?, :only => [:rate_up, :rate_down]
 
   def send_report
-    puts "------PARAMS---------\n\n"
-    puts params.to_yaml
-    puts "------REQUEST-------\n\n"
-    begin
-    puts request
-    rescue
-    end
-    puts "-----ENDREQ-----\n\n"
-
     if params[:report].present?
       @report = Report.build_from_params(params[:report])
     end
 
     if @report
       if @report.save
-        response = {:success => true, :message => "Poprawnie utworzono zgłoszenie!"}
+        response = 200
       else
-        response = {:success => false, :message => @report.errors}
+        response = 400
       end
     else
-      response = {:success => false, :message => "Nie można utworzyć zgłoszenia!"}
+      response = 403
     end
 
     respond_to do |format|
-      format.json { render :json => response }
+      format.json { render_json reponse }
       format.html { redirect_to root_path }
     end
   end

@@ -19,8 +19,9 @@ class Report < ActiveRecord::Base
 
     REPORT_ATTRS.each do |att|
       if att == :category_id
-        category = Category.find_by_unique_id(params[att])
-        data[att] = category.present? ? category.id : nil
+        data[att] = Category.find_category_id(params[att])
+      elsif att == :photo
+        data[att] = PhotoUploader.decode_photo(params[att])
       else
         data[att] = params[att]
       end

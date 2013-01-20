@@ -5,6 +5,9 @@ class Opinion < ActiveRecord::Base
 
   validates_presence_of :title, :description
 
+  validates_format_of :title, :with => /^.{3,15}$/
+  validates_format_of :description, :with => /^.{15,160}$/
+
   OPINION_ATTRS = [:title, :description, :report_id]
 
   def self.build_from_params(params)

@@ -42,9 +42,9 @@
         .new_opinion
           %form{:action => "/api/reports/#{@report.get('id')}/opinions/add"}
             %li
-              %input{:type => "text", :name => "content", :id => "op_content", :required => true, :placeholder => "Imię lub tytuł opinii"}
+              %input{:type => "text", :name => "content", :id => "op_content", :maxlength => 15, :required => true, :placeholder => "Imię lub tytuł opinii"}
             %li
-              %input{:type => "text", :name => "description", :id => "op_description", :required => true, :placeholder => "Treść opinii"}
+              %input{:type => "text", :name => "description", :id => "op_description", :maxlength => 160, :required => true, :placeholder => "Treść opinii"}
             %li
               %input{:type => "submit", :value => "Dodaj nową", :class => "btn btn-info"}
         .opinions

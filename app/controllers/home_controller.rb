@@ -2,6 +2,6 @@
 class HomeController < ApplicationController
 
   def index
-    @categories = Category.all
+    @categories = Category.all.sort_by(&:created_at)
   end
 end

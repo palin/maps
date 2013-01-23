@@ -10,7 +10,7 @@ class ReportDecorator < Draper::Base
     {
       :id => @report.id,
       :title => @report.title,
-      :created_at => @report.created_at.to_formatted_s,
+      :created_at => @report.created_at.to_formatted_s(:db),
       :description => @report.description,
       :category_title => @report.category.title,
       :category_unique_id => @report.category.unique_id,

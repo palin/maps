@@ -3,3 +3,11 @@
   %ul#categories
     - @categories.each do |category|
       = render :partial => 'categories/category', :object => category
+
+  %h3 Aplikacja mobilna
+  #mobile_app
+    %a{:href => "#"}
+      = image_tag "android.png", :alt => "Pobierz aplikację mobilną", :width => 75
+      %h5 Pobierz
+    %span Wymagany system operacyjny Android
+

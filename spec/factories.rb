@@ -19,7 +19,6 @@ FactoryGirl.define do
   factory :category do
     sequence(:title) { |n| "Kategoria#{n}"}
     sequence(:description ) { |n| "Opis kategorii#{n}"}
-    image File.open("#{Rails.root}/spec/rails.png", "r")
   end
 
   factory :opinion do

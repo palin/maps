@@ -19,6 +19,7 @@ gem 'rails-backbone'
 gem 'squeel'
 gem 'less-rails-bootstrap'
 gem 'yui-compressor', '~> 0.9.6'
+gem 'unicorn'
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'

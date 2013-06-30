@@ -10,87 +10,84 @@ describe Admin::CategoriesController do
     UserSession.create(@user, true)
   end
 
-  describe "#index" do
-    it "responses with 200" do
-      get :index
+  let!(:category) { FactoryGirl.create(:category) }
+  let(:category_id) { category.id }
 
-      response.code.should == "200"
-    end
+  describe "#index" do
+    subject { get :index }
+
+    its(:code) { should == "200" }
   end
 
   describe "#edit" do
-    it "responses with 200 if category exists" do
-      c = FactoryGirl.create(:category)
 
-      get :edit, :id => c.id
+    subject { get :edit, id: category_id }
 
-      response.code.should == "200"
+    describe "existing category" do
+      its(:code) { should == "200" }
     end
 
-    it "redirects to admin/categories if category doesn't exist" do
-      get :edit, :id => 'nonexistent'
+    describe "nonexistent category" do
+      let(:category_id) { "nonexistent" }
 
-      response.should redirect_to(admin_categories_path)
+      it { should redirect_to(admin_categories_path) }
     end
   end
 
   describe "#update" do
-    it "redirects to admin/categories if updated failed" do
-      put :update, :id => 'nonexistent'
+    let(:new_title) { 'new_title' }
 
-      response.should redirect_to(admin_categories_path)
+    subject { put :update, { id: category_id, category: { title: new_title } } }
+
+    describe "existing object" do
+      it { should redirect_to(admin_categories_path) }
+      it {
+        expect { subject }.to change { category.reload.title }.to "new_title"
+      }
+      it {
+        subject
+        flash[:notice].should == "Kategoria została zaktualizowana!"
+      }
     end
 
-    it "correctly updates object" do
-      c = FactoryGirl.create(:category)
+    describe "nonexistent object" do
+      let(:category_id) { "nonexistent" }
 
-      put :update, {:id => c.id, :category => {:title => 'new_title'}}
-
-      c.reload.title.should == 'new_title'
+      it { should redirect_to(admin_categories_path) }
     end
 
-    it "redirects to admin/categories if updated successfully" do
-      c = FactoryGirl.create(:category)
+    describe "issues with save" do
+      let(:new_title) { nil }
 
-      put :update, {:id => c.id, :category => {:title => 'new_title'}}
-
-      flash[:notice].should == "Kategoria została zaktualizowana!"
-      response.should redirect_to(admin_categories_path)
-    end
-
-    it "renders edit layout if problem with save" do
-      c = FactoryGirl.create(:category)
-
-      put :update, {:id => c.id, :category => {:title => nil}}
-
-      flash[:alert].should == "Wystąpił problem. Sprawdź dane formularza."
-      response.should render_template("edit")
+      it {
+        subject
+        flash[:alert].should == "Wystąpił problem. Sprawdź dane formularza."
+      }
+      it { should render_template("edit") }
     end
   end
 
   describe "#destroy" do
-    it "redirect to admin/categories if category doesn't exits" do
-      delete :destroy, :id => 'nonexistent'
+    let(:category_id) { category.id }
 
-      response.should redirect_to(admin_categories_path)
+    subject { delete :destroy, id: category_id }
+
+    describe "existing object" do
+      it { should redirect_to(admin_categories_path) }
+      it {
+        expect { delete :destroy, id: category_id }.to change(Category, :count).by(-1)
+      }
+      it {
+        subject
+        flash[:notice].should == "Kategoria została usunięta!"
+      }
+      it { should redirect_to(admin_categories_path) }
     end
 
-    it "destroy category correctly" do
-      c = FactoryGirl.create(:category)
-      now = Category.count
+    describe "nonexistent object" do
+      let(:category_id) { "nonexistent" }
 
-      delete :destroy, :id => c
-
-      Category.count.should == now - 1
-    end
-
-    it "redirects to admin/categories with flash notice after successful destroy" do
-      c = FactoryGirl.create(:category)
-
-      delete :destroy, :id => c
-
-      flash[:notice].should == "Kategoria została usunięta!"
-      response.should redirect_to(admin_categories_path)
+      it { should redirect_to(admin_categories_path) }
     end
   end
 end

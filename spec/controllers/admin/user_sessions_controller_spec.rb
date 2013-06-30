@@ -5,42 +5,44 @@ describe Admin::UserSessionsController do
   setup :activate_authlogic
 
   describe "#new" do
-    it "responses with 200" do
-      get :new
-      response.code.should == "200"
-    end
+    subject { get :new }
+
+    its(:code) { should == "200"}
   end
 
   describe "#create" do
-    it "creates correctly user session and redirects to admin panel" do
-      user = FactoryGirl.create(:user)
+    let!(:user) { FactoryGirl.create(:user) }
+    let(:user_login) { user.login }
+    let(:user_password) { user.password }
 
-      post :create, :user_session => {:login => user.login, :password => user.password}
-      flash[:notice].should == "Poprawnie zalogowano!"
-      response.should redirect_to(admin_reports_path)
+    subject { post :create, :user_session => {:login => user_login, :password => user_password} }
+
+    describe "correct login data" do
+      it {
+        subject
+        flash[:notice].should == "Poprawnie zalogowano!"
+      }
+      it { should redirect_to(admin_reports_path) }
     end
 
-    it "creates correctly user session and redirects to admin panel" do
-      post :create, :user_session => {:login => 'bleble', :password => 'bleble'}
+    describe "wrong login data" do
+      let(:user_login) { "blahblah" }
+      let(:user_password) { "blabla" }
 
-      flash[:alert].should == "Niepoprawne dane logowania!"
-      response.should render_template('new')
+      it { should render_template('new')}
+      it {
+        subject
+        flash[:alert].should == "Niepoprawne dane logowania!"
+      }
     end
   end
 
   describe "#destroy" do
-    it "doesn't return error if session wasn't created" do
-      delete :destroy
 
-      response.should redirect_to(root_path)
-    end
+    subject { delete :destroy }
 
-    it "redirects to root path after unlogging" do
-      FactoryGirl.create(:user)
-
-      delete :destroy
-
-      response.should redirect_to(root_path)
+    describe "redirect to main admin page" do
+      it { should redirect_to(root_path) }
     end
   end
 end

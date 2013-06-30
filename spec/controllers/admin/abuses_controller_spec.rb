@@ -11,34 +11,27 @@ describe Admin::AbusesController do
   end
 
   describe "#index" do
-    it "responses with 200" do
-      get :index
-      response.code.should == "200"
-    end
+    subject { get :index }
+
+    its(:code) { should == "200" }
   end
 
   describe "#destroy" do
-    it "responses with 200 after deleting object" do
-      abuse = FactoryGirl.create(:abuse)
+    let!(:abuse_id) { FactoryGirl.create(:abuse).id }
 
-      delete :destroy, :id => abuse.id
+    subject { delete :destroy, id: abuse_id }
 
-      response.should redirect_to admin_abuses_path
+    describe "existing object" do
+      it { should redirect_to admin_abuses_path }
+      it {
+        expect { subject }.to change { Abuse.count }.by(-1)
+      }
     end
 
-    it "redirects to admin/abuses if abuse doesn't exist" do
-      delete :destroy, :id => 'nonexistent'
+    describe "nonexistent object" do
+      let(:abuse_id) { "nonexistent" }
 
-      response.should redirect_to admin_abuses_path
-    end
-
-    it "correctly deletes object from database" do
-      abuse = FactoryGirl.create(:abuse)
-      now = Abuse.count
-
-      delete :destroy, :id => abuse.id
-
-      Abuse.count.should == now-1
+      it { should redirect_to admin_abuses_path }
     end
   end
 end

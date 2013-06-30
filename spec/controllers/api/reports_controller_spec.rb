@@ -4,81 +4,85 @@ require 'spec_helper'
 describe Api::ReportsController do
   Fog.mock!
 
+  let(:data) { JSON.parse(subject.body) }
+
   context "#send_report" do
-    it "returns success if params correct" do
-      r_count = Report.count
-      report = FactoryGirl.build(:report)
-      Report.stubs(:build_from_params).returns(report)
+    let(:report) { FactoryGirl.build(:report) }
 
-      post :send_report, :report => report, :format => :json
+    subject { post :send_report, :report => report, :format => :json }
 
-      Report.count.should == r_count + 1
-      response.body.should == {:success => true}.to_json
-      response.code.should == "200"
+    describe "correct params" do
+      before { Report.stubs(:build_from_params).returns(report) }
+
+      its(:code) { should == "200" }
+      it { data["success"].should == true }
+      it {
+        expect { subject }.to change(Report, :count).by(1)
+      }
     end
 
-    it "returns fail if no params" do
-      Report.stubs(:build_from_params).returns(nil)
-      post :send_report, :report => {}, :format => :json
+    describe "incorrect params" do
+      let(:report) { {} }
 
-      response.body.should == {:success => true}.to_json
-      response.code.should == "403"
+      before { Report.stubs(:build_from_params).returns(nil) }
+
+      its(:code) { should == "403" }
+      it { data["success"].should == true }
     end
   end
 
   context "#all" do
-    it "renders empty json" do
-      get :all
+    subject { get :all }
 
-      response.body.should == {:success => true, :reports => []}.to_json
+    let(:data) { JSON.parse(subject.body) }
+
+    describe "no reports" do
+      it { data["success"].should == true }
+      it { data["reports"].should == [] }
     end
 
-    it "renders json with report's data" do
-      @report = FactoryGirl.create(:report)
+    describe "report exists" do
+      let!(:report) { FactoryGirl.create(:report) }
 
-      get :all
-
-      response.body.include?("{\"id\":#{@report.id}").should == true
-    end
-  end
-
-  context "#rate_up" do
-    it "increments positives of given report" do
-      report = FactoryGirl.create(:report)
-      request.cookies["_reporter_session"] = "aaa"
-
-      post :rate_up, :id => report.id
-
-      report.reload.positives.should == 1
+      it { data["reports"][0]["id"].should == report.id }
     end
   end
 
-  context "#rate_down" do
-    it "increments negatives of given report" do
-      report = FactoryGirl.create(:report)
-      request.cookies["_reporter_session"] = "aaa"
+  describe "rating" do
+    let!(:report) { FactoryGirl.create(:report) }
 
-      post :rate_down, :id => report.id
+    before { request.cookies["_reporter_session"] = "aaa" }
 
-      report.reload.negatives.should == 1
+    context "#rate_up" do
+      subject { post :rate_up, :id => report.id }
+
+      it {
+        expect { subject }.to change { report.reload.positives }.to(1)
+      }
+    end
+
+    context "#rate_down" do
+      subject { post :rate_down, :id => report.id }
+
+      it {
+        expect { subject }.to change { report.reload.negatives }.to(1)
+      }
     end
   end
 
   context "#can_vote" do
-    it "returns 200 if has no cookies set" do
-      @report = FactoryGirl.create(:report)
+    let!(:report) { FactoryGirl.create(:report) }
 
-      post :can_vote, :id => @report.id
+    subject { post :can_vote, :id => report.id }
 
-      response.status.should == 200
+    describe "no cookies set" do
+      its(:status) { should == 200 }
     end
 
-    it "returns 409 if has cookies set" do
-      @report = FactoryGirl.create(:report)
-      cookies["report_id_#{@report.id}"] = @report.id
-      post :can_vote, :id => @report.id
+    describe "cookies set" do
+      before { cookies["report_id_#{report.id}"] = report.id }
 
-      response.status.should == 409
+      its(:status) { should == 409 }
     end
   end
 end

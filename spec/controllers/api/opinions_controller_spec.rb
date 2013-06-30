@@ -4,15 +4,12 @@ require 'spec_helper'
 describe Api::OpinionsController do
 
   describe "#add" do
-    it "correctly adds new opinion" do
-      r = FactoryGirl.create(:report)
+    let!(:report) { FactoryGirl.create(:report) }
+    subject { post :add, {:title => "tytul opinii", :description => "opis opinii dlugiej", :report_id => report.id} }
 
-      now = Opinion.count
-
-      post :add, {:title => "tytul opinii", :description => "opis opinii dlugiej", :report_id => r.id}
-
-      Opinion.count.should == now + 1
-    end
+    it {
+      expect { subject }.to change(Opinion, :count).by(1)
+    }
   end
 
 end

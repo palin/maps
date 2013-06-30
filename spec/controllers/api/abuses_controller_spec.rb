@@ -3,46 +3,33 @@ require 'spec_helper'
 
 describe Api::AbusesController do
 
-
+  let!(:report) { FactoryGirl.create(:report) }
 
   describe "#duplicate" do
-    it "correctly responses with thanks message" do
-      report = FactoryGirl.create(:report)
+    subject { post :duplicate, :report_id => report.id }
 
-      post :duplicate, :report_id => report.id
-
-      response.body.should == {:success => true, :thanks => "Informacja o duplikacie została wysłana do moderatorów."}.to_json
-    end
+    its(:code) { should == "200" }
+    its(:body) { should == {:success => true, :thanks => "Informacja o duplikacie została wysłana do moderatorów."}.to_json }
   end
 
   describe "#content" do
+    subject { post :content, :report_id => report.id }
 
-    it "correctly responses with thanks message" do
-      report = FactoryGirl.create(:report)
-
-      post :content, :report_id => report.id
-
-      response.body.should == {:success => true, :thanks => "Informacja o nieodpowiedniej treści została wysłana do moderatorów."}.to_json
-    end
+    its(:code) { should == "200" }
+    its(:body) { should == {:success => true, :thanks => "Informacja o nieodpowiedniej treści została wysłana do moderatorów."}.to_json }
   end
 
   describe "#solved" do
-    it "correctly responses with thanks message" do
-      report = FactoryGirl.create(:report)
+    subject { post :solved, :report_id => report.id }
 
-      post :solved, :report_id => report.id
-
-      response.body.should == {:success => true, :thanks => "Informacja o rozwiązaniu problemu została wysłana do moderatorów."}.to_json
-    end
+    its(:code) { should == "200" }
+    its(:body) { should == {:success => true, :thanks => "Informacja o rozwiązaniu problemu została wysłana do moderatorów."}.to_json }
   end
 
   describe "#spam" do
-    it "correctly responses with thanks message" do
-      report = FactoryGirl.create(:report)
+    subject { post :spam, :report_id => report.id }
 
-      post :spam, :report_id => report.id
-
-      response.body.should == {:success => true, :thanks => "Informacja o spamie została wysłana do moderatorów."}.to_json
-    end
+    its(:code) { should == "200" }
+    its(:body) { should == {:success => true, :thanks => "Informacja o spamie została wysłana do moderatorów."}.to_json }
   end
 end

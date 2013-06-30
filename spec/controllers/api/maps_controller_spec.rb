@@ -3,10 +3,8 @@ require 'spec_helper'
 
 describe Api::MapsController do
   describe "#border" do
-    it "returns 200 OK" do
-      post :border
+    subject { get :border }
 
-      response.code.should == "200"
-    end
+    its(:code) { should == "200" }
   end
 end

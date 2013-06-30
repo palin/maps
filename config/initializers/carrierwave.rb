@@ -3,9 +3,9 @@ CarrierWave.configure do |config|
     s3_config = YAML.load_file("#{Rails.root}/config/s3_config.yml")[Rails.env] rescue {}
 
     config.fog_credentials = {
-      :provider               => 'AWS',       # required
-      :aws_access_key_id      => s3_config['access_key_id'],       # required
-      :aws_secret_access_key  => s3_config['secret_access_key'],       # required
+      :provider               => 'AWS',
+      :aws_access_key_id      => ENV['S3_ACCESS_KEY'],
+      :aws_secret_access_key  => ENV['S3_SECRET_ACCESS_KEY'],
       :region                 => 'eu-west-1'
     }
     config.fog_directory  = s3_config['bucket']                     # required

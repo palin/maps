@@ -19,6 +19,7 @@ FactoryGirl.define do
   factory :category do
     sequence(:title) { |n| "Kategoria#{n}"}
     sequence(:description ) { |n| "Opis kategorii#{n}"}
+    unique_id { "#{SecureRandom.hex[1]}#{SecureRandom.hex[3]}#{SecureRandom.hex[9]}" }
   end
 
   factory :opinion do

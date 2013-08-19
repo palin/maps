@@ -20,13 +20,13 @@ class Report < ActiveRecord::Base
     REPORT_ATTRS.each do |att|
       if att == :category_id
         data[att] = Category.find_category_id(params[att])
-      elsif att == :photo
+      elsif att == :photo && Rails.env.production?
         data[att] = PhotoUploader.decode_photo(params[att])
       else
         data[att] = params[att]
       end
     end
-
+    binding.pry
     Report.new(data)
   end
 

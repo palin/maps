@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
-class Api::ApiController < ActionController::Base
+class V1::ApiController < ActionController::Base
+
+  respond_to :json
 
   def render_json(status = 200, data = {})
     if status.is_a?(Hash)
@@ -33,12 +35,16 @@ class Api::ApiController < ActionController::Base
     end
   end
 
+  def not_found
+    render_error 404 and return
+  end
+
   def has_cookie?(type, id)
     cookies["#{type}_id_#{id}"].present?
   end
 
   def cookie_enabled?
-    render_error 409, :reason => "Żeby głosować należy włączyć obsługę ciasteczek (cookies)!" if request.cookies["_reporter_session"].to_s.blank?
+    render_error 404, :reason => "Żeby głosować należy włączyć obsługę ciasteczek (cookies)!" if request.cookies["_reporter_session"].to_s.blank?
   end
 
   def set_cookie(type, id)

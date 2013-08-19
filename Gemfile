@@ -10,6 +10,7 @@ gem 'draper'
 gem 'formtastic'
 gem 'fog'
 gem 'haml'
+gem "jbuilder", "~> 1.4.2"
 gem 'json'
 gem 'json_pure'
 gem 'jquery-rails'

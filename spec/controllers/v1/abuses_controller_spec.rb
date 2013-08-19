@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'spec_helper'
 
-describe Api::AbusesController do
+describe V1::AbusesController do
 
   let!(:report) { FactoryGirl.create(:report) }
 

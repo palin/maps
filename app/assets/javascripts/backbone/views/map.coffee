@@ -27,28 +27,28 @@ class Reporter.Views.Map extends Backbone.View
     allMarkers = []
     mappy = @map
     marker = null
-    modal = new Reporter.Views.Modal.ReportInfo()
     _.each @reports.models, (report) ->
       marker = new google.maps.Marker({
         map: mappy,
         draggable: false,
         animation: google.maps.Animation.DROP,
         position: new google.maps.LatLng(parseFloat(report.get('latitude')), parseFloat(report.get('longitude'))),
-        icon: "assets/categories/#{report.get('category_unique_id')}_icon.png",
-        category: report.get('category_unique_id')
+        icon: "assets/categories/#{report.get('category').unique_id}_icon.png",
+        category: report.get('category').unique_id
       })
       allMarkers.push marker
-      google.maps.event.addListener(marker, 'click', -> modal.render(report))
+      google.maps.event.addListener marker, 'click', =>
+        Reporter.router.navigate("report/#{report.id}", {trigger: true})
     @markers = allMarkers
 
   drawBorder: ->
-    url = "api/maps/border"
+    url = "v1/maps/border"
     response = $.get(url, null, @prepareBorder, 'json')
 
   prepareBorder: (response) =>
     border_coords = []
 
-    _.each response.border, (coords) ->
+    _.each response, (coords) ->
       border_coords.push new google.maps.LatLng(coords[0], coords[1])
 
     border = new google.maps.Polygon({

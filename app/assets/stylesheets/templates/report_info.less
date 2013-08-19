@@ -45,21 +45,26 @@ div.modal-container#report-info {
         span {
           display: block;
         }
-        a {
+        button {
           display: block;
           float: left;
           width: 32px;
           height: 32px;
-          &.disabled {
-            .element-opacity (0.3, 30);
-          }
-          &.down {
-            float: left;
-          }
-          &.up {
-            float: right;
-          }
+          border: none;
         }
+
+        button.disabled {
+          .element-opacity (0.3, 30);
+        }
+        button.rate.down {
+          float: left;
+          background: url(../minus_medium.png);
+        }
+        button.rate.up {
+          float: right;
+          background: url(../plus_medium.png)
+        }
+
         div#current_rating {
           float: left;
           padding-top: 5px;
@@ -209,13 +214,24 @@ div.modal-container#report-info {
               height: 20px;
               width: 80px;
 
-              a.disabled {
+              button.disabled {
                 .element-opacity (0.3, 30);
               }
 
-              a {
+              button {
                 display: inline-block;
                 float: left;
+                width: 20px;
+                height: 20px;
+                border: none;
+              }
+
+              button.opinion-rate-up {
+                background: url(../plus_small.png);
+              }
+
+              button.opinion-rate-down {
+                background: url(../minus_small.png);
               }
 
               #current_opinion_rating {

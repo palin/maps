@@ -1,9 +1,11 @@
-class Reporter.Views.Modal.ReportInfo extends Reporter.Views.Modal.Base
+class Reporter.Views.Modal.ReportInfo extends Marionette.Layout
+
   template: JST['modals/report_info']
   modal: 'div.modal-container#report-info'
 
   events:
-    'click .rating-box a': 'onRate'
+    'click .rating-box .rate.down': 'onRateNegative'
+    'click .rating-box .rate.up': 'onRatePositive'
     'click #report-info button.close': 'closeModal'
     'click #report-info .overlay': 'closeModal'
     'submit .new_opinion form': 'onOpinionSubmit'
@@ -11,16 +13,35 @@ class Reporter.Views.Modal.ReportInfo extends Reporter.Views.Modal.Base
     'click .rating-opinion a': 'onRateOpinion'
     'click .moderate-box ul li a': 'onModerate'
 
-  url: (vote, id) ->
-    "api/reports/#{id}/rate_#{vote}"
+  initialize: ->
+    @report = @model
 
-  onRate: (e) ->
-    return if $(e.currentTarget).attr("disabled") == 'disabled'
+  serializeData: ->
+    report: @report.attributes
+
+  closeModal: ->
+    super
+    Reporter.router.navigate("/")
+
+
+
+
+
+  url: (vote, id) ->
+    "v1/reports/#{id}/rate_#{vote}"
+
+  onRateNegative: (e) ->
     e.preventDefault()
-    response = @sendRequest(e)
-    response.success(@onRateSuccess)
-    @disableRating()
+    return if $(e.currentTarget).attr("disabled") == 'disabled'
+    @model.rateDown()
     return false
+
+  onRatePositive: (e) ->
+    console.log "onRatePositive"
+    e.preventDefault()
+    return if $(e.currentTarget).attr("disabled") == 'disabled'
+    console.log "come on"
+    @model.rateUp()
 
   sendRequest: (e) ->
     $.post(@url($(e.currentTarget).data('vote'), e.currentTarget.id), null, null, 'json')
@@ -34,27 +55,15 @@ class Reporter.Views.Modal.ReportInfo extends Reporter.Views.Modal.Base
       $(link).addClass('disabled')
 
   canVote: (id) ->
-    url = "api/reports/#{id}/can_vote"
+    url = "v1/reports/#{id}/can_vote"
     response = $.post(url, null, null, 'json')
     response.error(@disableRating)
 
-  render: (context) ->
-    $("html meta[property='og:title']")[0].content = "Zgłoszenie- #{context.get('title')}"
-    $("html meta[property='og:url']")[0].content = "http://reporter-maps.herokuapp.com/#/report/#{context.get('id')}"
-    $("html meta[property='og:image']")[0].content = context.get('photo_small')
-    url = "api/reports/#{context.id}/rating"
-    response = $.ajax(url, null, null, 'json')
-    response.success ->
-      context.set('rating', JSON.parse(response.responseText).rating)
-    @opinions = new Reporter.Collections.Opinions(context.id)
-    @opinions.fetch
-      success: =>
-        $(@el).append @template({report: context, opinions: @opinions.models})
-        @canVote(context.id)
-        @canVoteOpinions(context.id)
-      error: =>
-        $(@el).append @template({report: context, opinions: null})
-        @canVote(context.id)
+  render: ->
+    $("html meta[property='og:title']")[0].content = "Zgłoszenie- #{@report.get('title')}"
+    $("html meta[property='og:url']")[0].content = "http://reporter-maps.herokuapp.com/#/report/#{@report.id}"
+    $("html meta[property='og:image']")[0].content = @report.get('photo').small
+    $(@el).append @template()
 
   onOpinionSubmit: (e) ->
     e.preventDefault()
@@ -105,7 +114,7 @@ class Reporter.Views.Modal.ReportInfo extends Reporter.Views.Modal.Base
           $(link).addClass('disabled')
 
   canVoteOpinions: (report_id) ->
-    url = "api/reports/#{report_id}/opinions/can_vote"
+    url = "v1/reports/#{report_id}/opinions/can_vote"
     response = $.get(url, null, @onCheckVoteOpinions, 'json')
 
   updateRatedOpinion: (rating, id) ->

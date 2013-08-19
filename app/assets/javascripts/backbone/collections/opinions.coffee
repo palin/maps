@@ -1,7 +1,7 @@
 class Reporter.Collections.Opinions extends Backbone.Collection
   model: Reporter.Models.Opinion
   url: ->
-    "/api/reports/#{@id}/opinions/all"
+    "/v1/reports/#{@id}/opinions/all"
 
   initialize: (id) ->
     @id = id

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'spec_helper'
 
-describe Api::OpinionsController do
+describe V1::OpinionsController do
 
   describe "#add" do
     let!(:report) { FactoryGirl.create(:report) }

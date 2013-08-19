@@ -6,6 +6,7 @@
 #= require backbone
 #= require backbone_rails_sync
 #= require backbone_datalink
+#= require ./marionette
 #= require_tree ./templates
 #= require_tree ./models
 #= require_tree ./views
@@ -37,14 +38,14 @@ window.Reporter =
     Categories: {}
   }
   currentView: null
+  currentReport: null
+  router: null
 
-  initCurrentView: ->
-    if @currentView?
-      @currentView.undelegateEvents()
-      @currentView = null
-
-    viewName = $("body").data("view_name")
-    @currentView = new Reporter.Views[viewName]() if Reporter.Views[viewName]?
+  apiRoot: ->
+    "/v1"
 
 $ ->
-  Reporter.initCurrentView()
+  Reporter.router = new Reporter.Router()
+  Reporter.currentView = new Reporter.Views.Home()
+  Backbone.history.start()
+

@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class Api::AbusesController < Api::ApiController
+class V1::AbusesController < V1::ApiController
 
   before_filter :find_report
 
@@ -23,5 +23,6 @@ class Api::AbusesController < Api::ApiController
 
   def find_report
     @report = Report.find_by_id(params[:report_id])
+    not_found unless @report
   end
 end

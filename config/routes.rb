@@ -1,15 +1,8 @@
 Reporter::Application.routes.draw do
-  namespace :api do
-    resources :reports, :only => [] do
+  namespace :v1 do
+    resources :reports, :only => [:show, :index, :update] do
       collection do
-        get :all
         post :send_report
-      end
-      member do
-        post :rate_up
-        post :rate_down
-        post :can_vote
-        get :rating
       end
       resources :opinions, :only => [] do
         collection do

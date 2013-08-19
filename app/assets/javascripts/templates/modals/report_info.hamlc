@@ -3,44 +3,41 @@
   .modal
     .left-column
       .image-box
-        %a{:href => @report.get('photo_full'), :alt => @report.get('title')}
-          %img{:src => @report.get('photo_small'), :alt => @report.get('title')}
+        %a{:href => @report.photo.full, :alt => @report.title}
+          %img{:src => @report.photo.small, :alt => @report.title}
       .rating-box
-        %a{:href => '#', :'data-vote' => 'down', :id => @report.get('id'), :class => "down"}
-          %img{:src => "assets/minus_medium.png", :alt => "-1"}
-        #current_rating
-          = @report.get('rating')
-        %a{:href => '#', :'data-vote' => 'up', :id => @report.get('id'), :class => "up"}
-          %img{:src => "assets/plus_medium.png", :alt => "+1"}
+        %button.rate.down{:disabled => (if !@report.can_vote then true else false), :class => (if !@report.can_vote then 'disabled'), :id => @report.id}
+        #current_rating= @report.rating
+        %button.rate.up{:disabled => (if !@report.can_vote then true else false), :class => (if !@report.can_vote then 'disabled'), :id => @report.id}
       .moderate-box
         %span Zgłoś do moderacji:
         %ul
           %li
-            %a{:href => "/api/reports/#{@report.get('id')}/abuses/spam", :id => "spam"} spam
+            %a{:href => "v1/api/reports/#{@report.id}/abuses/spam", :id => "spam"} spam
           %li
-            %a{:href => "/api/reports/#{@report.get('id')}/abuses/duplicate", :id => "duplicate"} duplikat
+            %a{:href => "v1/api/reports/#{@report.id}/abuses/duplicate", :id => "duplicate"} duplikat
           %li
-            %a{:href => "/api/reports/#{@report.get('id')}/abuses/content", :id => "content"} nieodpowiednia treść
+            %a{:href => "v1/api/reports/#{@report.id}/abuses/content", :id => "content"} nieodpowiednia treść
           %li
-            %a{:href => "/api/reports/#{@report.get('id')}/abuses/solved", :id => "solved"} problem rozwiązany
+            %a{:href => "v1/api/reports/#{@report.id}/abuses/solved", :id => "solved"} problem rozwiązany
       .social-box
-        <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Freporter-maps.herokuapp.com%2F%23%2Freport%2F#{@report.get('id')}&amp;send=false&amp;layout=button_count&amp;width=120&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:120px; height:21px;" allowTransparency="true"></iframe>
+        <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Freporter-maps.herokuapp.com%2F%23%2Freport%2F#{@report.id}&amp;send=false&amp;layout=button_count&amp;width=120&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:120px; height:21px;" allowTransparency="true"></iframe>
     .right-column
       .head-box
-        %h3= @report.get('title')
-        %p= @report.get('description')
+        %h3= @report.title
+        %p= @report.description
         %h5
           Kategoria:
-          %span.category= @report.get('category_title')
+          %span.category= @report.category.title
         %h5
           Utworzono:
-          %span.created_at= @report.get('created_at')
+          %span.created_at= @report.created_at
 
       .opinion-box
         %img{:src => "assets/people.png", :alt => "Opinie użytkowników"}
         %h4 Opinie:
         .new_opinion
-          %form{:action => "/api/reports/#{@report.get('id')}/opinions/add"}
+          %form{:action => "v1/api/reports/#{@report.id}/opinions/add"}
             %li
               %input{:type => "text", :name => "content", :id => "op_content", :maxlength => 15, :required => true, :placeholder => "Imię lub tytuł opinii"}
             %li
@@ -48,19 +45,17 @@
             %li
               %input{:type => "submit", :value => "Dodaj nową", :class => "btn btn-info"}
         .opinions
-          - for opinion in @opinions
+          - for opinion in @report.opinions
             .opinion
               .title
-                = opinion.get('title')
+                = opinion.title
               .rating-opinion
-                %a{:href => '#', :'data-vote' => 'up', :'data-report-id' => opinion.get('report_id'), :id => opinion.get('id')}
-                  %img{:src => "assets/plus_small.png", :alt => "-1"}
+                %button.opinion-rate-up{:disabled => (if !opinion.can_vote then true), :data-id => opinion.id, :class => (if !opinion.can_vote then 'disabled')}
                 #current_opinion_rating
-                  %span.rating{:'data-opinion-id' => opinion.get('id')}= opinion.get('rating')
-                %a{:href => '#', :'data-vote' => 'down', :'data-report-id' => opinion.get('report_id'), :id => opinion.get('id')}
-                  %img{:src => "assets/minus_small.png", :alt => "+1"}
+                  %span.rating{:'data-opinion-id' => opinion.id}= opinion.rating
+                %button.opinion-rate-down{:disabled => (if !opinion.can_vote then true), :data-id => opinion.id, :class => (if !opinion.can_vote then 'disabled')}
               .description
                 %p
-                  = opinion.get('description')
-    %button.close{type: "button"}
+                  = opinion.description
+    %button.close
       %img{:src => "assets/close_modal_medium.png"}

@@ -1,0 +1,10 @@
+%span Zgłoś do moderacji:
+  %ul
+    %li
+      %a{:href => "v1/api/reports/#{@report.id}/abuses/spam", :id => "spam"} spam
+    %li
+      %a{:href => "v1/api/reports/#{@report.id}/abuses/duplicate", :id => "duplicate"} duplikat
+    %li
+      %a{:href => "v1/api/reports/#{@report.id}/abuses/content", :id => "content"} nieodpowiednia treść
+    %li
+      %a{:href => "v1/api/reports/#{@report.id}/abuses/solved", :id => "solved"} problem rozwiązany

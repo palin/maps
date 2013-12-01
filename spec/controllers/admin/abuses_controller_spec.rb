@@ -6,18 +6,18 @@ describe Admin::AbusesController do
 
   before do
     activate_authlogic
-    @user = FactoryGirl.create(:user)
+    @user = create(:user)
     UserSession.create(@user, true)
   end
 
   describe "#index" do
     subject { get :index }
 
-    its(:code) { should == "200" }
+    its(:status) { should == 200 }
   end
 
   describe "#destroy" do
-    let!(:abuse_id) { FactoryGirl.create(:abuse).id }
+    let!(:abuse_id) { create(:abuse).id }
 
     subject { delete :destroy, id: abuse_id }
 

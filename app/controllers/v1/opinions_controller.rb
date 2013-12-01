@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class V1::OpinionsController < V1::ApiController
 
-  before_filter :find_opinion_by_id, only: [:rate_up, :rate_down, :rating, :can_vote]
+  before_filter :find_opinion, only: [:rate_up, :rate_down, :rating, :can_vote]
   before_filter :cookie_enabled?, only: [:rate_up, :rate_down]
 
   def add
@@ -37,7 +37,7 @@ class V1::OpinionsController < V1::ApiController
 
   private
 
-  def find_opinion_by_id
+  def find_opinion
     @opinion = Opinion.find_by_id(params[:id])
   end
 end

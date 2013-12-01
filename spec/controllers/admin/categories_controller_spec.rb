@@ -6,17 +6,17 @@ describe Admin::CategoriesController do
 
   before do
     activate_authlogic
-    @user = FactoryGirl.create(:user)
+    @user = create(:user)
     UserSession.create(@user, true)
   end
 
-  let!(:category) { FactoryGirl.create(:category) }
+  let!(:category) { create(:category) }
   let(:category_id) { category.id }
 
   describe "#index" do
     subject { get :index }
 
-    its(:code) { should == "200" }
+    its(:status) { should == 200 }
   end
 
   describe "#edit" do
@@ -24,7 +24,7 @@ describe Admin::CategoriesController do
     subject { get :edit, id: category_id }
 
     describe "existing category" do
-      its(:code) { should == "200" }
+      its(:status) { should == 200 }
     end
 
     describe "nonexistent category" do
@@ -41,13 +41,8 @@ describe Admin::CategoriesController do
 
     describe "existing object" do
       it { should redirect_to(admin_categories_path) }
-      it {
-        expect { subject }.to change { category.reload.title }.to "new_title"
-      }
-      it {
-        subject
-        flash[:notice].should == "Kategoria została zaktualizowana!"
-      }
+      it { expect { subject }.to change { category.reload.title }.to "new_title" }
+      it { expect { subject }.to change { flash[:notice] }.to("Kategoria została zaktualizowana!") }
     end
 
     describe "nonexistent object" do
@@ -59,10 +54,7 @@ describe Admin::CategoriesController do
     describe "issues with save" do
       let(:new_title) { nil }
 
-      it {
-        subject
-        flash[:alert].should == "Wystąpił problem. Sprawdź dane formularza."
-      }
+      it { expect { subject }.to change { flash[:alert] }.to("Wystąpił problem. Sprawdź dane formularza.") }
       it { should render_template("edit") }
     end
   end
@@ -73,14 +65,8 @@ describe Admin::CategoriesController do
     subject { delete :destroy, id: category_id }
 
     describe "existing object" do
-      it { should redirect_to(admin_categories_path) }
-      it {
-        expect { delete :destroy, id: category_id }.to change(Category, :count).by(-1)
-      }
-      it {
-        subject
-        flash[:notice].should == "Kategoria została usunięta!"
-      }
+      it { expect { delete :destroy, id: category_id }.to change(Category, :count).by(-1) }
+      it { expect { subject }.to change { flash[:notice] }.to("Kategoria została usunięta!") }
       it { should redirect_to(admin_categories_path) }
     end
 

@@ -1,0 +1,3 @@
+%button.rate.down{:disabled => (if !@report.can_vote then true else false), :class => (if !@report.can_vote then 'disabled'), :id => @report.id}
+#current_rating= @report.rating
+%button.rate.up{:disabled => (if !@report.can_vote then true else false), :class => (if !@report.can_vote then 'disabled'), :id => @report.id}

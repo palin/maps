@@ -2,7 +2,6 @@ class Reporter.Views.Modal.ReportInfo extends Marionette.Layout
 
   template: JST['modals/report_info']
   modal: 'div.modal-container#report-info'
-
   events:
     'click .rating-box .rate.down': 'onRateNegative'
     'click .rating-box .rate.up': 'onRatePositive'
@@ -22,10 +21,6 @@ class Reporter.Views.Modal.ReportInfo extends Marionette.Layout
   closeModal: ->
     super
     Reporter.router.navigate("/")
-
-
-
-
 
   url: (vote, id) ->
     "v1/reports/#{id}/rate_#{vote}"

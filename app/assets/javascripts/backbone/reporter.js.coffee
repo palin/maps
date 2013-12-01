@@ -8,6 +8,7 @@
 #= require backbone_datalink
 #= require ./marionette
 #= require_tree ./templates
+#= require_tree ./components
 #= require_tree ./models
 #= require_tree ./views
 #= require_tree ./routers
@@ -22,6 +23,7 @@ window.Reporter =
     Reports: {}
     Opinions: {}
   }
+  Components: {}
   Routers: {}
   Templates: {}
   Views: {
@@ -41,8 +43,15 @@ window.Reporter =
   currentReport: null
   router: null
 
-  apiRoot: ->
-    "/v1"
+  apiRoot: (version=1)->
+    "/v#{version}"
+
+  showView: (view)->
+    @currentView = view
+    console.log @currentView
+    console.log @currentView.$el
+    $('.content').append(@currentView.$el)
+    @currentView.render()
 
 $ ->
   Reporter.router = new Reporter.Router()

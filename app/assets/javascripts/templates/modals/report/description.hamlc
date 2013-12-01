@@ -1,0 +1,8 @@
+%h3= @model.title
+%p= @model.description
+%h5
+  Kategoria:
+  %span.category= @model.category.title
+%h5
+  Utworzono:
+  %span.created_at= @model.created_at

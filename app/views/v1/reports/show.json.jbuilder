@@ -11,7 +11,7 @@ json.photo do |json|
 end
 
 if @report.opinions
-  json.opinions(@report.opinions) do |json, opinion|
+  json.opinions(@report.opinions) do |opinion|
     json.extract! opinion, :id, :report_id, :title, :description, :rating
     json.can_vote !@disabled_opinions.include?(opinion.id)
   end

@@ -7,21 +7,19 @@ describe Admin::UserSessionsController do
   describe "#new" do
     subject { get :new }
 
-    its(:code) { should == "200"}
+    its(:status) { should == 200 }
   end
 
   describe "#create" do
-    let!(:user) { FactoryGirl.create(:user) }
-    let(:user_login) { user.login }
-    let(:user_password) { user.password }
+    let!(:user) { create(:user) }
 
-    subject { post :create, :user_session => {:login => user_login, :password => user_password} }
+    subject { post :create, user_session: { login: user_login, password: user_password } }
 
     describe "correct login data" do
-      it {
-        subject
-        flash[:notice].should == "Poprawnie zalogowano!"
-      }
+      let(:user_login) { user.login }
+      let(:user_password) { user.password }
+
+      it { expect { subject }.to change { flash[:notice] }.to("Poprawnie zalogowano!") }
       it { should redirect_to(admin_reports_path) }
     end
 
@@ -29,16 +27,12 @@ describe Admin::UserSessionsController do
       let(:user_login) { "blahblah" }
       let(:user_password) { "blabla" }
 
-      it { should render_template('new')}
-      it {
-        subject
-        flash[:alert].should == "Niepoprawne dane logowania!"
-      }
+      it { expect { subject }.to change { flash[:alert] }.to("Niepoprawne dane logowania!") }
+      it { should render_template('new') }
     end
   end
 
   describe "#destroy" do
-
     subject { delete :destroy }
 
     describe "redirect to main admin page" do

@@ -1,16 +1,17 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '4.0.0'
 
 gem 'pg'
 
 gem 'authlogic'
 gem 'carrierwave'
 gem 'draper'
+gem 'decent_exposure'
 gem 'formtastic'
 gem 'fog'
 gem 'haml'
-gem "jbuilder", "~> 1.4.2"
+gem 'jbuilder', '~> 1.4.2'
 gem 'json'
 gem 'json_pure'
 gem 'jquery-rails'
@@ -19,22 +20,20 @@ gem 'mini_magick'
 gem 'rails-backbone'
 gem 'less-rails-bootstrap'
 gem 'yui-compressor', '~> 0.9.6'
+gem 'unf'
 gem 'unicorn'
 
-group :assets do
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'therubyracer', :platforms => :ruby
-  gem 'uglifier', '>= 1.0.3'
-  gem 'haml_coffee_assets'
-  gem 'execjs'
-end
+gem 'coffee-rails'
+gem 'therubyracer', :platforms => :ruby
+gem 'uglifier', '>= 1.0.3'
+gem 'haml_coffee_assets'
+gem 'execjs'
 
 group :development do
   gem 'psych'
   gem 'railroady'
   gem 'capistrano'
   gem 'mysql2'
-  gem "rails-dev-boost"
 end
 
 group :test do

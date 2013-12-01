@@ -33,10 +33,17 @@ Reporter::Application.routes.draw do
     end
   end
 
+  namespace :v2 do
+    resources :reports, only: [:create, :index, :show, :update] do
+      resources :abuses, only: [:create]
+      resources :opinions, only: [:create, :index, :show, :update]
+    end
+  end
+
   namespace :admin do
     root :to => 'reports#index'
-    match 'logout', :to => 'user_sessions#destroy', :as => :logout
-    match 'login', :to => 'user_sessions#new', :as => :login
+    delete 'logout', :to => 'user_sessions#destroy', :as => :logout
+    post 'login', :to => 'user_sessions#new', :as => :login
     resources :user_sessions, :only => [:create]
     resources :reports
     resources :opinions

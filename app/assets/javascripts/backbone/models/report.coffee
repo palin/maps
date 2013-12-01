@@ -7,7 +7,7 @@ class Reporter.Models.Report extends Backbone.Model
     @urlRoot()
 
   urlRoot: ->
-    Reporter.apiRoot() + "/reports/#{@id}"
+    Reporter.apiRoot(2) + "/reports/#{@get('id')}"
 
   rateUp: ->
     @save { positives: @get('positives')+1 },
@@ -16,3 +16,17 @@ class Reporter.Models.Report extends Backbone.Model
   rateDown: ->
     @save { negatives: @get('negatives')+1 },
       reset: true
+
+  toJSON: ->
+    report:
+      id: @get('id')
+      key: @get('key')
+
+  uniqueId: ->
+    @get('category').unique_id
+
+  latitude: ->
+    parseFloat(@get('latitude'))
+
+  longitude: ->
+    parseFloat(@get('longitude'))

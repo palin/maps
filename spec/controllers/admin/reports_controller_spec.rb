@@ -6,91 +6,78 @@ describe Admin::ReportsController do
 
   before do
     activate_authlogic
-    @user = FactoryGirl.create(:user)
+    @user = create(:user)
     UserSession.create(@user, true)
   end
 
   describe "#index" do
-    it "responses with 200" do
-      get :index
+    subject { get :index }
 
-      response.code.should == "200"
-    end
+    its(:status) { should == 200 }
   end
 
   describe "#edit" do
-    it "responses with 200 if report exists" do
-      c = FactoryGirl.create(:report)
+    subject { get :edit, id: report_id }
 
-      get :edit, :id => c.id
+    context "existing report" do
+      let(:report_id) { create(:report).id }
 
-      response.code.should == "200"
+      its(:status) { should == 200 }
     end
 
-    it "redirects to admin/reports if report doesn't exist" do
-      get :edit, :id => 'nonexistent'
+    context "nonexistent report" do
+      let(:report_id) { 'nonexistent' }
 
-      response.should redirect_to(admin_reports_path)
+      it { should redirect_to(admin_reports_path) }
     end
   end
 
   describe "#update" do
-    it "redirects to admin/reports if updated failed" do
-      put :update, :id => 'nonexistent'
+    subject { put :update, id: report_id, report: report_data }
 
-      response.should redirect_to(admin_reports_path)
+    let(:report_data) { {} }
+    let!(:report) { create(:report) }
+    let(:report_id) { report.id }
+
+    context "existing report" do
+      describe "correct new data" do
+        let(:report_data) { { title: 'new_title' } }
+
+        it { expect { subject }.to change { report.reload.title }.to('new_title') }
+        it { expect { subject }.to change { flash[:notice] }.to("Zgłoszenie zostało zaktualizowane!") }
+        it { should redirect_to(admin_reports_path) }
+      end
+
+      describe "incorrect new data" do
+        let(:report_data) { { title: nil } }
+
+        it { expect { subject }.to change { flash[:alert] }.to("Wystąpił problem. Sprawdź dane formularza.") }
+        it { should render_template("edit") }
+      end
     end
 
-    it "correctly updates object" do
-      c = FactoryGirl.create(:report)
+    context "nonexistent report" do
+      let(:report_id) { 'nonexistent' }
 
-      put :update, {:id => c.id, :report => {:title => 'new_title'}}
-
-      c.reload.title.should == 'new_title'
-    end
-
-    it "redirects to admin/reports if updated successfully" do
-      c = FactoryGirl.create(:report)
-
-      put :update, {:id => c.id, :report => {:title => 'new_title'}}
-
-      flash[:notice].should == "Zgłoszenie zostało zaktualizowane!"
-      response.should redirect_to(admin_reports_path)
-    end
-
-    it "renders edit layout if problem with save" do
-      c = FactoryGirl.create(:report)
-
-      put :update, {:id => c.id, :report => {:title => nil}}
-
-      flash[:alert].should == "Wystąpił problem. Sprawdź dane formularza."
-      response.should render_template("edit")
+      it { should redirect_to(admin_reports_path) }
     end
   end
 
   describe "#destroy" do
-    it "redirect to admin/reports if report doesn't exits" do
-      delete :destroy, :id => 'nonexistent'
+    subject { delete :destroy, id: report_id }
 
-      response.should redirect_to(admin_reports_path)
+    context "existing report" do
+      let!(:report_id) { create(:report).id }
+
+      it { expect { subject }.to change { Report.count }.by(-1) }
+      it { expect { subject }.to change { flash[:notice] }.to("Zgłoszenie zostało usunięte!") }
+      it { should redirect_to(admin_reports_path) }
     end
 
-    it "destroy report correctly" do
-      c = FactoryGirl.create(:report)
-      now = Report.count
+    context "nonexistent report" do
+      let(:report_id) { 'nonexistent' }
 
-      delete :destroy, :id => c
-
-      Report.count.should == now - 1
-    end
-
-    it "redirects to admin/reports with flash notice after successful destroy" do
-      c = FactoryGirl.create(:report)
-
-      delete :destroy, :id => c
-
-      flash[:notice].should == "Zgłoszenie zostało usunięte!"
-      response.should redirect_to(admin_reports_path)
+      it { should redirect_to(admin_reports_path) }
     end
   end
 end

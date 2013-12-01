@@ -3,20 +3,20 @@ require 'spec_helper'
 
 describe Abuse do
   it "has a valid factory" do
-    FactoryGirl.build(:abuse).should be_valid
+    build(:abuse).should be_valid
   end
 
   it "is invalid without name" do
-    FactoryGirl.build(:abuse, name: nil).should be_invalid
+    build(:abuse, name: nil).should be_invalid
   end
 
   it "is invalid without report_id" do
-    FactoryGirl.build(:abuse, report_id: nil).should be_invalid
+    build(:abuse, report_id: nil).should be_invalid
   end
 
   describe "#reason" do
     let(:abuse_name) { "spam" }
-    let(:abuse) { FactoryGirl.create(:abuse, name: abuse_name) }
+    let(:abuse) { create(:abuse, name: abuse_name) }
 
     describe "for spam" do
       it { abuse.reason.should == "Spam" }

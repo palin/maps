@@ -1,6 +1,6 @@
 .modal-container
   .overlay
-  .modal
+  .modal-bodal
     .content
       %button.close
         %img{:src => "assets/close_modal.png"}

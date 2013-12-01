@@ -1,12 +1,10 @@
 class Reporter.Router extends Backbone.Router
 
   routes:
-    "report/:id": "report"
+    "reports/:id": "reports"
 
-  report: (id)->
+  reports: (id)->
     report = new Reporter.Models.Report(id: id)
     report.fetch
-      success: (response)->
-        Reporter.currentView = new Reporter.Views.Modal.ReportInfo(model: response)
-        Reporter.currentView.render()
-    Reporter.currentReport = report
+      success: (report)->
+        Reporter.showView(new Reporter.Views.Modal.Report(model: report))

@@ -6,20 +6,20 @@ describe Category do
 
   describe "factories" do
     it "has a valid factory" do
-      FactoryGirl.build(:category).should be_valid
+      build(:category).should be_valid
     end
 
     it "is invalid without title" do
-      FactoryGirl.build(:category, title: nil).should be_invalid
+      build(:category, title: nil).should be_invalid
     end
 
     it "is invalid without description" do
-      FactoryGirl.build(:category, description: nil).should be_invalid
+      build(:category, description: nil).should be_invalid
     end
   end
 
   describe "#image" do
-    let(:category) { FactoryGirl.create(:category, unique_id: unique_id) }
+    let(:category) { create(:category, unique_id: unique_id) }
 
     it { category.image.should == "categories/uid.png" }
   end
@@ -28,7 +28,7 @@ describe Category do
     subject { Category.find_category_id(unique_id) }
 
     context "existing category" do
-      let!(:category) { FactoryGirl.create(:category, unique_id: unique_id) }
+      let!(:category) { create(:category, unique_id: unique_id) }
 
       it { should == category.id }
     end

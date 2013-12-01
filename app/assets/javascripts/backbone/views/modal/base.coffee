@@ -1,4 +1,4 @@
-class Reporter.Views.Modal.Base extends Backbone.View
+class Reporter.Views.Modal.Base extends Marionette.Layout
 
   el: 'body section.content'
   template: JST['modals/base']
@@ -9,6 +9,3 @@ class Reporter.Views.Modal.Base extends Backbone.View
   closeModal: ->
     $(@modal).fadeOut 300, =>
       $(@modal).remove()
-
-  render: (context) ->
-    $(@el).append @template({context})

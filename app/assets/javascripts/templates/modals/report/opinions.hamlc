@@ -1,0 +1,3 @@
+%img{:src => "assets/people.png", :alt => "Opinie użytkowników"}
+  %h4 Opinie:
+

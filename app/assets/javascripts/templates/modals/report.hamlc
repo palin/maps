@@ -1,0 +1,13 @@
+.modal-container#report
+  .overlay
+  .modal-bodal
+    .left-column
+      #photo-region
+      #rating-region
+      #abuse-region
+      #social-region
+    .right-column
+      #description-region
+      #opinions-region
+    %button.close
+      %img{:src => "assets/close_modal_medium.png"}

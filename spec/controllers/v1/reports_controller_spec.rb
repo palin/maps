@@ -5,29 +5,27 @@ describe V1::ReportsController do
   Fog.mock!
   render_views
 
-  let(:data) { JSON.parse(subject.body) }
+  let(:data) { MultiJson.load(subject.body) }
 
   context "#send_report" do
-    let(:report) { FactoryGirl.build(:report) }
+    let(:report) { build(:report) }
 
-    subject { post :send_report, :report => report, :format => :json }
+    subject { post :send_report, report: report, format: :json }
 
     describe "correct params" do
-      before { Report.stubs(:build_from_params).returns(report) }
+      before { Report.stub(:build_from_params).and_return(report) }
 
-      its(:code) { should == "200" }
+      its(:status) { should == 200 }
       it { data["success"].should == true }
-      it {
-        expect { subject }.to change(Report, :count).by(1)
-      }
+      it { expect { subject }.to change(Report, :count).by(1) }
     end
 
     describe "incorrect params" do
       let(:report) { {} }
 
-      before { Report.stubs(:build_from_params).returns(nil) }
+      before { Report.stub(:build_from_params).and_return(nil) }
 
-      its(:code) { should == "403" }
+      its(:status) { should == 403 }
       it { data["success"].should == true }
     end
   end
@@ -35,15 +33,13 @@ describe V1::ReportsController do
   context "#index" do
     subject { get :index, format: :json }
 
-    let(:data) { JSON.parse(subject.body) }
-
     describe "no reports" do
       it { data.should == [] }
     end
 
     describe "reports exist" do
-      let!(:report) { FactoryGirl.create(:report) }
-      let!(:report_2) { FactoryGirl.create(:report) }
+      let!(:report) { create(:report) }
+      let!(:report_2) { create(:report) }
 
       it { data[0]["id"].should == report.id }
       it { data[0]["latitude"].should == report.latitude.to_s }
@@ -57,7 +53,7 @@ describe V1::ReportsController do
   end
 
   context "#update" do
-    let!(:report) { FactoryGirl.create(:report) }
+    let!(:report) { create(:report) }
 
     subject { put :update, id: report.id, rating: rating, format: :json}
 
@@ -84,14 +80,14 @@ describe V1::ReportsController do
         let(:rating) { "up" }
 
         it { expect { subject }.not_to change { report.reload.positives }.to(1) }
-        its(:code) { should == "404" }
+        its(:status) { should == 404 }
       end
 
       context "rate down" do
         let(:rating) { "down" }
 
         it { expect { subject }.not_to change { report.reload.negatives }.to(1) }
-        its(:code) { should == "404" }
+        its(:status) { should == 404 }
       end
     end
 
@@ -99,20 +95,20 @@ describe V1::ReportsController do
       describe "empty" do
         let(:rating) { "" }
 
-        its(:code) { should == "404" }
+        its(:status) { should == 404 }
       end
 
       describe "nil" do
         let(:rating) { nil }
 
-        its(:code) { should == "404" }
+        its(:status) { should == 404 }
       end
     end
   end
 
   context "#show" do
-    let!(:report) { FactoryGirl.create(:report) }
-    let!(:report_2) { FactoryGirl.create(:report) }
+    let!(:report) { create(:report) }
+    let!(:report_2) { create(:report) }
 
     subject { get :show, id: report.id, format: :json }
 

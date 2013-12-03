@@ -7,4 +7,5 @@ json.photo do
 end
 json.category do
   json.unique_id report.category.unique_id
+  json.title report.category.title
 end

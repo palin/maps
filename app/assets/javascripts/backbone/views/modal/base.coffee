@@ -1,6 +1,7 @@
-class Reporter.Views.Modal.Base extends Marionette.Layout
+class Reporter.Views.Modal.Base extends Marionette.ItemView
 
-  el: 'body section.content'
+  id: "report"
+  className: "modal-container"
   template: JST['modals/base']
   events: 'click button.close': 'closeModal'
   modal: 'div.modal-container'
@@ -9,3 +10,9 @@ class Reporter.Views.Modal.Base extends Marionette.Layout
   closeModal: ->
     $(@modal).fadeOut 300, =>
       $(@modal).remove()
+
+  serializeData: ->
+    model: @model.attributes
+
+  render: ->
+    $(@el).append @template(@serializeData())

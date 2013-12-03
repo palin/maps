@@ -9,14 +9,6 @@ class Reporter.Models.Report extends Backbone.Model
   urlRoot: ->
     Reporter.apiRoot(2) + "/reports/#{@get('id')}"
 
-  rateUp: ->
-    @save { positives: @get('positives')+1 },
-      reset: true
-
-  rateDown: ->
-    @save { negatives: @get('negatives')+1 },
-      reset: true
-
   toJSON: ->
     report:
       id: @get('id')

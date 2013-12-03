@@ -1,7 +1,10 @@
-class Reporter.Views.Modal.Report extends Reporter.Views.Modal.Base
+class Reporter.Views.Modal.Report extends Marionette.Layout
 
+  id: "report"
+  className: "modal-container"
   template: JST['modals/report']
-  modal: 'div.modal-container#report'
+  events:
+    'click button.close': 'closeModal'
   regions:
     photoRegion: "#photo-region"
     ratingRegion: "#rating-region"
@@ -26,6 +29,6 @@ class Reporter.Views.Modal.Report extends Reporter.Views.Modal.Base
     @descriptionRegion.show(@descriptionView)
     @opinionsRegion.show(@opinionsView)
 
-  closeModal: ->
-    super
+  closeModal: (e)->
+    @close()
     Reporter.router.navigate("/")

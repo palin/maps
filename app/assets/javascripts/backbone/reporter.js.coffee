@@ -48,8 +48,6 @@ window.Reporter =
 
   showView: (view)->
     @currentView = view
-    console.log @currentView
-    console.log @currentView.$el
     $('.content').append(@currentView.$el)
     @currentView.render()
 

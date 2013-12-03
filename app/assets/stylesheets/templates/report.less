@@ -10,22 +10,25 @@ div.modal-container#report {
     .element-opacity (0.9, 90);
   }
 
-  .modal {
+  .modal-body {
+    position: absolute;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    width: 600px;
-    margin: -250px 0 0 -435px;
-    height: 400px;
+    height: 450px;
+    width: 650px;
     padding: 25px;
+    background: #fff;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
 
     .left-column {
       float: left;
       width: 150px;
       height: 400px;
-
-      .image-box {
+      #photo-region {
         float: left;
-        width: 125px;
-        height: 125px;
+        width: 127px;
+        height: 127px;
         margin-bottom: 6px;
         .border;
         a {
@@ -34,6 +37,83 @@ div.modal-container#report {
             height: 125px;
           }
         }
+      }
+      #rating-region {
+        float: left;
+        width: 127px;
+        height: 32px;
+        margin-bottom: 20px;
+
+        span {
+          display: block;
+        }
+        button {
+          display: block;
+          float: left;
+          width: 32px;
+          height: 32px;
+          border: none;
+        }
+
+        button.disabled {
+          .element-opacity (0.3, 30);
+        }
+        button.rate.down {
+          float: left;
+          background: url(../minus_medium.png);
+        }
+        button.rate.up {
+          float: right;
+          background: url(../plus_medium.png)
+        }
+
+        div#current_rating {
+          float: left;
+          padding-top: 5px;
+          width: 61px;
+          height: 27px;
+          margin: 0;
+        }
+      }
+      #abuse-region {
+        float: left;
+        width: 125px;
+        font-size: 11px;
+        color: #666;
+
+        img {
+          width: 16px;
+          height: 16px;
+          display: inline-block;
+          float: left;
+          margin-top: 2px;
+        }
+        span {
+          margin-left: -18px;
+        }
+        ul {
+          list-style-image: url("/assets/moderate_mini.png");
+          padding-left: 20px;
+          margin-left: 0px;
+          margin-top: 7px;
+          margin-bottom: 30px;
+          li {
+            text-align: left;
+            margin-bottom: 3px;
+
+            a {
+              text-decoration: underline;
+              color: #666;
+            }
+            a:hover {
+              color: #999;
+            }
+          }
+        }
+      }
+      #social-region {
+        float: left;
+        height: 30px;
       }
 
       .rating-box {
@@ -74,41 +154,6 @@ div.modal-container#report {
         }
       }
 
-      .moderate-box {
-        float: left;
-        width: 125px;
-        height: 130px;
-        font-size: 11px;
-        color: #666;
-
-        img {
-          width: 16px;
-          height: 16px;
-          display: inline-block;
-          float: left;
-          margin-top: 2px;
-        }
-        span {
-          margin-left: -18px;
-        }
-        ul {
-          list-style-image: url("/assets/moderate_mini.png");
-          margin-left: 19px;
-          li {
-            text-align: left;
-            margin-bottom: -3px;
-
-            a {
-              text-decoration: underline;
-              color: #666;
-            }
-            a:hover {
-              color: #999;
-            }
-          }
-        }
-      }
-
       .social-box {
         float: left;
         width: 125px;
@@ -122,8 +167,8 @@ div.modal-container#report {
       height: 400px;
       text-align: left;
 
-      .head-box {
-        margin-top: 5px;
+      #description-region {
+        margin-top: 12px;
         margin-bottom: 10px;
 
         p {
@@ -134,14 +179,14 @@ div.modal-container#report {
         }
         h3 {
           margin-top: -12px;
-          margin-bottom: 0px;
+          margin-bottom: 10px;
           font-size: 24px;
           font-weight: 700;
         }
         h5 {
           margin-top: -5px;
-          margin-bottom: 3px;
-          font-size: 12px;
+          margin-bottom: 10px;
+          font-size: 13px;
           font-weight: 400;
           .category, .created_at {
             color: #2f96b4;
@@ -149,7 +194,7 @@ div.modal-container#report {
         }
       }
 
-      .opinion-box {
+      #opinions-region {
         overflow: hidden;
         height: 265px;
         img {
@@ -164,7 +209,7 @@ div.modal-container#report {
           height: 32px;
           border-bottom: 1px solid #999;
           margin-bottom: 10px;
-
+          margin-top: 30px;
           form {
             list-style: none;
 

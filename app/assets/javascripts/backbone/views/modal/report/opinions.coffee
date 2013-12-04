@@ -7,6 +7,7 @@ class Reporter.Views.Modal.ReportOpinions extends Marionette.CompositeView
     Reporter.Views.Modal.ReportOpinion
 
   initialize: ->
+    @opinion = new Reporter.Models.Opinion(report_id: @model.id)
     @collection.fetch(reset: true)
 
   serializeData: ->
@@ -16,7 +17,7 @@ class Reporter.Views.Modal.ReportOpinions extends Marionette.CompositeView
     e.preventDefault()
     title = @$('input[name=title]').val()
     description = @$('input[name=description]').val()
-    opinion = new Reporter.Models.Opinion(report_id: @model.id, title: title, description: description)
-    opinion.save null,
+    @opinion.save { title: title, description: description },
       success: =>
         @$('form')[0].reset()
+        @collection.fetch(reset: true)

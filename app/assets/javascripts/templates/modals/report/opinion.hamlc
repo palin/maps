@@ -1,0 +1,9 @@
+.title
+  = @model.title
+.rating-opinion
+  %button.opinion-rate-up
+  #current_opinion_rating
+    %span.rating= @model.rating
+  %button.opinion-rate-down
+.description
+  %p= @model.description

@@ -1,13 +1,16 @@
-class Reporter.Views.Modal.ReportOpinions extends Marionette.ItemView
+class Reporter.Views.Modal.ReportOpinions extends Marionette.CompositeView
   template: JST['modals/report/opinions']
+  itemViewContainer: '.items'
   events:
     'submit form': 'submit'
+  getItemView: ->
+    Reporter.Views.Modal.ReportOpinion
+
+  initialize: ->
+    @collection.fetch(reset: true)
 
   serializeData: ->
     model: @model.attributes
-
-  render: ->
-    $(@el).append @template(@serializeData())
 
   submit: (e)->
     e.preventDefault()

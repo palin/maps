@@ -1,10 +1,11 @@
 %img{:src => "assets/people.png", :alt => "Opinie użytkowników"}
-  %h4 Opinie:
-  .new_opinion
-    %form
-      %li
-        %input{:type => "text", :name => "title", :id => "op_title", :maxlength => 15, :required => true, :placeholder => "Imię lub tytuł opinii"}
-      %li
-        %input{:type => "text", :name => "description", :id => "op_description", :maxlength => 160, :required => true, :placeholder => "Treść opinii"}
-      %li
-        %input{:type => "submit", :value => "Dodaj nową", :class => "btn btn-info"}
+%h4 Opinie:
+.new_opinion
+  %form
+    %li
+      %input{:type => "text", :name => "title", :id => "op_title", :maxlength => 15, :required => true, :placeholder => "Imię lub tytuł opinii"}
+    %li
+      %input{:type => "text", :name => "description", :id => "op_description", :maxlength => 160, :required => true, :placeholder => "Treść opinii"}
+    %li
+      %input{:type => "submit", :value => "Dodaj nową", :class => "btn btn-info"}
+.items

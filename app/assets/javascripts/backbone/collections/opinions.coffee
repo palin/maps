@@ -1,8 +1,11 @@
 class Reporter.Collections.Opinions extends Backbone.Collection
   model: Reporter.Models.Opinion
 
+  initialize: (options)->
+    @report_id = options.report_id
+
   url: ->
-    Reporter.api_root(2) + "/reports/#{@get('report_id')}/opinions"
+    Reporter.apiRoot(2) + "/reports/#{@report_id}/opinions"
 
   parse: (json) ->
     json.opinions

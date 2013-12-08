@@ -1,6 +1,8 @@
 class V2::BaseController < ActionController::Base
   respond_to :json
 
+  helper_method :has_cookie?
+
   def bad_request
     render json: { error: '400 Bad Request' }, status: 400
   end

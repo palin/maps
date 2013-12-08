@@ -8,7 +8,7 @@ class Reporter.Components.Marker extends Backbone.Model
       draggable: false
       animation: google.maps.Animation.DROP
       position: new google.maps.LatLng(report.latitude(), report.longitude())
-      icon: "assets/categories/#{report.get('category').unique_id}_icon.png"
-      category: report.get('category').unique_id
+      icon: "assets/categories/#{report.uniqueId()}_icon.png"
+      category: report.uniqueId()
     google.maps.event.addListener @googleMarker, 'click', =>
       Reporter.router.navigate("reports/#{report.id}", { trigger: true })

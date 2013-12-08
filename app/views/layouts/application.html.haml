@@ -14,6 +14,7 @@
     %meta{:content => "System Zgłaszania Szkód - Poznań", :property => "og:site_name"}/
     %meta{:content => "1718041185", :property => "fb:admins"}/
   %body{class: "#{controller_name}_controller #{action_name}_action", data: {view_name: "#{controller_name.classify}"}}
+    #flash.notice
     = render 'layouts/header'
     = render 'layouts/content'
     = render 'layouts/footer'

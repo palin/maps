@@ -4,6 +4,7 @@ class V2::ReportsController < V2::BaseController
 
   expose(:report) { Report.find_by_id(params[:id]) || Report.create(report_params) }
   expose(:reports) { Report.all }
+  expose(:user_can_vote?) { !has_cookie?('report', report.id) }
 
   before_filter :cookie_enabled?, only: [:update]
 

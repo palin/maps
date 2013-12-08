@@ -1,3 +1,3 @@
-%button.rate.down{disabled: false, class: '', 'data-key': 'negatives'}
-#current_rating 0
-%button.rate.up{disabled: false, class: '', 'data-key': 'positives'}
+%button.rate.down{disabled: !@model.can_vote, class: (if @model.can_vote then '' else 'disabled'), 'data-key': 'negatives'}
+#current_rating= @model.rating
+%button.rate.up{disabled: !@model.can_vote, class: (if @model.can_vote then '' else 'disabled'), 'data-key': 'positives'}

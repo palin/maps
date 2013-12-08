@@ -1,8 +1,36 @@
 @import "variables";
 
 body.admin_namespace {
+  .navbar-inner {
+    height: 50px;
+    .container {
+      height: 50px;
+      .brand {
+        font-size: 35px;
+        float: left;
+      }
+      .nav-collapse.collapse {
+        display: block;
+        margin-top: 10px;
+        float: left;
+        width: 890px;
+        ul.nav {
+          float: left;
+          width: 380px;
+          margin-left: 100px;
+          li {
+            float: left;
+          }
+        }
+        ul.nav.pull-right {
+          width: 100px;
+        }
+      }
+    }
+  }
+
   section.content {
-    margin-top: 41px;
+    margin-top: 80px;
 
     div#flash {
       height: 30px;

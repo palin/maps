@@ -31,6 +31,7 @@ class Reporter.Views.Modal.Report extends Marionette.Layout
     @descriptionRegion.show(@descriptionView)
     @opinionsRegion.show(@opinionsView)
 
-  closeModal: (e)->
-    @close()
-    Reporter.router.navigate("/")
+  closeModal: (e)=>
+    @$el.fadeOut 300, =>
+      @close()
+      Reporter.router.navigate("/")

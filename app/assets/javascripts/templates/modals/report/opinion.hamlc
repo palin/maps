@@ -1,9 +1,9 @@
 .title
   = @model.title
 .rating-opinion
-  %button.opinion-rate-up
+  %button.opinion-rate-up{disabled: !@model.can_vote, class: (if @model.can_vote then '' else 'disabled'), 'data-key': 'positives'}
   #current_opinion_rating
     %span.rating= @model.rating
-  %button.opinion-rate-down
+  %button.opinion-rate-down{disabled: !@model.can_vote, class: (if @model.can_vote then '' else 'disabled'), 'data-key': 'negatives'}
 .description
   %p= @model.description

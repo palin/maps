@@ -15,17 +15,21 @@
 #= require_tree .
 
 window.Reporter =
+  Collections: {
+    Border: {}
+    Opinions: {}
+    Reports: {}
+  }
+  Components: {
+    Marker: {}
+    Point: {}
+  }
   Models: {
+    Abuse: {}
     Opinion: {}
     Report: {}
   }
-  Collections: {
-    Reports: {}
-    Opinions: {}
-  }
-  Components: {}
   Routers: {}
-  Templates: {}
   Views: {
     Admin: {}
     Home: {}
@@ -34,7 +38,7 @@ window.Reporter =
       UniversityInfo: {}
       ReportInfo: {}
       LargePhoto: {}
-      ModerateConfirmation: {}
+      AbuseConfirmation: {}
     }
     Map: {}
     Categories: {}
@@ -50,6 +54,14 @@ window.Reporter =
     @currentView = view
     $('.content').append(@currentView.$el)
     @currentView.render()
+
+  showInfoMessage: (content)->
+    flash = $('body #flash.notice')
+    flash.text(content)
+    flash.slideToggle(500)
+    setTimeout =>
+      flash.slideToggle(500)
+    , 2000
 
 $ ->
   Reporter.router = new Reporter.Router()

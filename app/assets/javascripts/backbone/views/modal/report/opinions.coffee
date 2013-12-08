@@ -20,4 +20,6 @@ class Reporter.Views.Modal.ReportOpinions extends Marionette.CompositeView
     @opinion.save { title: title, description: description },
       success: =>
         @$('form')[0].reset()
+        @$('input').attr('disabled', true)
+        Reporter.showInfoMessage("Dziekujemy za opinie!")
         @collection.fetch(reset: true)

@@ -1,4 +1,11 @@
-json.extract! report, :id, :title, :description, :photo, :positives, :negatives, :created_at, :updated_at, :category_id, :latitude, :longitude, :photo_data
+json.extract! report, :id, :title, :description
+json.rating report.rating
+json.can_vote user_can_vote?
+json.created_at report.created_at.to_formatted_s(:db)
+json.photo do
+  json.full report.photo_full
+  json.small report.photo_small
+end
 json.category do
-  json.unique_id report.category.unique_id
+  json.title report.category.title
 end

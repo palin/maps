@@ -14,4 +14,5 @@ class Reporter.Views.Modal.ReportAbuse extends Marionette.ItemView
     abuse = new Reporter.Models.Abuse(report_id: @model.id, name: name)
     abuse.save null,
       success: =>
+        Reporter.showInfoMessage("Dziekujemy za zgloszenie!")
         @$el.slideUp(200, 'swing', =>@close())

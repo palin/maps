@@ -10,8 +10,7 @@ class Reporter.Views.Modal.ReportRating extends Marionette.ItemView
     $(@el).append @template(@serializeData())
 
   rateReport: (e)->
-    key = @$(e.currentTarget).data('key')
-    @model.save key: key,
-      success: ->
-        console.log "great success"
-        true
+    @model.save key: @$(e.currentTarget).data('key'),
+      success: =>
+        @$el.empty()
+        @render()

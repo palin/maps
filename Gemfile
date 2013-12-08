@@ -30,6 +30,10 @@ gem 'uglifier', '>= 1.0.3'
 gem 'haml_coffee_assets'
 gem 'execjs'
 
+group :production do
+  gem 'rails_12factor'
+end
+
 group :development do
   gem 'psych'
   gem 'railroady'

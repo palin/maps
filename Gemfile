@@ -8,7 +8,6 @@ gem 'pg'
 
 gem 'authlogic'
 gem 'carrierwave'
-gem 'draper'
 gem 'decent_exposure'
 gem 'formtastic'
 gem 'fog'

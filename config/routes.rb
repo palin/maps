@@ -25,18 +25,17 @@ Reporter::Application.routes.draw do
         end
       end
     end
-
-    resources :maps, :only => [] do
-      collection do
-        get :border
-      end
-    end
   end
 
   namespace :v2 do
     resources :reports, only: [:create, :index, :show, :update] do
       resources :abuses, only: [:create]
       resources :opinions, only: [:create, :index, :show, :update]
+    end
+    resources :maps, :only => [] do
+      collection do
+        get :border
+      end
     end
   end
 

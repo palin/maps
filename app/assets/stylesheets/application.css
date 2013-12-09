@@ -7,17 +7,17 @@
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: font-url('open-sans-400.woff') format('woff');
+  src: url('/assets/open-sans-400.woff') format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
-  src: font-url('open-sans-600.woff') format('woff');
+  src: url('/assets/open-sans-600.woff') format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  src: font-url('open-sans-700.woff') format('woff');
+  src: url('/assets/open-sans-700.woff') format('woff');
 }

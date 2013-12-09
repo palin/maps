@@ -28,7 +28,7 @@ class Admin::ReportsController < Admin::AdminController
       params[:report][:category_id] = category.id
     end
 
-    @report.assign_attributes(params[:report])
+    @report.assign_attributes(report_params)
 
     if @report.save
       flash[:notice] = "Zgłoszenie zostało zaktualizowane!"
@@ -39,6 +39,12 @@ class Admin::ReportsController < Admin::AdminController
     end
   end
 
+  private
+
+  def report_params
+    params.require(:report).permit(:title, :description, :photo, :category_id, :latitude, :longitude)
+  end
+
   def find_report
     @report = Report.find_by_id(params[:id])
     unless @report
@@ -46,5 +52,4 @@ class Admin::ReportsController < Admin::AdminController
       redirect_to admin_reports_path and return
     end
   end
-
 end

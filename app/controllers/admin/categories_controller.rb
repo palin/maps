@@ -13,7 +13,7 @@ class Admin::CategoriesController < Admin::AdminController
   end
 
   def update
-    @category.assign_attributes(params[:category])
+    @category.assign_attributes(category_params)
 
     if @category.save
       flash[:notice] = "Kategoria została zaktualizowana!"
@@ -35,6 +35,10 @@ class Admin::CategoriesController < Admin::AdminController
   end
 
   private
+
+  def category_params
+    params.require(:category).permit(:title, :description, :unique_id)
+  end
 
   def find_category
     @category = Category.find_by_id(params[:id])

@@ -40,15 +40,15 @@ Reporter::Application.routes.draw do
   end
 
   namespace :admin do
-    root :to => 'reports#index'
-    delete 'logout', :to => 'user_sessions#destroy', :as => :logout
-    post 'login', :to => 'user_sessions#new', :as => :login
-    resources :user_sessions, :only => [:create]
+    root to: 'reports#index'
+    get 'logout', to: 'user_sessions#destroy', as: :logout
+    get 'login', to: 'user_sessions#new', as: :login
+    resources :user_sessions, only: [:create]
     resources :reports
     resources :opinions
     resources :abuses
     resources :categories
   end
 
-  root :to => 'home#index'
+  root to: 'home#index'
 end

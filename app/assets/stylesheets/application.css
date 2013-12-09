@@ -8,17 +8,17 @@
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: local('Open Sans'), local('OpenSans'), url(open-sans-400.woff) format('woff');
+  src: local('Open Sans'), local('OpenSans'), url(asset_path(open-sans-400.woff)) format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
-  src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(open-sans-600.woff) format('woff');
+  src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(asset_path(open-sans-600.woff)) format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(open-sans-700.woff) format('woff');
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(asset_path(open-sans-700.woff)) format('woff');
 }

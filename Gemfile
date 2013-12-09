@@ -16,7 +16,6 @@ gem 'jbuilder', '~> 1.4.2'
 gem 'json'
 gem 'json_pure'
 gem 'jquery-rails'
-gem 'kaminari'
 gem 'mini_magick'
 gem 'rails-backbone'
 gem 'less-rails-bootstrap'
@@ -37,7 +36,6 @@ end
 group :development do
   gem 'psych'
   gem 'railroady'
-  gem 'capistrano'
   gem 'mysql2'
 end
 

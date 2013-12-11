@@ -3,7 +3,6 @@
 div.modal-container {
   margin: 0 auto;
   width: 650px;
-  height: 100%;
   div.overlay {
     background: @black;
     position: absolute;
@@ -16,5 +15,16 @@ div.modal-container {
     filter: alpha(opacity=60);
     -moz-opacity:0.6;
     -webkit-opacity:0.6
+  }
+  div.modal-container#report {
+    height: 100%;
+    .modal-body {
+      height: 450px;
+      width: 650px;
+    }
+  }
+
+  div.modal-container#large-photo {
+
   }
 }

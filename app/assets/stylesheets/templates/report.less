@@ -3,8 +3,16 @@
 .border {
   border: 1px solid black;
 }
+#report {
+  button.close {
+    position: absolute;
+    right: -23px;
+    top: -23px;
+    .element-opacity (1.0, 100);
+  }
+}
 
-div.modal-container#report {
+div.modal-container#report, div.modal-container#large-photo {
 
   div.overlay {
     .element-opacity (0.9, 90);
@@ -13,8 +21,6 @@ div.modal-container#report {
   .modal-body {
     position: absolute;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    height: 450px;
-    width: 650px;
     padding: 25px;
     background: #fff;
     -webkit-border-radius: 6px;
@@ -300,12 +306,8 @@ div.modal-container#report {
         }
       }
     }
-
-    button.close {
-      position: absolute;
-      right: -23px;
-      top: -23px;
-      .element-opacity (1.0, 100);
+    img.large {
+      height: 600px;
     }
   }
 }

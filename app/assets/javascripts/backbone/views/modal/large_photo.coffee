@@ -1,12 +1,17 @@
-class Reporter.Views.Modal.LargePhoto extends Marionette.ItemView
+class Reporter.Views.Modal.LargePhoto extends Marionette.Layout
   template: JST['modals/large_photo']
-  modal: 'div.modal-container#large-photo'
+  id: "large-photo"
+  className: "modal-container"
   events:
-    'click #large-photo .overlay': 'closeModal'
-    'click #large-photo button.close': 'closeModal'
+    'click .overlay': 'closeModal'
+    'click button.close': 'closeModal'
 
   serializeData: ->
     model: @model.attributes
 
   render: ->
     $(@el).append @template(@serializeData())
+
+  closeModal: (e)=>
+    @$el.fadeOut 300, =>
+      @close()

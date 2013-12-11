@@ -1,4 +1,4 @@
-class V2::AbusesController < V2::BaseController
+class V1::AbusesController < V1::BaseController
 
   before_filter :abuse_params, only: [:create]
 

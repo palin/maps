@@ -7,7 +7,7 @@ class Reporter.Collections.Reports extends Backbone.Collection
     @markers = options.markers
 
   url: ->
-    Reporter.apiRoot(2) + "/reports"
+    Reporter.apiRoot() + "/reports"
 
   parse: (response)->
     response.reports

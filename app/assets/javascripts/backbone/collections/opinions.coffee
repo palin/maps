@@ -5,7 +5,7 @@ class Reporter.Collections.Opinions extends Backbone.Collection
     @report_id = options.report_id
 
   url: ->
-    Reporter.apiRoot(2) + "/reports/#{@report_id}/opinions"
+    Reporter.apiRoot() + "/reports/#{@report_id}/opinions"
 
   parse: (json) ->
     json.opinions

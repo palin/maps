@@ -1,6 +1,6 @@
 class Reporter.Models.Opinion extends Backbone.Model
   urlRoot: ->
-    Reporter.apiRoot(2) + "/reports/#{@get('report_id')}/opinions"
+    Reporter.apiRoot() + "/reports/#{@get('report_id')}/opinions"
 
   toJSON: ->
     opinion:

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'spec_helper'
 
-describe V2::ReportsController do
+describe V1::ReportsController do
   Fog.mock!
   render_views
 

@@ -1,4 +1,4 @@
-class V2::BaseController < ActionController::Base
+class V1::BaseController < ActionController::Base
   respond_to :json
 
   helper_method :has_cookie?

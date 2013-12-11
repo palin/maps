@@ -1,4 +1,4 @@
-class V2::ReportsController < V2::BaseController
+class V1::ReportsController < V1::BaseController
 
   before_filter :report_params, only: [:create, :update]
 

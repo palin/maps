@@ -1,6 +1,6 @@
 Reporter::Application.routes.draw do
 
-  namespace :v2 do
+  namespace :v1 do
     resources :reports, only: [:create, :index, :show, :update] do
       resources :abuses, only: [:create]
       resources :opinions, only: [:create, :index, :show, :update]

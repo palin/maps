@@ -1,4 +1,4 @@
-class V2::OpinionsController < V2::BaseController
+class V1::OpinionsController < V1::BaseController
 
   before_filter :opinion_params, only: [:create, :update]
   expose(:report) { Report.find(params[:report_id]) }

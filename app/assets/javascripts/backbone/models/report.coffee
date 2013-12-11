@@ -7,7 +7,7 @@ class Reporter.Models.Report extends Backbone.Model
     @urlRoot()
 
   urlRoot: ->
-    Reporter.apiRoot(2) + "/reports/#{@get('id')}"
+    Reporter.apiRoot() + "/reports/#{@get('id')}"
 
   toJSON: ->
     report:

@@ -8,7 +8,7 @@ class Reporter.Collections.Border extends Backbone.Collection
     @urlRoot()
 
   urlRoot: ->
-    Reporter.apiRoot(2) + "/maps/border"
+    Reporter.apiRoot() + "/maps/border"
 
   parse: (response)->
     response

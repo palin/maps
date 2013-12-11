@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'spec_helper'
 
-describe V2::AbusesController do
+describe V1::AbusesController do
   render_views
 
   let!(:report) { create(:report) }

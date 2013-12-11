@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'spec_helper'
 
-describe V2::OpinionsController do
+describe V1::OpinionsController do
   render_views
 
   let!(:report) { create(:report) }

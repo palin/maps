@@ -1,37 +1,37 @@
 # -*- encoding : utf-8 -*-
 class Admin::CategoriesController < Admin::AdminController
 
-  before_filter :require_admin, :set_cache_buster
-  before_filter :find_category, :except => [:index]
+  expose(:categories) { Category.order(sort_column("Category") + " " + sort_direction).page(params[:page]).per(10) }
+  expose(:category) { Category.find_by_id(params[:id]) }
+
+  before_filter :find_category, except: [:index]
 
   def index
-    @categories = Category.order(sort_column("Category") + " " + sort_direction).page(params[:page]).per(10)
   end
 
   def edit
-
   end
 
   def update
-    @category.assign_attributes(category_params)
+    category.assign_attributes(category_params)
 
-    if @category.save
+    if category.save
       flash[:notice] = "Kategoria została zaktualizowana!"
-      redirect_to admin_categories_path and return
+      redirect_to admin_categories_path
     else
       flash[:alert] = "Wystąpił problem. Sprawdź dane formularza."
-      render :action => 'edit'
+      render :edit
     end
   end
 
   def destroy
-    if @category.destroy
+    if category.destroy
       flash[:notice] = "Kategoria została usunięta!"
     else
       flash[:alert] = "Nie można usunąć zgłoszenia!"
     end
 
-    redirect_to admin_categories_path and return
+    redirect_to admin_categories_path
   end
 
   private
@@ -41,10 +41,9 @@ class Admin::CategoriesController < Admin::AdminController
   end
 
   def find_category
-    @category = Category.find_by_id(params[:id])
-    unless @category
+    unless category
       flash[:alert] = "Nie znaleziono takiej kategorii"
-      redirect_to admin_categories_path and return
+      redirect_to admin_categories_path
     end
   end
 end

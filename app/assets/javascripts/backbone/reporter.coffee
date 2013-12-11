@@ -65,6 +65,7 @@ window.Reporter =
 
 $ ->
   Reporter.router = new Reporter.Router()
-  Reporter.currentView = new Reporter.Views.Home()
+  viewName = $('body').data('view-name')
+  Reporter.currentView = new Reporter.Views[viewName] if Reporter.Views[viewName]?
   Backbone.history.start()
 

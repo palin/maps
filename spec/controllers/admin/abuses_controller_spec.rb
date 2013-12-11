@@ -23,9 +23,7 @@ describe Admin::AbusesController do
 
     describe "existing object" do
       it { should redirect_to admin_abuses_path }
-      it {
-        expect { subject }.to change { Abuse.count }.by(-1)
-      }
+      it { expect { subject }.to change { Abuse.count }.by(-1) }
     end
 
     describe "nonexistent object" do

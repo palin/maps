@@ -1,10 +1,10 @@
 %h2 Edytuj kategorię
 
-= semantic_form_for @category, :url => admin_category_path(@category.id), :format => :html, :class => 'form-signin', :method => :put do |f|
-  = f.input :title, :label => "Tytuł", :placeholder => "Tytuł"
-  = f.input :description, :as => :text, :label => "Opis", :placeholder => "Opis"
+= semantic_form_for category, url: admin_category_path(category.id), format: :html, class: 'form-signin', method: :put do |f|
+  = f.input :title, label: "Tytuł", placeholder: "Tytuł"
+  = f.input :description, as: :text, label: "Opis", placeholder: "Opis"
   %li.icon
     %label.label Ikona kategorii
-    = image_tag "categories/#{@category.unique_id}.png", :alt => "Ikona kategorii", :width => 24
-  = f.input :unique_id, :label => "Unikalna nazwa", :input_html => {:disabled => "true"}
-  = f.submit :value => "Zapisz zmiany", :class => "btn btn-large btn-primary"
+    = image_tag "categories/#{category.unique_id}.png", alt: "Ikona kategorii", width: 24
+  = f.input :unique_id, label: "Unikalna nazwa", input_html: {disabled: "true"}
+  = f.submit value: "Zapisz zmiany", class: "btn btn-large btn-primary"

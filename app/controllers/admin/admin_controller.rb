@@ -1,11 +1,12 @@
 # -*- encoding : utf-8 -*-
 class Admin::AdminController < ActionController::Base
-
   layout "admin/layouts/admin"
 
-  protect_from_forgery
+  protect_from_forgery except: :destroy
 
   helper_method :current_user_session, :current_user, :sort_column, :sort_direction
+
+  before_filter :require_admin, :set_cache_buster
 
   def require_admin
     redirect_to admin_login_path and return unless current_user.present?

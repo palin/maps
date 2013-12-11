@@ -9,17 +9,17 @@
       %th Powód
       %th Akcje
   %tbody
-    - @abuses.each do |a|
+    - abuses.each do |a|
       %tr
         %td= a.id
-        %td= l a.created_at, :format => "%d-%m-%Y %H:%M:%S"
+        %td= l a.created_at, format: "%d-%m-%Y %H:%M:%S"
         %td= a.report_id
         %td= a.reason
         %td
-          = link_to "Usuń nadużycie", admin_abus_path(a.id), :method => :delete, :confirm => "Jesteś pewny? Usunięcie jest nieodwracalne!"
+          = link_to "Usuń nadużycie", admin_abus_path(a.id), method: :delete, confirm: "Jesteś pewny? Usunięcie jest nieodwracalne!"
           %br
           = link_to "Edytuj zgłoszenie", edit_admin_report_path(a.report_id)
           %br
-          = link_to "Usuń zgłoszenie", admin_report_path(a.report_id), :method => :delete, :confirm => "Jesteś pewny? Usunięcie jest nieodwracalne!"
+          = link_to "Usuń zgłoszenie", admin_report_path(a.report_id), method: :delete, confirm: "Jesteś pewny? Usunięcie jest nieodwracalne!"
 
-= paginate @abuses
+= paginate abuses

@@ -3,9 +3,9 @@
 
 = render "admin/layouts/flash"
 
-= semantic_form_for @user_session, :url => admin_user_sessions_path, :method => :post do |f|
-  = f.input :login, :label => false, :required => true, :placeholder => "Login"
-  = f.input :password, :label => false, :required => true, :placeholder => "Hasło"
+= semantic_form_for @user_session, url: admin_user_sessions_path, method: :post do |f|
+  = f.input :login, label: false, required: true, placeholder: "Login"
+  = f.input :password, label: false, required: true, placeholder: "Hasło"
   = f.actions do
     = f.action :submit
     = f.action :cancel

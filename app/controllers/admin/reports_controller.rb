@@ -1,25 +1,25 @@
 # -*- encoding : utf-8 -*-
 class Admin::ReportsController < Admin::AdminController
 
-  before_filter :require_admin, :set_cache_buster
+  expose(:reports) { Report.order(sort_column("Report") + " " + sort_direction).page(params[:page] || 1).per(params[:per_page] || 10) }
+  expose(:report) { Report.find_by_id(params[:id]) }
+
   before_filter :find_report, :except => [:index]
 
   def index
-    @reports = Report.order(sort_column("Report") + " " + sort_direction).page(params[:page]).per(10)
   end
 
   def destroy
-    if @report.destroy
+    if report.destroy
       flash[:notice] = "Zgłoszenie zostało usunięte!"
     else
       flash.now[:alert] = "Nie można usunąć zgłoszenia!"
     end
 
-    redirect_to admin_reports_path and return
+    redirect_to admin_reports_path
   end
 
   def edit
-
   end
 
   def update
@@ -28,28 +28,31 @@ class Admin::ReportsController < Admin::AdminController
       params[:report][:category_id] = category.id
     end
 
-    @report.assign_attributes(report_params)
+    report.assign_attributes(report_params)
 
-    if @report.save
+    if report.save
       flash[:notice] = "Zgłoszenie zostało zaktualizowane!"
-      redirect_to admin_reports_path and return
+      redirect_to admin_reports_path
     else
       flash[:alert] = "Wystąpił problem. Sprawdź dane formularza."
-      render :action => 'edit'
+      render :edit
     end
   end
 
   private
 
   def report_params
-    params.require(:report).permit(:title, :description, :photo, :category_id, :latitude, :longitude)
+    begin
+      params.require(:report).permit(:title, :description, :photo, :category_id, :latitude, :longitude)
+    rescue ActionController::ParameterMissing
+      unprocessable_entity
+    end
   end
 
   def find_report
-    @report = Report.find_by_id(params[:id])
-    unless @report
+    unless report
       flash[:alert] = "Nie znaleziono takiego zgłoszenia"
-      redirect_to admin_reports_path and return
+      redirect_to admin_reports_path
     end
   end
 end

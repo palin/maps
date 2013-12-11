@@ -5,13 +5,9 @@ class MapBorder
     coords = []
     File.open("app/assets/poznan_coords", "r") do |f|
       while (line = f.gets)
-        splitted = line.split(', ')
-        single_coord = []
+        values = line.split(', ')
 
-        single_coord.push splitted.first.to_f
-        single_coord.push splitted.last.to_f
-
-        coords.push single_coord
+        coords.push [values.first.to_f, values.last.to_f]
       end
     end
 

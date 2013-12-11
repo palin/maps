@@ -118,6 +118,9 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     json_pure (1.8.1)
+    kaminari (0.15.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     kgio (2.8.1)
     launchy (2.4.1)
       addressable (~> 2.3)
@@ -288,6 +291,7 @@ DEPENDENCIES
   jquery-rails
   json
   json_pure
+  kaminari
   launchy
   less-rails-bootstrap
   mail_safe

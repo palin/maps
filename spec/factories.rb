@@ -1,6 +1,7 @@
 FactoryGirl.define do
 
   factory :user do
+    sequence(:name) { |n| "User Userovsky#{n}"}
     sequence(:login) { |n| "user#{n}"}
     password "password"
     password_confirmation "password"

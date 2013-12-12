@@ -100,7 +100,7 @@ describe V1::OpinionsController do
       context "response data" do
         let(:data) { MultiJson.load(subject.body) }
 
-        it { data.length.should == 8 }
+        it { data.length.should == 6 }
         it { data['title'].should == opinion.title }
         it { data['description'].should == opinion.description }
         it { data['report_id'].should == report.id }

@@ -1,7 +1,7 @@
 class Opinion < ActiveRecord::Base
   belongs_to :report
 
-  validates_presence_of :title, :description
+  validates_presence_of :title, :description, :report_id
 
   validates_format_of :title, with: /^.{3,15}$/, multiline: true
   validates_format_of :description, with: /^.{15,160}$/, multiline: true

@@ -9,4 +9,3 @@ end
 json.category do
   json.title report.category.title
 end
-# json.partial! 'v1/opinions/opinion', opinions: report.opinions

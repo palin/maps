@@ -18,32 +18,34 @@ describe Abuse do
     let(:abuse_name) { "spam" }
     let(:abuse) { create(:abuse, name: abuse_name) }
 
+    subject { abuse }
+
     describe "for spam" do
-      it { abuse.reason.should == "Spam" }
+      its(:reason) { should == "Spam" }
     end
 
     describe "for duplicate" do
       let(:abuse_name) { "duplicate" }
 
-      it { abuse.reason.should == "Duplikat" }
+      its(:reason) { should == "Duplikat" }
     end
 
     describe "for solved" do
       let(:abuse_name) { "solved" }
 
-      it { abuse.reason.should == "Problem rozwiązano" }
+      its(:reason) { should == "Problem rozwiązano" }
     end
 
     describe "for content" do
       let(:abuse_name) { "content" }
 
-      it { abuse.reason.should == "Nieodpowiednia treść" }
+      its(:reason) { should == "Nieodpowiednia treść" }
     end
 
     describe "for noname" do
       let(:abuse_name) { "noname" }
 
-      it { abuse.reason.should == "Brak powodu" }
+      its(:reason) { should == "Brak powodu" }
     end
   end
 end

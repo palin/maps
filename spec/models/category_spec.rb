@@ -2,8 +2,6 @@
 require 'spec_helper'
 
 describe Category do
-  let(:unique_id) { "uid" }
-
   describe "factories" do
     it "has a valid factory" do
       build(:category).should be_valid
@@ -19,24 +17,8 @@ describe Category do
   end
 
   describe "#image" do
-    let(:category) { create(:category, unique_id: unique_id) }
+    subject { create(:category, unique_id: "uid") }
 
-    it { category.image.should == "categories/uid.png" }
-  end
-
-  describe "self#find_category_id" do
-    subject { Category.find_category_id(unique_id) }
-
-    context "existing category" do
-      let!(:category) { create(:category, unique_id: unique_id) }
-
-      it { should == category.id }
-    end
-
-    context "nonexistent category" do
-      let(:unique_id) { "any" }
-
-      it { should == nil }
-    end
+    its(:image) { should == "categories/uid.png" }
   end
 end

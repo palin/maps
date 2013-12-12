@@ -116,10 +116,9 @@ describe V1::ReportsController do
 
     context "report" do
       it { data["id"].should == report.id }
+      it { data["title"].should == report.title }
       it { data["description"].should == report.description }
-      it { data["latitude"].should == report.latitude.to_s }
-      it { data["longitude"].should == report.longitude.to_s }
-      it { data["category"]["unique_id"].should == report.category.unique_id }
+      it { data["rating"].should == report.rating }
     end
   end
 end

@@ -10,8 +10,6 @@ class Report < ActiveRecord::Base
   validates_format_of :title, with: /^.{8,30}$/, multiline: true
   validates_format_of :description, with: /^.{15,120}$/, multiline: true
 
-  REPORT_ATTRS = [:title, :description, :photo, :category_id, :latitude, :longitude]
-
   def rating
     positives - negatives
   end

@@ -1,7 +1,0 @@
-.modal-container
-  .overlay
-  .modal-bodal
-    .content
-      %button.close
-        %img{:src => "assets/close_modal.png"}
-      %h2 Base modal

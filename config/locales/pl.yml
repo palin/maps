@@ -1,0 +1,67 @@
+pl:
+  views:
+    pagination:
+      previous: "&lt; Poprzednia"
+      next: "Następna &gt;"
+      last: "Ostatnia &gt;&gt;"
+      first: "&lt;&lt; Pierwsza"
+      truncate: "..."
+    admin:
+      abuses:
+        index:
+          header: "Nadużycia"
+          caption: "Nadużycia w zgłoszeniach problemów"
+          col_id: "Nr"
+          col_created_at: "Utworzono"
+          col_report_id: "Id zgłoszenia"
+          col_reason: "Powód"
+          col_actions: "Akcje"
+          delete_abuse: "Usuń nadużycie"
+          edit_report: "Edytuj zgłoszenie"
+          delete_report: "Usuń zgłoszenie"
+          delete_confirmation: "Jesteś pewny? Usunięcie jest nieodwracalne!"
+      categories:
+        index:
+          header: "Kategorie"
+          caption: "Kategorie zgłoszeń"
+          col_id: "Nr"
+          col_title: "Tytuł"
+          col_description: "Opis"
+          col_created_at: "Utworzono"
+          col_unique_id: "Unikalna nazwa"
+          col_amount: "Ilość zgłoszeń"
+          col_icon: "Ikona"
+          col_actions: "Akcje"
+          edit_category: "Edytuj kategorię"
+      opinions:
+      reports:
+      user_sessions:
+    home:
+      index:
+        no_script: "Aby zobaczyć mapę oraz skorzystać ze wszystkich funkcjonalności strony, należy włączyć obsługę kodu Javascript."
+  models:
+    abuse:
+      spam: "Spam"
+      duplicate: "Duplikat"
+      content: "Nieodpowiednia treść"
+      solved: "Problem rozwiązano"
+      noname: "Brak powodu"
+    category:
+      fif:
+        title: "Problemy naturalne"
+        description: "Zwierzęta, przewrócone drzewa"
+      wan:
+        title: "Wandalizm"
+        description: "Graffiti, zdewastowane przystanki"
+      pro:
+        title: "Problemy drogowe"
+        description: "Zniszczone oświetlenie, dziury w drodze"
+      bud:
+        title: "Problemy architektoniczne"
+        description: "Niebezpieczne budynki, odpadający tynk"
+      nie:
+        title: "Nieprzemyślane rozwiązania"
+        description: "Źle zaprojektowane przejścia dla pieszych, drogi dla rowerzystów, brak dostępu dla inwalidów"
+      inn:
+        title: "Inne"
+        description: "Problemy niepasujące do powyższych kategorii"

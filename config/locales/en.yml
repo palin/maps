@@ -1,12 +1,22 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
   views:
     pagination:
-      previous: "&lt; Poprzednia"
-      next: "Następna &gt;"
-      last: "Ostatnia &gt;&gt;"
-      first: "&lt;&lt; Pierwsza"
+      previous: "&lt; Previous"
+      next: "Next &gt;"
+      last: "Last &gt;&gt;"
+      first: "&lt;&lt; First"
       truncate: "..."
+    admin:
+      abuses:
+        index:
+          header: "Abuses"
+          caption: "Abuses in reports"
+          col_id: "Id"
+          col_created_at: "Created"
+          col_report_id: "Report id"
+          col_reason: "Reason"
+          col_actions: "Actions"
+          delete_abuse: "Delete abuse"
+          edit_report: "Edit report"
+          delete_report: "Delete report"
+          delete_confirmation: "Are you sure? Deleting is permanent!"

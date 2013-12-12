@@ -12,19 +12,19 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   version :full do
-    process :resize_to_fit => [1000, 1000]
+    process resize_to_fit: [1000, 1000]
   end
 
   version :medium do
-    process :resize_to_fit => [600, 600]
+    process resize_to_fit: [600, 600]
   end
 
   version :small do
-    process :resize_to_fit => [300, 300]
+    process resize_to_fit: [300, 300]
   end
 
   version :thumb do
-    process :resize_to_fill => [100, 100]
+    process resize_to_fill: [100, 100]
   end
 
   if Rails.env.test?
@@ -44,11 +44,11 @@ class PhotoUploader < CarrierWave::Uploader::Base
       tempfile << Base64.decode64(base64_img)
 
       file_string = ActionDispatch::Http::UploadedFile.new(
-        :tempfile => tempfile,
-        :filename => "rimg#{Digest::MD5.hexdigest(Time.now.to_s)}.jpg",
-        :original_filename => "rimg#{Digest::MD5.hexdigest(Time.now.to_s)}.jpg"
+        tempfile: tempfile,
+        filename: "rimg#{Digest::MD5.hexdigest(Time.now.to_s)}.jpg",
+        original_filename: "rimg#{Digest::MD5.hexdigest(Time.now.to_s)}.jpg"
       )
-    rescue
+    rescue => e
       nil
     end
   end

@@ -5,11 +5,12 @@ Reporter::Application.routes.draw do
       resources :abuses, only: [:create]
       resources :opinions, only: [:create, :index, :show, :update]
     end
-    resources :maps, :only => [] do
+    resources :maps, only: [] do
       collection do
         get :border
       end
     end
+    resources :categories, only: [:index]
   end
 
   namespace :admin do

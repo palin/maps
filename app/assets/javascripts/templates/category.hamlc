@@ -1,0 +1,3 @@
+%img{ src: "assets/categories/#{@category.unique_id}.png", alt: @category.title }
+%a{ href: "#", 'data-category-id' => @category.unique_id}= @category.title
+%span.description= @category.description

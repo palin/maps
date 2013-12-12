@@ -40,6 +40,7 @@ window.Reporter =
     }
     Map: {}
     Categories: {}
+    Category: {}
   }
   currentView: null
   currentReport: null

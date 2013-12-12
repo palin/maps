@@ -1,8 +1,6 @@
 %section.right_sidebar
   %h3 Kategorie zdarzeń
   %ul#categories
-    - @categories.each do |category|
-      = render partial: 'categories/category', object: category
   #example_form
     %h5 Formularz testowy
     = semantic_form_for @report, html: { multipart: true }, format: :html, url: "v1/reports" do |f|

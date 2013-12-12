@@ -1,16 +1,16 @@
-%h2 Kategorie
+%h2= t("views.admin.categories.index.header")
 %table.table.table-striped
-  %caption Kategorie zgłoszeń
+  %caption= t("views.admin.categories.index.caption")
   %thead
     %tr
-      %th= sortable("Category", "id", "Nr")
-      %th= sortable("Category", "title", "Tytuł")
-      %th= sortable("Category", "description", "Opis")
-      %th= sortable("Category", "created_at", "Utworzono")
-      %th= sortable("Category", "unique_id", "Unikalna nazwa")
-      %th Ilość zgłoszeń
-      %th Ikona
-      %th Akcje
+      %th= sortable("Category", "id", t("views.admin.categories.index.col_id"))
+      %th= sortable("Category", "title", t("views.admin.categories.index.col_title"))
+      %th= sortable("Category", "description", t("views.admin.categories.index.col_description"))
+      %th= sortable("Category", "created_at", t("views.admin.categories.index.col_created_at"))
+      %th= sortable("Category", "unique_id", t("views.admin.categories.index.col_unique_id"))
+      %th= t("views.admin.categories.index.col_amount")
+      %th= t("views.admin.categories.index.col_icon")
+      %th= t("views.admin.categories.index.col_actions")
   %tbody
     - categories.each do |c|
       %tr
@@ -23,6 +23,6 @@
         %td
           = image_tag c.image, alt: c.title, width: 75
         %td
-          = link_to "Edytuj", edit_admin_category_path(c.id)
+          = link_to t("views.admin.categories.index.edit_category"), edit_admin_category_path(c.id)
 
 = paginate categories

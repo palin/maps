@@ -1,13 +1,13 @@
-%h2 Nadużycia
+%h2= t("views.admin.abuses.index.header")
 %table.table.table-striped
-  %caption Nadużycia w zgłoszeniach problemów
+  %caption= t("views.admin.abuses.index.caption")
   %thead
     %tr
-      %th= sortable("Abuse", "id", "Nr")
-      %th= sortable("Abuse", "created_at", "Utworzono")
-      %th= sortable("Abuse", "report_id", "Id zgłoszenia")
-      %th Powód
-      %th Akcje
+      %th= sortable("Abuse", "id", t("views.admin.abuses.index.col_id"))
+      %th= sortable("Abuse", "created_at", t("views.admin.abuses.index.col_created_at"))
+      %th= sortable("Abuse", "report_id", t("views.admin.abuses.index.col_report_id"))
+      %th= t("views.admin.abuses.index.col_reason")
+      %th= t("views.admin.abuses.index.col_actions")
   %tbody
     - abuses.each do |a|
       %tr
@@ -16,10 +16,10 @@
         %td= a.report_id
         %td= a.reason
         %td
-          = link_to "Usuń nadużycie", admin_abus_path(a.id), method: :delete, confirm: "Jesteś pewny? Usunięcie jest nieodwracalne!"
+          = link_to t("views.admin.abuses.index.delete_abuse"), admin_abus_path(a.id), method: :delete, confirm: t("views.admin.abuses.index.delete_confirmation")
           %br
-          = link_to "Edytuj zgłoszenie", edit_admin_report_path(a.report_id)
+          = link_to t("views.admin.abuses.index.edit_report"), edit_admin_report_path(a.report_id)
           %br
-          = link_to "Usuń zgłoszenie", admin_report_path(a.report_id), method: :delete, confirm: "Jesteś pewny? Usunięcie jest nieodwracalne!"
+          = link_to t("views.admin.abuses.index.delete_report"), admin_report_path(a.report_id), method: :delete, confirm: t("views.admin.abuses.index.delete_confirmation")
 
 = paginate abuses

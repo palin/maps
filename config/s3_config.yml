@@ -1,6 +1,4 @@
 development:
   bucket: fixer-photos
-development:
-  bucket: fixer-photos
 production:
   bucket: fixer-photos-prod

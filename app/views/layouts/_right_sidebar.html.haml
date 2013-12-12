@@ -3,21 +3,21 @@
   %ul#categories
     - @categories.each do |category|
       = render partial: 'categories/category', object: category
-  / #example_form
-  /   %h5 Formularz testowy
-  /   = semantic_form_for @report, html: { multipart: true }, format: :html, url: "v1/reports.json" do |f|
-  /     = f.input :title, label: false, placeholder: "Tytuł"
-  /     = f.input :description, label: false, placeholder: "Opis"
-  /     = f.input :photo, label: false, as: :file
-  /     = f.input :latitude, label: false, as: :string, input_html: { value: 52.3992 }
-  /     = f.input :longitude, label: false, as: :string, input_html: { value: 16.9355 }
-  /     = f.input :category_id, label: false, required: true, as: :select, include_blank: false, collection: Category.all, member_level: :unique_id
-  /     = f.submit value: "Utwórz raport"
+  #example_form
+    %h5 Formularz testowy
+    = semantic_form_for @report, html: { multipart: true }, format: :html, url: "v1/reports" do |f|
+      = f.input :title, label: false, placeholder: "Tytuł"
+      = f.input :description, label: false, placeholder: "Opis"
+      = f.input :photo, label: false, as: :file
+      = f.input :latitude, label: false, as: :string, input_html: { value: 52.3992 }
+      = f.input :longitude, label: false, as: :string, input_html: { value: 16.9355 }
+      = f.input :category_id, label: false, required: true, as: :select, include_blank: false, collection: Category.all, member_level: :unique_id
+      = f.submit value: "Utwórz raport"
 
-  %h3 Aplikacja mobilna
-  #mobile_app
-    %a{href: "#"}
-      = image_tag "android.png", alt: "Pobierz aplikację mobilną", width: 75
-      %h5 Pobierz
-    %span Wymagany system operacyjny Android
+  / %h3 Aplikacja mobilna
+  / #mobile_app
+  /   %a{href: "#"}
+  /     = image_tag "android.png", alt: "Pobierz aplikację mobilną", width: 75
+  /     %h5 Pobierz
+  /   %span Wymagany system operacyjny Android
 

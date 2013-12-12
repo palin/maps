@@ -2,18 +2,13 @@ class V1::ReportsController < V1::BaseController
 
   before_filter :report_params, only: [:create, :update]
 
-  expose(:report) { Report.find_by_id(params[:id]) || Report.create(report_params) }
+  expose(:report) { Report.find_by_id(params[:id]) || Report.new(report_params) }
   expose(:reports) { Report.all }
   expose(:user_can_vote?) { !has_cookie?('report', report.id) }
 
   before_filter :cookie_enabled?, only: [:update]
 
   def index
-    # respond_to do |format|
-    #   format.json { render :json =>  {reports: reports }}
-    #   format.html { redirect_to root_path }
-    # end
-    respond_with reports
   end
 
   def show
@@ -21,7 +16,11 @@ class V1::ReportsController < V1::BaseController
   end
 
   def create
-    respond_with report
+    report.save
+    respond_to do |format|
+      format.json { respond_with report }
+      format.html { redirect_to root_path }
+    end
   end
 
   def update

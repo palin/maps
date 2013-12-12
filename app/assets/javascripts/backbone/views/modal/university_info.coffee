@@ -1,4 +1,4 @@
-class Reporter.Views.Modal.UniversityInfo extends Reporter.Views.Modal.Base
+class Reporter.Views.Modal.UniversityInfo extends Marionette.Layout
   template: JST['modals/university_info']
   modal: 'div.modal-container#university-info'
   events:

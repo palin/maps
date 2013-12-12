@@ -34,11 +34,9 @@ window.Reporter =
     Admin: {}
     Home: {}
     Modal: {
-      Base: {}
       UniversityInfo: {}
-      ReportInfo: {}
+      Report: {}
       LargePhoto: {}
-      AbuseConfirmation: {}
     }
     Map: {}
     Categories: {}

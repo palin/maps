@@ -9,52 +9,50 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130119211354) do
+ActiveRecord::Schema.define(version: 20131212220037) do
 
-  create_table "abuses", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "abuses", force: true do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "name"
     t.integer  "report_id"
   end
 
-  create_table "categories", :force => true do |t|
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
-    t.string   "title"
-    t.string   "description"
-    t.string   "unique_id",   :limit => 3
+  create_table "categories", force: true do |t|
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "unique_id",  limit: 3
   end
 
-  create_table "opinions", :force => true do |t|
+  create_table "opinions", force: true do |t|
     t.string   "title"
     t.string   "description"
-    t.integer  "positives",   :default => 0
-    t.integer  "negatives",   :default => 0
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.integer  "positives",   default: 0
+    t.integer  "negatives",   default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "report_id"
   end
 
-  create_table "reports", :force => true do |t|
+  create_table "reports", force: true do |t|
     t.string   "title"
     t.string   "description"
     t.string   "photo"
-    t.integer  "positives",                                 :default => 0
-    t.integer  "negatives",                                 :default => 0
-    t.datetime "created_at",                                               :null => false
-    t.datetime "updated_at",                                               :null => false
+    t.integer  "positives",                           default: 0
+    t.integer  "negatives",                           default: 0
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.integer  "category_id"
-    t.decimal  "latitude",    :precision => 8, :scale => 6
-    t.decimal  "longitude",   :precision => 8, :scale => 6
+    t.decimal  "latitude",    precision: 8, scale: 6
+    t.decimal  "longitude",   precision: 8, scale: 6
     t.text     "photo_data"
   end
 
-  create_table "users", :force => true do |t|
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+  create_table "users", force: true do |t|
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.string   "name"
     t.string   "login"
     t.string   "password"

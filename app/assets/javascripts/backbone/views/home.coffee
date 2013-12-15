@@ -7,7 +7,6 @@ class Reporter.Views.Home extends Backbone.View
     @categories = new Reporter.Collections.Categories()
     @renderCategories(new Reporter.Views.Categories(collection: @categories, mapView: @mapView))
     @categories.fetch()
-    # new Reporter.Views.Modal.UniversityInfo().render()
 
   renderCategories: (view)->
     @$('ul#categories').append(view.$el)

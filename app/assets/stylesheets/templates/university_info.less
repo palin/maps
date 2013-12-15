@@ -1,11 +1,8 @@
 @import "variables";
 
 div.modal-container#university-info {
-  .modal {
-    width: 870px;
-    margin: -250px 0 0 -435px;
-    height: 550px;
-  }
+  width: 870px;
+  height: 600px;
 
   div.overlay {
     opacity: 0.9;
@@ -16,8 +13,16 @@ div.modal-container#university-info {
   }
 
   .modal-body {
-    max-height: 550px;
-    width: 835px;
+    width: 870px;
+    .modal-header {
+      margin-top: -30px;
+      .close {
+        margin-right: -20px;
+      }
+    }
+    h3, h4, h5 {
+      font-weight: 700;
+    }
     div.left {
       float: left;
       width: 380px;
@@ -28,6 +33,7 @@ div.modal-container#university-info {
       float: right;
       width: 435px;
       height: 436px;
+      margin-top: 25px;
     }
   }
 }

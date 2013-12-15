@@ -1,6 +1,11 @@
 class Reporter.Views.Modal.UniversityInfo extends Marionette.Layout
   template: JST['modals/university_info']
-  modal: 'div.modal-container#university-info'
+  id: 'university-info'
+  className: 'modal-container'
   events:
-    'click #university-info .overlay': 'closeModal'
-    'click #university-info button.close': 'closeModal'
+    'click .overlay': 'closeModal'
+    'click button.close': 'closeModal'
+
+  closeModal: (e)=>
+    @$el.fadeOut 300, =>
+      @close()

@@ -1,15 +1,13 @@
-.modal-container#university-info
-  .overlay
-  .modal
-    .modal-header
-      %button.close{type: "button"} ×
-      %h3 Politechnika Poznańska
-      %h4 Praca Dyplomowa Inżynierska
-    .modal-body
-      .left
-        %h5 Tytuł: System zgłaszania szkód na terenie miasta Poznania \"SZS-Poznań\"
-        %br /
-        %h5 Autorzy: Wojciech Ostrowski, Maciej Paliński
-        %h5 Promotor: Dr inż. Beata Jankowska
-      .right
-        %image{src: "assets/logo_put.png"}
+.overlay
+.modal-body
+  .modal-header
+    %button.close{type: "button"} ×
+    %h3 Politechnika Poznańska
+    %h4 Praca Dyplomowa Inżynierska
+  .left
+    %h5 Tytuł: System zgłaszania szkód na terenie miasta Poznania \"SZS-Poznań\"
+    %br
+    %h5 Autorzy: Wojciech Ostrowski, Maciej Paliński
+    %h5 Promotor: Dr inż. Beata Jankowska
+  .right
+    %image{src: "assets/logo_put.png"}

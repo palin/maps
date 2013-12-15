@@ -11,4 +11,7 @@ class Reporter.Router extends Backbone.Router
         Reporter.showView(new Reporter.Views.Modal.Report(model: report))
 
   home: ->
-    Reporter.showView(new Reporter.Views.Modal.UniversityInfo())
+    Reporter.showView(new Reporter.Views.Modal.UniversityInfo()) unless @adminPath()
+
+  adminPath: ->
+    window.location.pathname.indexOf("admin") != -1

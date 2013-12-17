@@ -7,6 +7,7 @@ gem 'rails', '4.0.0'
 gem 'pg'
 
 gem 'authlogic'
+gem 'asset_sync'
 gem 'carrierwave'
 gem 'decent_exposure'
 gem 'formtastic'
@@ -29,6 +30,7 @@ gem 'therubyracer', :platforms => :ruby
 gem 'uglifier', '>= 1.0.3'
 gem 'haml_coffee_assets'
 gem 'execjs'
+gem 'non-stupid-digest-assets'
 
 group :production do
   gem 'rails_12factor'

@@ -24,10 +24,9 @@ class Reporter.Views.Category extends Marionette.ItemView
       marker.setMap(value) if marker.category == category
 
   toggleMarkers: (e) ->
-    @$('img').toggleClass("grey")
     link = @$('a')
     category = link.data('category-id')
-    console.log category
+    @$("div.category-icon.#{category}").toggleClass("grey")
     if !link.hasClass('selected')
       @toggleMarker(category, null)
       link.addClass('selected')

@@ -36,7 +36,6 @@ window.Reporter =
     Modal: {
       UniversityInfo: {}
       Report: {}
-      LargePhoto: {}
     }
     Map: {}
     Categories: {}

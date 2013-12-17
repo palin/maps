@@ -1,3 +1,3 @@
 .image-box
-  %a{:href => @model.photo.full, :alt => @title}
+  %a{:href => @model.photo.full, :alt => @title, 'data-lightbox' => "large-photo-#{@model.id}"}
     %img{:src => @model.photo.small, :alt => @title}

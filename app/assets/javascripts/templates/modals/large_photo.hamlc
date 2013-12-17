@@ -1,6 +1,0 @@
-.overlay
-.modal-body
-  .content
-  %button.close
-    %img{src: "assets/close_modal.png"}
-  %img{src: @model.photo.full, class: "large"}

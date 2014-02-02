@@ -2,20 +2,12 @@
 class Admin::CategoriesController < Admin::AdminController
 
   expose(:categories) { Category.order(sort_column("Category") + " " + sort_direction).page(params[:page]).per(10) }
-  expose(:category) { Category.find_by_id(params[:id]) }
+  expose(:category) { Category.find(params[:id]) }
 
-  before_filter :find_category, except: [:index]
-
-  def index
-  end
-
-  def edit
-  end
+  rescue_from ActiveRecord::RecordNotFound, with: :no_record_handler
 
   def update
-    category.assign_attributes(category_params)
-
-    if category.save
+    if category.update_attributes(category_params)
       flash[:notice] = "Kategoria została zaktualizowana!"
       redirect_to admin_categories_path
     else
@@ -37,13 +29,11 @@ class Admin::CategoriesController < Admin::AdminController
   private
 
   def category_params
-    params.require(:category).permit(:title, :description, :unique_id)
+    params.require(:category).permit(:unique_id)
   end
 
-  def find_category
-    unless category
-      flash[:alert] = "Nie znaleziono takiej kategorii"
-      redirect_to admin_categories_path
-    end
+  def no_record_handler
+    flash[:alert] = "Nie znaleziono takiej kategorii"
+    redirect_to admin_categories_path
   end
 end

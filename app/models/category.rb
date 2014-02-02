@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Category < ActiveRecord::Base
 
+  validates_presence_of :unique_id
   has_many :reports
 
   def image

@@ -2,12 +2,9 @@
 class Admin::AbusesController < Admin::AdminController
 
   expose(:abuses) { Abuse.order(sort_column("Abuse") + " " + sort_direction).page(params[:page] || 1).per(params[:per_page] || 10) }
-  expose(:abuse) { Abuse.find_by_id(params[:id]) }
+  expose(:abuse)
 
-  before_filter :find_abuse, :except => [:index]
-
-  def index
-  end
+  rescue_from ActiveRecord::RecordNotFound, with: :no_record_handler
 
   def destroy
     if abuse.destroy
@@ -21,10 +18,8 @@ class Admin::AbusesController < Admin::AdminController
 
   private
 
-  def find_abuse
-    unless abuse
-      flash[:alert] = "Nie znaleziono takiego zgłoszenia nadużycia"
-      redirect_to admin_abuses_path
-    end
+  def no_record_handler
+    flash[:alert] = "Nie znaleziono takiego zgłoszenia nadużycia"
+    redirect_to admin_abuses_path
   end
 end

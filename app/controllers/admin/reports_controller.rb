@@ -2,12 +2,9 @@
 class Admin::ReportsController < Admin::AdminController
 
   expose(:reports) { Report.order(sort_column("Report") + " " + sort_direction).page(params[:page] || 1).per(params[:per_page] || 10) }
-  expose(:report) { Report.find_by_id(params[:id]) }
+  expose(:report) { Report.find(params[:id]) }
 
-  before_filter :find_report, :except => [:index]
-
-  def index
-  end
+  rescue_from ActiveRecord::RecordNotFound, with: :no_record_handler
 
   def destroy
     if report.destroy
@@ -19,18 +16,8 @@ class Admin::ReportsController < Admin::AdminController
     redirect_to admin_reports_path
   end
 
-  def edit
-  end
-
   def update
-    if params[:report][:category_id].present?
-      category = Category.find_by_unique_id(params[:report][:category_id])
-      params[:report][:category_id] = category.id
-    end
-
-    report.assign_attributes(report_params)
-
-    if report.save
+    if report.update_attributes(report_params)
       flash[:notice] = "Zgłoszenie zostało zaktualizowane!"
       redirect_to admin_reports_path
     else
@@ -42,17 +29,11 @@ class Admin::ReportsController < Admin::AdminController
   private
 
   def report_params
-    begin
-      params.require(:report).permit(:title, :description, :photo, :category_id, :latitude, :longitude)
-    rescue ActionController::ParameterMissing
-      unprocessable_entity
-    end
+    params.require(:report).permit(:title, :description, :photo, :category_id, :latitude, :longitude)
   end
 
-  def find_report
-    unless report
-      flash[:alert] = "Nie znaleziono takiego zgłoszenia"
-      redirect_to admin_reports_path
-    end
+  def no_record_handler
+    flash[:alert] = "Nie znaleziono takiego zgłoszenia"
+    redirect_to admin_reports_path
   end
 end

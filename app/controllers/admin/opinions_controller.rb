@@ -2,12 +2,9 @@
 class Admin::OpinionsController < Admin::AdminController
 
   expose(:opinions) { Opinion.order(sort_column("Opinion") + " " + sort_direction).page(params[:page]).per(10) }
-  expose(:opinion) { Opinion.find_by_id(params[:id]) }
+  expose(:opinion)
 
-  before_filter :find_opinion, :except => [:index]
-
-  def index
-  end
+  rescue_from ActiveRecord::RecordNotFound, with: :no_record_handler
 
   def destroy
     if opinion.destroy
@@ -21,10 +18,8 @@ class Admin::OpinionsController < Admin::AdminController
 
   private
 
-  def find_opinion
-    unless opinion
-      flash[:alert] = "Nie znaleziono takiej opinii"
-      redirect_to admin_opinions_path
-    end
+  def no_record_handler
+    flash[:alert] = "Nie znaleziono takiej opinii"
+    redirect_to admin_opinions_path
   end
 end
